@@ -1,8 +1,11 @@
 import Ember from 'ember';
 
-const { run, $ } = Ember;
+const { run, $, assign } = Ember;
 
-// integration helpers
+const DEFAULT_EVENT_OPTIONS = { canBubble: true, cancelable: true };
+const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
+const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
+
 function focus(el) {
   if (!el) { return; }
   let $el = $(el);
@@ -24,18 +27,99 @@ function focus(el) {
   }
 }
 
+function fireEvent(element, type, options = {}) {
+  if (!element) {
+    return;
+  }
+  let event;
+  if (KEYBOARD_EVENT_TYPES.indexOf(type) > -1) {
+    event = buildKeyboardEvent(type, options);
+  } else if (MOUSE_EVENT_TYPES.indexOf(type) > -1) {
+    let rect = element.getBoundingClientRect();
+    let x = rect.left + 1;
+    let y = rect.top + 1;
+    let simulatedCoordinates = {
+      screenX: x + 5,
+      screenY: y + 95,
+      clientX: x,
+      clientY: y
+    };
+    event = buildMouseEvent(type, assign(simulatedCoordinates, options));
+  } else {
+    event = buildBasicEvent(type, options);
+  }
+  element.dispatchEvent(event);
+}
+
+function buildBasicEvent(type, options = {}) {
+  let event = document.createEvent('Events');
+  event.initEvent(type, true, true);
+  assign(event, options);
+  return event;
+}
+
+function buildMouseEvent(type, options = {}) {
+  let event;
+  try {
+    event = document.createEvent('MouseEvents');
+    let eventOpts = assign({}, DEFAULT_EVENT_OPTIONS, options);
+    event.initMouseEvent(
+      type,
+      eventOpts.canBubble,
+      eventOpts.cancelable,
+      window,
+      eventOpts.detail,
+      eventOpts.screenX,
+      eventOpts.screenY,
+      eventOpts.clientX,
+      eventOpts.clientY,
+      eventOpts.ctrlKey,
+      eventOpts.altKey,
+      eventOpts.shiftKey,
+      eventOpts.metaKey,
+      eventOpts.button,
+      eventOpts.relatedTarget);
+  } catch (e) {
+    event = buildBasicEvent(type, options);
+  }
+  return event;
+}
+
+function buildKeyboardEvent(type, options = {}) {
+  let event;
+  try {
+    event = document.createEvent('KeyEvents');
+    let eventOpts = assign({}, DEFAULT_EVENT_OPTIONS, options);
+    event.initKeyEvent(
+      type,
+      eventOpts.canBubble,
+      eventOpts.cancelable,
+      window,
+      eventOpts.ctrlKey,
+      eventOpts.altKey,
+      eventOpts.shiftKey,
+      eventOpts.metaKey,
+      eventOpts.keyCode,
+      eventOpts.charCode
+    );
+  } catch (e) {
+    event = buildBasicEvent(type, options);
+  }
+  return event;
+}
+
 export function click(selector, options = {}) {
-  let mousedown = new window.Event('mousedown', { bubbles: true, cancelable: true, view: window });
-  let mouseup = new window.Event('mouseup', { bubbles: true, cancelable: true, view: window });
-  let click = new window.Event('click', { bubbles: true, cancelable: true, view: window });
-  Object.keys(options).forEach(key => {
-    mousedown[key] = options[key];
-    mouseup[key] = options[key];
-    click[key] = options[key];
-  });
-  let element = document.querySelector(selector);
-  run(() => element.dispatchEvent(mousedown));
-  focus(element);
-  run(() => element.dispatchEvent(mouseup));
-  run(() => element.dispatchEvent(click));
+  let el = document.querySelector(selector);
+  run(() => fireEvent(el, 'mousedown', options));
+  focus(el);
+  run(() => fireEvent(el, 'mouseup', options));
+  run(() => fireEvent(el, 'click', options));
+}
+
+export function fillIn(selector, text) {
+  let el = document.querySelector(selector);
+  run(() => focus(el));
+  run(() => el.value = text);
+  run(() => fireEvent(el, 'input'));
+  run(() => fireEvent(el, 'change'));
 }
