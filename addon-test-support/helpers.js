@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import wait from 'ember-test-helpers/wait';
 
 const { run, $ } = Ember;
 
@@ -22,6 +23,8 @@ function focus(el) {
       });
     }
   }
+
+  return wait();
 }
 
 export function click(selector, options = {}) {
@@ -38,4 +41,6 @@ export function click(selector, options = {}) {
   focus(element);
   run(() => element.dispatchEvent(mouseup));
   run(() => element.dispatchEvent(click));
+
+  return wait();
 }
