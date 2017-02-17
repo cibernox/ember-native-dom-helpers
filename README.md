@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cibernox/ember-native-dom-helpers.svg?branch=master)]
+
 # ember-native-dom-helpers
 
 Test helpers for integration tests that mimic the behaviour of the acceptance test
