@@ -1,17 +1,21 @@
 {
   "name": "ember-native-dom-helpers",
   "version": "0.1.2",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Test helpers for your integration tests that fire native events",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "testing",
+    "helpers",
+    "native",
+    "events"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Miguel Camba",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/cibernox/ember-native-dom-helpers",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
