@@ -1,25 +1,27 @@
 # ember-native-dom-helpers
 
-Test helpers for integration tests in ember that mimic the behaviour the acceptance 
-helpers provided by ember.
+Test helpers for integration tests that mimic the behaviour of the acceptance test
+helpers provided by Ember.
 
 ## Usage
 
 ```js
-import { click, fillIn } from 'ember-native-dom-helpers/test-support/helpers';
+import { click, fillIn, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
 
 moduleForComponent('my-component', 'Integration | Component | my-component', {
   integration: true
 });
 
 
-test('I can click my component', function(assert) {
+test('I can interact with my component', function(assert) {
   this.render(hbs```
     {{my-component}}
   ```);
 
   fillIn('.some-input');
   click('.main-button');
+  keyEvent('.other-input', 'keyup', 40); // down arrow
+  triggerEvent('.some-drop-area', 'mouseenter');
   assert.ok('someting happened');
 })
 ```
@@ -28,9 +30,11 @@ test('I can click my component', function(assert) {
 
 The main advantages are:
 
-- Fire native events: In ember when adding events with `onclick={{action "foo"}}` firing 
-  events with jQuery leadns to the action being fired twice. Firing native events fixes
-  that problem but they are very verbose to use. This helpers simplify the process.
+- Fire native events: In Ember, when adding events with the `onclick={{action "foo"}}` syntax, 
+  dispatching jQuery events leads to the action being called twice. Besides there is subtle 
+  differences between jQuery and Native events and can bite you. Firing native events fixes
+  that problem but they are very verbose and there is browsers incompatibilities.
+  This makes firing native events a no-brainer.
 
 - Runloop aware: This helpers automatically spawn a runloop, so you don't need to wrap
   every interation with `Ember.run(() => /* interact with element */ );`. 
