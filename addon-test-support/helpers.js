@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import wait from 'ember-test-helpers/wait';
 
-const { run, $, assign } = Ember;
+const { run, $, merge } = Ember;
 
 const DEFAULT_EVENT_OPTIONS = { canBubble: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
@@ -46,7 +46,7 @@ function fireEvent(element, type, options = {}) {
       clientX: x,
       clientY: y
     };
-    event = buildMouseEvent(type, assign(simulatedCoordinates, options));
+    event = buildMouseEvent(type, merge(simulatedCoordinates, options));
   } else {
     event = buildBasicEvent(type, options);
   }
@@ -56,7 +56,7 @@ function fireEvent(element, type, options = {}) {
 function buildBasicEvent(type, options = {}) {
   let event = document.createEvent('Events');
   event.initEvent(type, true, true);
-  assign(event, options);
+  merge(event, options);
   return event;
 }
 
@@ -64,7 +64,7 @@ function buildMouseEvent(type, options = {}) {
   let event;
   try {
     event = document.createEvent('MouseEvents');
-    let eventOpts = assign({}, DEFAULT_EVENT_OPTIONS, options);
+    let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
     event.initMouseEvent(
       type,
       eventOpts.canBubble,
@@ -91,7 +91,7 @@ function buildKeyboardEvent(type, options = {}) {
   let event;
   try {
     event = document.createEvent('KeyEvents');
-    let eventOpts = assign({}, DEFAULT_EVENT_OPTIONS, options);
+    let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
     event.initKeyEvent(
       type,
       eventOpts.canBubble,
