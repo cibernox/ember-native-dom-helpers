@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cibernox/ember-native-dom-helpers.svg?branch=master)]
+![Build Status](https://travis-ci.org/cibernox/ember-native-dom-helpers.svg?branch=master)
 
 # ember-native-dom-helpers
 
