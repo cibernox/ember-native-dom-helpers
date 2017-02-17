@@ -58,3 +58,4 @@ The main advantages are:
 
 - `click(selector, eventOptions)`
 - `fillIn(selector, text)`
+- `keyEvent(selector, type, keyCode)` (type being `keydown`, `keyup` or `keypress`)
