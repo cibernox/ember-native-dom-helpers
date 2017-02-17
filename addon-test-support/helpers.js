@@ -128,8 +128,12 @@ export function fillIn(selector, text) {
   return wait();
 }
 
-export function keyEvent(selector, type, keyCode) {
+export function triggerEvent(selector, type, options) {
   let el = document.querySelector(selector);
-  run(() => fireEvent(el, type, { keyCode, which: keyCode }));
+  run(() => fireEvent(el, type, options));
   return wait();
+}
+
+export function keyEvent(selector, type, keyCode) {
+  return triggerEvent(selector, type, { keyCode, which: keyCode });
 }
