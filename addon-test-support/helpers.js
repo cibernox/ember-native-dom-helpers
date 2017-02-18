@@ -7,6 +7,9 @@ const DEFAULT_EVENT_OPTIONS = { canBubble: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
 const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
 
+import config from 'dummy/config/environment';
+const { APP: { rootElement } } = config;
+
 function focus(el) {
   if (!el) { return; }
 
@@ -111,7 +114,7 @@ function buildKeyboardEvent(type, options = {}) {
 }
 
 export function click(selector, options = {}) {
-  let el = document.querySelector(selector);
+  let el = document.querySelector(`${rootElement} ${selector}`);
   run(() => fireEvent(el, 'mousedown', options));
   focus(el);
   run(() => fireEvent(el, 'mouseup', options));
@@ -120,7 +123,7 @@ export function click(selector, options = {}) {
 }
 
 export function fillIn(selector, text) {
-  let el = document.querySelector(selector);
+  let el = document.querySelector(`${rootElement} ${selector}`);
   run(() => focus(el));
   run(() => el.value = text);
   run(() => fireEvent(el, 'input'));
@@ -129,7 +132,7 @@ export function fillIn(selector, text) {
 }
 
 export function triggerEvent(selector, type, options) {
-  let el = document.querySelector(selector);
+  let el = document.querySelector(`${rootElement} ${selector}`);
   run(() => fireEvent(el, type, options));
   return wait();
 }

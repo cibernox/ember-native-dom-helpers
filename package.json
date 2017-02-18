@@ -10,7 +10,10 @@
     "events"
   ],
   "license": "MIT",
-  "author": "Miguel Camba",
+  "contributors": [
+    "Miguel Camba <miguel.camba@gmail.com> (http://miguelcamba.com)",
+    "Bill Heaton <pixelhandler@gmail.com> (https://pixelhandler.com)"
+  ],
   "directories": {
     "doc": "doc",
     "test": "tests"
