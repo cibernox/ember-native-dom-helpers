@@ -1,0 +1,24 @@
+<input type="text" value={{inputValue}}>
+
+<input type="checkbox" checked={{isChecked}}>
+
+<select onchange={{action "selected"}}>
+  <option value="" selected="selected">Choose One</option>
+  <option value="blue">blue</option>
+  <option value="red">red</option>
+</select>
+
+<textarea>{{textareaValue}}</textarea>
+
+<a href="#" class="terms-show" {{action 'showTerms'}}>Agree to Terms and conditions</a>
+
+<section class="terms-hidden">
+  <p>I have read this bull and agree to it's mastery of my freedom and anonymity</p>
+  <button {{action 'agree'}} class="terms-agree">I accept your terms, darn it</button>
+</section>
+
+<button type="submit" {{action "submit"}}>Submit</button>
+
+<p class="message">{{message}}</p>
+
+{{yield}}
