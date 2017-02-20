@@ -1,12 +1,10 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { fillIn, click, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { find, first, fillIn, click, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
 
 moduleForComponent('x-form', 'Integration | Component | x-form', {
   integration: true
 });
-
-const find = (selector) => document.querySelectorAll(`#ember-testing ${selector}`);
 
 test('form inputs exist', function(assert) {
   this.render(hbs`{{x-form}}`);
@@ -24,11 +22,12 @@ test('can fill in a text input field', function(assert) {
 
   let text = 'yada yada';
   let selector = 'input[type="text"]';
-  let value = find(selector)[0].value;
+
+  let value = find(selector).value;
   assert.equal(value, '', 'nothing input yet');
   fillIn(selector, text);
 
-  value = find(selector)[0].value;
+  value = find(selector).value;
   assert.equal(value, text, `expected ${value} to be ${text}`);
 });
 
@@ -37,22 +36,22 @@ test('can fill in a textarea field', function(assert) {
 
   let text = 'yada yada';
   let selector = 'textarea';
-  let value = find(selector)[0].value;
+  let value = find(selector).value;
   assert.equal(value, '', 'nothing input yet');
   fillIn(selector, text);
 
-  value = find(selector)[0].value;
+  value = find(selector).value;
   assert.equal(value, text, `expected ${value} to be ${text}`);
 });
 
 test('can click a checkbox', function(assert) {
   this.render(hbs`{{x-form}}`);
   let selector = 'input[type="checkbox"]';
-  let el = find(selector)[0];
+  let el = find(selector);
   assert.equal(el.checked, false, 'input NOT checked');
   click(selector);
 
-  el = find(selector)[0];
+  el = find(selector);
   assert.ok(el.checked, 'input checked');
 });
 
@@ -65,33 +64,51 @@ test('can trigger change on a select input', function(assert) {
   this.render(hbs`{{x-form onSelect=(action externalAction)}}`);
 
   let selector = 'select > option[selected]';
-  find(selector)[0].selected = false;
+  find(selector).selected = false;
   selector = 'select > option[value="blue"]';
   click(selector);
-  find(selector)[0].selected = true;
+  find(selector).selected = true;
   selector = 'select';
-  // await
   triggerEvent(selector, 'change');
-  let el = find(selector)[0];
+  let el = find(selector);
   assert.equal(el.value, 'blue');
 });
 
-test('can trigger a keyEvent', function(assert) {
+test('can click to submit form', function(assert) {
   this.render(hbs`{{x-form}}`);
 
-  let selector = '.message';
-  let el = find(selector)[0];
+  let el = find('.message');
   assert.ok(el.innerText === '', 'no message printed yet');
 
-  selector = '.terms-show';
-  click(selector);
-  selector = '.terms-agree';
-  click(selector);
-  selector = 'input[type="text"]';
-  // await
-  keyEvent(selector, 'keyup', 13);
+  click('.terms-show');
+  click('.terms-agree');
+  click('button[type="submit"]')
 
-  selector = '.message';
-  el = find(selector)[0];
+  el = find('.message');
   assert.ok(el.innerText !== '', 'message printed after submit');
+});
+
+test('can trigger a keyEvent to submit form', function(assert) {
+  this.render(hbs`{{x-form}}`);
+
+  let el = find('.message');
+  assert.ok(el.innerText === '', 'no message printed yet');
+
+  click('.terms-show');
+  click('button'); // '.terms-agree' is the first button so it will be clicked
+  // not using `click('button[type="submit"]')` instead submit with the enter key;
+  keyEvent('input[type="text"]', 'keyup', 13);
+
+  el = find('.message');
+  assert.ok(el.innerText !== '', 'message printed after submit');
+});
+
+test('can click the first link', function(assert) {
+  this.render(hbs`{{x-form}}`);
+
+  let el = find('section');
+  assert.ok(el.classList.contains('terms-hidden'), 'terms are hidden');
+
+  click(first('a'));
+  assert.ok(!el.classList.contains('terms-hidden'), 'terms are NOT hidden');
 });
