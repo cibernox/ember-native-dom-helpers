@@ -25,6 +25,9 @@ export default Ember.Component.extend({
     selected(evt) {
       this.set('selectedValue', evt.target.value);
       this.get('onSelect')(evt.target.value);
+    },
+    submit() {
+      this.submit()
     }
   },
 

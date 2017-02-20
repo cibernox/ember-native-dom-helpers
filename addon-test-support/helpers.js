@@ -1,14 +1,14 @@
 import Ember from 'ember';
 import wait from 'ember-test-helpers/wait';
+import settings from 'ember-native-dom-helpers/test-support/settings';
 
 const { run, merge } = Ember;
+const { rootElement } = settings;
 
 const DEFAULT_EVENT_OPTIONS = { canBubble: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
 const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
 
-import config from 'dummy/config/environment';
-const { APP: { rootElement } } = config;
 
 function focus(el) {
   if (!el) { return; }
@@ -113,8 +113,15 @@ function buildKeyboardEvent(type, options = {}) {
   return event;
 }
 
+/*
+  @method click
+  @param {String} selector
+  @param {Object} options
+  @return {RSVP.Promise}
+  @public
+*/
 export function click(selector, options = {}) {
-  let el = document.querySelector(`${rootElement} ${selector}`);
+  let el = first(selector);
   run(() => fireEvent(el, 'mousedown', options));
   focus(el);
   run(() => fireEvent(el, 'mouseup', options));
@@ -122,8 +129,15 @@ export function click(selector, options = {}) {
   return wait();
 }
 
+/*
+  @method fillIn
+  @param {String} selector
+  @param {String} text
+  @return {RSVP.Promise}
+  @public
+*/
 export function fillIn(selector, text) {
-  let el = document.querySelector(`${rootElement} ${selector}`);
+  let el = first(selector);
   run(() => focus(el));
   run(() => el.value = text);
   run(() => fireEvent(el, 'input'));
@@ -131,12 +145,68 @@ export function fillIn(selector, text) {
   return wait();
 }
 
+/*
+  @method triggerEvent
+  @param {String} selector
+  @param {String} type
+  @param {Object} options
+  @return {RSVP.Promise}
+  @public
+*/
 export function triggerEvent(selector, type, options) {
-  let el = document.querySelector(`${rootElement} ${selector}`);
+  let el = first(selector);
   run(() => fireEvent(el, type, options));
   return wait();
 }
 
+/*
+  @method keyEvent
+  @param {String} selector
+  @param {String} type
+  @param {Number} keyCode
+*/
 export function keyEvent(selector, type, keyCode) {
   return triggerEvent(selector, type, { keyCode, which: keyCode });
+}
+
+/*
+  The find test helper uses `querySelectorAll` to search inside the test
+  DOM (based on app configuration for the rootElement).
+
+  Alternalively, a second argument may be passed which is an element as the
+  DOM context to search within.
+
+  @method find
+  @param {String} CSS selector to find one or more elements in the test DOM
+  @param {HTMLElement} contextEl to query within, query from its contained DOM
+  @return {HTMLElement|NodeList} one element or a (non-live) list of element objects
+  @public
+*/
+export function find(selector, contextEl) {
+  if (selector instanceof HTMLElement || selector instanceof NodeList) {
+    return selector;
+  }
+  let list;
+  if (contextEl instanceof HTMLElement) {
+    list = contextEl.querySelectorAll(selector);
+  } else {
+    list = document.querySelectorAll(`${rootElement} ${selector}`);
+  }
+  return (list.length === 1) ? list[0] : list;
+}
+
+
+/*
+  Since the find helper may return a NodeList or an HTMLElement the first helper
+  only returns the first matching element
+
+  @method first
+  @param {String} CSS selector to find one element in the test DOM
+  @param {HTMLElement} contextEl to query within, query from its contained DOM
+  @return {HTMLElement} first element found with matching selector
+  @public
+*/
+export function first(selector, contextEl) {
+  const el = find(selector, contextEl);
+  return (el instanceof NodeList) ? el[0] : el;
 }
