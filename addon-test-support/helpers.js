@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import wait from 'ember-test-helpers/wait';
 
-const { run, $, merge } = Ember;
+const { run, merge } = Ember;
 
 const DEFAULT_EVENT_OPTIONS = { canBubble: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
@@ -9,19 +9,19 @@ const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseen
 
 function focus(el) {
   if (!el) { return; }
-  let $el = $(el);
-  if ($el.is(':input, [contenteditable=true]')) {
-    let type = $el.prop('type');
+
+  if (el.tagName === 'INPUT' || el.contentEditable || el.tagName === 'ANCHOR') {
+    let type = el.type;
     if (type !== 'checkbox' && type !== 'radio' && type !== 'hidden') {
       run(null, function() {
         // Firefox does not trigger the `focusin` event if the window
-        // does not have focus. If the document doesn't have focus just
-        // use trigger('focusin') instead.
-
-        if (!document.hasFocus || document.hasFocus()) {
-          el.focus();
+        // does not have focus. If the document does not have focus then
+        // fire `focusin` event as well.
+        if (document.hasFocus && !document.hasFocus()) {
+          fireEvent(el, 'focusin');
+          fireEvent(el, 'focus', null, false); // focus does not bubble
         } else {
-          $el.trigger('focusin');
+          el.focus();
         }
       });
     }
@@ -53,9 +53,9 @@ function fireEvent(element, type, options = {}) {
   element.dispatchEvent(event);
 }
 
-function buildBasicEvent(type, options = {}) {
+function buildBasicEvent(type, options = {}, bubbles = true, cancelable = true) {
   let event = document.createEvent('Events');
-  event.initEvent(type, true, true);
+  event.initEvent(type, bubbles, cancelable);
   merge(event, options);
   return event;
 }
