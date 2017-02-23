@@ -5,9 +5,8 @@
 */
 class TestSupportSettings {
 
-  constructor(init = { rootElement: '#ember-testing', $: false}) {
+  constructor(init = { rootElement: '#ember-testing' }) {
     this._rootElement = init.rootElement;
-    this._useJQueryWrapper = init.$;
   }
 
   /*
@@ -21,17 +20,6 @@ class TestSupportSettings {
   }
   set rootElement(value) {
     this._rootElement = value;
-  }
-
-  /*
-    @public useJQueryWrapper
-    @type Boolean
-  */
-  get useJQueryWrapper() {
-    return this._useJQueryWrapper;
-  }
-  set useJQueryWrapper(value) {
-    this._useJQueryWrapper = value;
   }
 }
 
