@@ -5,10 +5,12 @@
 Test helpers for integration tests that mimic the behaviour of the acceptance test
 helpers provided by Ember.
 
+Use this addon as a way to start the gradual migration towards the future "testing unification" RFC setup. That RFC proposes only native DOM.
+
 ## Usage
 
 ```js
-import { click, fillIn, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { click, fillIn, find, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
 
 moduleForComponent('my-component', 'Integration | Component | my-component', {
   integration: true
@@ -24,7 +26,7 @@ test('I can interact with my component', function(assert) {
   click('.main-button');
   keyEvent('.other-input', 'keyup', 40); // down arrow
   triggerEvent('.some-drop-area', 'mouseenter');
-  assert.ok('someting happened');
+  assert.ok(find('.result-of-event-happened'));
 })
 ```
 
@@ -60,9 +62,24 @@ The main advantages are:
   The helpers provided by this addon fire those events in the right order simulating more 
   closely how a real user would interact with the page.
 
+## Standard DOM elements returned using a `find` helper
+
+- The `find` helper uses `document.querySelectorAll` and will return a single `HTMLElement`
+  or a `NodeList` of elements. The `find` helper will query the DOM within `#ember-testing`
+- To use a different value from your `config/environment.js` settings, add to `tests/test-helper.js`…
+
+```js
+import settings from 'ember-native-dom-helpers/test-support/settings';
+import config from '../config/environment';
+const { APP: { rootElement } } = config;
+
+settings.rootElement = rootElement || settings.rootElement;
+```
+
 ## Helpers
 
 - `click(selector, eventOptions)`
 - `fillIn(selector, text)`
+- `find(selector, contextHTMLElement)` (query within test DOM, `#ember-testing`)
 - `keyEvent(selector, type, keyCode)` (type being `keydown`, `keyup` or `keypress`)
 - `triggerEvent(selector, type, options)`
