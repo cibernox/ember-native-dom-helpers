@@ -119,7 +119,7 @@ function buildKeyboardEvent(type, options = {}) {
   @public
 */
 export function click(selector, options = {}) {
-  let el = unwrapjQueryEl(first(selector));
+  let el = first(selector);
   run(() => fireEvent(el, 'mousedown', options));
   focus(el);
   run(() => fireEvent(el, 'mouseup', options));
@@ -135,7 +135,7 @@ export function click(selector, options = {}) {
   @public
 */
 export function fillIn(selector, text) {
-  let el = unwrapjQueryEl(first(selector));
+  let el = first(selector);
   run(() => focus(el));
   run(() => el.value = text);
   run(() => fireEvent(el, 'input'));
@@ -152,7 +152,7 @@ export function fillIn(selector, text) {
   @public
 */
 export function triggerEvent(selector, type, options) {
-  let el = unwrapjQueryEl(first(selector));
+  let el = first(selector);
   run(() => fireEvent(el, type, options));
   return wait();
 }
@@ -181,19 +181,15 @@ export function keyEvent(selector, type, keyCode) {
   @public
 */
 export function find(selector, contextEl) {
-  let selected;
+  let result;
   if (selector instanceof HTMLElement || selector instanceof NodeList) {
-    selected = selector;
+    result = selector;
   } else if (contextEl instanceof HTMLElement) {
-    selected = contextEl.querySelectorAll(selector);
+    result = contextEl.querySelectorAll(selector);
   } else if (Object.prototype.toString.call(selector) === "[object String]") {
-    selected = document.querySelectorAll(`${settings.rootElement} ${selector}`);
+    result = document.querySelectorAll(`${settings.rootElement} ${selector}`);
   }
-  if (!settings.useJQueryWrapper) {
-    return (selected.length === 1) ? selected[0] : selected;
-  } else {
-    return (selector.jquery /*passed a jQuery obj*/) ? selector : Ember.$(selected);
-  }
+  return (result.length === 1) ? result[0] : result;
 }
 
 
@@ -209,13 +205,5 @@ export function find(selector, contextEl) {
 */
 export function first(selector, contextEl) {
   const el = find(selector, contextEl);
-  if (!settings.useJQueryWrapper) {
-    return (el instanceof NodeList) ? el[0] : el;
-  } else {
-    return el.first();
-  }
-}
-
-function unwrapjQueryEl(el) {
-  return (settings.useJQueryWrapper && el.jquery) ? el[0] : el;
+  return (el instanceof NodeList) ? el[0] : el;
 }
