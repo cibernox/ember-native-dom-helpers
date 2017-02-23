@@ -3,8 +3,6 @@ import wait from 'ember-test-helpers/wait';
 import settings from 'ember-native-dom-helpers/test-support/settings';
 
 const { run, merge } = Ember;
-const { rootElement } = settings;
-
 const DEFAULT_EVENT_OPTIONS = { canBubble: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
 const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
@@ -121,7 +119,7 @@ function buildKeyboardEvent(type, options = {}) {
   @public
 */
 export function click(selector, options = {}) {
-  let el = first(selector);
+  let el = unwrapjQueryEl(first(selector));
   run(() => fireEvent(el, 'mousedown', options));
   focus(el);
   run(() => fireEvent(el, 'mouseup', options));
@@ -137,7 +135,7 @@ export function click(selector, options = {}) {
   @public
 */
 export function fillIn(selector, text) {
-  let el = first(selector);
+  let el = unwrapjQueryEl(first(selector));
   run(() => focus(el));
   run(() => el.value = text);
   run(() => fireEvent(el, 'input'));
@@ -154,7 +152,7 @@ export function fillIn(selector, text) {
   @public
 */
 export function triggerEvent(selector, type, options) {
-  let el = first(selector);
+  let el = unwrapjQueryEl(first(selector));
   run(() => fireEvent(el, type, options));
   return wait();
 }
@@ -177,22 +175,25 @@ export function keyEvent(selector, type, keyCode) {
   DOM context to search within.
 
   @method find
-  @param {String} CSS selector to find one or more elements in the test DOM
+  @param {String|HTMLElement|NodeList} CSS selector to find one or more elements in the test DOM
   @param {HTMLElement} contextEl to query within, query from its contained DOM
   @return {HTMLElement|NodeList} one element or a (non-live) list of element objects
   @public
 */
 export function find(selector, contextEl) {
+  let selected;
   if (selector instanceof HTMLElement || selector instanceof NodeList) {
-    return selector;
+    selected = selector;
+  } else if (contextEl instanceof HTMLElement) {
+    selected = contextEl.querySelectorAll(selector);
+  } else if (Object.prototype.toString.call(selector) === "[object String]") {
+    selected = document.querySelectorAll(`${settings.rootElement} ${selector}`);
   }
-  let list;
-  if (contextEl instanceof HTMLElement) {
-    list = contextEl.querySelectorAll(selector);
+  if (!settings.useJQueryWrapper) {
+    return (selected.length === 1) ? selected[0] : selected;
   } else {
-    list = document.querySelectorAll(`${rootElement} ${selector}`);
+    return (selector.jquery /*passed a jQuery obj*/) ? selector : Ember.$(selected);
   }
-  return (list.length === 1) ? list[0] : list;
 }
 
 
@@ -208,5 +209,13 @@ export function find(selector, contextEl) {
 */
 export function first(selector, contextEl) {
   const el = find(selector, contextEl);
-  return (el instanceof NodeList) ? el[0] : el;
+  if (!settings.useJQueryWrapper) {
+    return (el instanceof NodeList) ? el[0] : el;
+  } else {
+    return el.first();
+  }
+}
+
+function unwrapjQueryEl(el) {
+  return (settings.useJQueryWrapper && el.jquery) ? el[0] : el;
 }

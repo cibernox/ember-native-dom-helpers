@@ -1,6 +1,8 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { find, first } from 'ember-native-dom-helpers/test-support/helpers';
+import settings from 'ember-native-dom-helpers/test-support/settings';
+import Ember from 'ember';
 
 
 moduleForComponent('find', 'Integration | Test Helper | find', {
@@ -107,4 +109,25 @@ test('if a node list is passed to find instead of a selector it is returned', fu
   let expected = document.querySelector('#ember-testing a');
   let actual = find(expected);
   assert.strictEqual(actual, expected, 'node list was returned from find');
+});
+
+test('with setting for using jquery with the find helper', function(assert) {
+  // Can be used for test suites that have lots of jquery usage
+  settings.useJQueryWrapper = true;
+
+  this.render(hbs`
+    <a href="https://emberjs.com">Ember</a>
+    <a href="https://ember-cli.com">Ember CLI</a>
+  `);
+
+  let expected = Ember.$('#ember-testing a').first();
+  let actual = find('a').first();
+  assert.strictEqual(actual[0], expected[0], 'anchor elment found');
+  assert.ok(actual.jquery, 'element is a jquery instance');
+
+  actual = first('a');
+  assert.strictEqual(actual[0], expected[0], 'first anchor elment found');
+  assert.ok(actual.jquery, 'first element is a jquery instance');
+
+  settings.useJQueryWrapper = false;
 });
