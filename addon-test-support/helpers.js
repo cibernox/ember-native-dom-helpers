@@ -10,7 +10,7 @@ const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseen
 function focus(el) {
   if (!el) { return; }
 
-  if (el.tagName === 'INPUT' || el.contentEditable || el.tagName === 'ANCHOR') {
+  if (el.tagName === 'INPUT' || el.contentEditable || el.tagName === 'A') {
     let type = el.type;
     if (type !== 'checkbox' && type !== 'radio' && type !== 'hidden') {
       run(null, function() {
