@@ -34,16 +34,18 @@ test('It can fire keyup events', function(assert) {
 });
 
 test('It can fire keypress events', function(assert) {
-  assert.expect(3);
+  let done = assert.async();
   this.onKeyPress = (e) => {
     assert.ok(true, 'a focus event is fired');
     assert.ok(e instanceof window.Event, 'It receives a native event');
-    // event.which is deprecated, favor `keyCode`
-    if (e.keyCode) {
-      assert.equal(e.keyCode, 40, 'The event has the right keyCode');
-    } else {
+    if (e.hasOwnProperty('which')) {
+      // event.which is deprecated, favor `keyCode`
       assert.equal(e.which, 40, 'The event has the right which');
     }
+    if (e.hasOwnProperty('keyCode')) {
+      assert.equal(e.keyCode, 40, 'The event has the right keyCode');
+    }
+    done();
   }
 
   this.render(hbs`<input class="target-element" onkeypress={{onKeyPress}} />`);
