@@ -108,3 +108,12 @@ test('if a node list is passed to find instead of a selector it is returned', fu
   let actual = find(expected);
   assert.strictEqual(actual, expected, 'node list was returned from find');
 });
+
+test('with empty query result, find returns null', function(assert) {
+  this.render(hbs`
+    <div class='hiding'>You can't find me</div>
+  `);
+  let expected = null;
+  let actual = find('.hidden');
+  assert.strictEqual(actual, expected, 'null is returned for an empty query');
+});
