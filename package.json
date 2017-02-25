@@ -28,6 +28,8 @@
     "ember-cli-babel": "^5.1.7"
   },
   "devDependencies": {
+    "@types/ember": "^2.7.36",
+    "@types/rsvp": "3.3.0",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^2.4.1",
     "ember-cli": "2.12.0-beta.1",
@@ -40,13 +42,15 @@
     "ember-cli-release": "^1.0.0-beta.2",
     "ember-cli-shims": "^1.0.2",
     "ember-cli-sri": "^2.1.0",
+    "ember-cli-typescript": "github:emberwatch/ember-cli-typescript",
     "ember-cli-uglify": "^1.2.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.6.0",
     "ember-resolver": "^2.0.3",
     "ember-source": "^2.12.0-beta.1",
-    "loader.js": "^4.1.0"
+    "loader.js": "^4.1.0",
+    "typescript": "^2.2.1"
   },
   "engines": {
     "node": ">= 4"
