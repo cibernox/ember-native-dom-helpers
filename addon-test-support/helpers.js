@@ -177,7 +177,7 @@ export function keyEvent(selector, type, keyCode) {
   @method find
   @param {String|HTMLElement|NodeList} CSS selector to find one or more elements in the test DOM
   @param {HTMLElement} contextEl to query within, query from its contained DOM
-  @return {HTMLElement|NodeList} one element or a (non-live) list of element objects
+  @return {null|HTMLElement|NodeList} null, one element or a (non-live) list of element objects
   @public
 */
 export function find(selector, contextEl) {
@@ -189,7 +189,7 @@ export function find(selector, contextEl) {
   } else if (Object.prototype.toString.call(selector) === "[object String]") {
     result = document.querySelectorAll(`${settings.rootElement} ${selector}`);
   }
-  return (result.length === 1) ? result[0] : result;
+  return (result.length === 0) ? null : (result.length === 1) ? result[0] : result;
 }
 
 
