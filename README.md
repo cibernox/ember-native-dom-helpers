@@ -2,15 +2,30 @@
 
 # ember-native-dom-helpers
 
-Test helpers for integration tests that mimic the behaviour of the acceptance test
-helpers provided by Ember.
+Test helpers for integration tests that mimic the behaviour of the acceptance
+test helpers provided by Ember.
 
-Use this addon as a way to start the gradual migration towards the future "testing unification" RFC setup. That RFC proposes only native DOM.
+Use this addon as a way to start the gradual migration towards the future
+"testing unification" [RFC][emberjs/rfcs/pull/119] which proposes only native DOM.
+
+See the [Grand Testing Unification RFC][emberjs/rfcs/pull/119]
+
+- [shared-test-helpers]
+- [example-migration-of-component-integration-test]
+
+[emberjs/rfcs/pull/119]: https://github.com/emberjs/rfcs/pull/119
+[shared-test-helpers]: https://github.com/rwjblue/rfcs/blob/42/text/0000-grand-testing-unification.md#shared-test-helpers
+[example-migration-of-component-integration-test]: https://github.com/rwjblue/rfcs/blob/42/text/0000-grand-testing-unification.md#example-migration-of-component-integration-test
+
+**Status**: (Pre) 1.0, although we have a good idea what the needs are for
+test helpers, we are working though a few points on what changes are needed
+when using only standard DOM APIs (i.e. without jQuery).
+
 
 ## Usage
 
 ```js
-import { click, fillIn, find, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { click, fillIn, find, findAll, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
 
 moduleForComponent('my-component', 'Integration | Component | my-component', {
   integration: true
@@ -27,6 +42,7 @@ test('I can interact with my component', function(assert) {
   keyEvent('.other-input', 'keyup', 40); // down arrow
   triggerEvent('.some-drop-area', 'mouseenter');
   assert.ok(find('.result-of-event-happened'));
+  assert.equal(findAll('.result-list-item).length, 3);
 })
 ```
 
@@ -64,8 +80,9 @@ The main advantages are:
 
 ## Standard DOM elements returned using a `find` helper
 
-- The `find` helper uses `document.querySelectorAll` and will return a single `HTMLElement`
-  or a `NodeList` of elements. The `find` helper will query the DOM within `#ember-testing`
+- The `find` helper uses `document.querySelector` and will return a single `HTMLElement` or `null`.
+- The `findAll` helper uses `document.querySelectorAll` and returns `NodeList` with zero or more elements.
+- Both `find` and `findAll` helpers query the DOM within `#ember-testing`.
 - To use a different value from your `config/environment.js` settings, add to `tests/test-helper.js`…
 
 ```js
@@ -80,6 +97,7 @@ settings.rootElement = rootElement || settings.rootElement;
 
 - `click(selector, eventOptions)`
 - `fillIn(selector, text)`
-- `find(selector, contextHTMLElement)` (query within test DOM, `#ember-testing`)
+- `find(selector, contextHTMLElement)` (query for an element in test DOM, `#ember-testing`)
+- `findAll(selector, contextHTMLElement)` (query for elements in test DOM, `#ember-testing`)
 - `keyEvent(selector, type, keyCode)` (type being `keydown`, `keyup` or `keypress`)
 - `triggerEvent(selector, type, options)`

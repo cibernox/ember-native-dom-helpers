@@ -119,7 +119,7 @@ function buildKeyboardEvent(type, options = {}) {
   @public
 */
 export function click(selector, options = {}) {
-  let el = first(selector);
+  let el = find(selector);
   run(() => fireEvent(el, 'mousedown', options));
   focus(el);
   run(() => fireEvent(el, 'mouseup', options));
@@ -135,7 +135,7 @@ export function click(selector, options = {}) {
   @public
 */
 export function fillIn(selector, text) {
-  let el = first(selector);
+  let el = find(selector);
   run(() => focus(el));
   run(() => el.value = text);
   run(() => fireEvent(el, 'input'));
@@ -152,7 +152,7 @@ export function fillIn(selector, text) {
   @public
 */
 export function triggerEvent(selector, type, options) {
-  let el = first(selector);
+  let el = find(selector);
   run(() => fireEvent(el, type, options));
   return wait();
 }
@@ -168,42 +168,47 @@ export function keyEvent(selector, type, keyCode) {
 }
 
 /*
-  The find test helper uses `querySelectorAll` to search inside the test
+  The find test helper uses `querySelector` to search inside the test
   DOM (based on app configuration for the rootElement).
 
   Alternalively, a second argument may be passed which is an element as the
   DOM context to search within.
 
   @method find
-  @param {String|HTMLElement|NodeList} CSS selector to find one or more elements in the test DOM
+  @param {String} CSS selector to find one or more elements in the test DOM
   @param {HTMLElement} contextEl to query within, query from its contained DOM
-  @return {null|HTMLElement|NodeList} null, one element or a (non-live) list of element objects
+  @return {null|HTMLElement} null or an element
   @public
 */
 export function find(selector, contextEl) {
   let result;
-  if (selector instanceof HTMLElement || selector instanceof NodeList) {
-    result = selector;
-  } else if (contextEl instanceof HTMLElement) {
+  if (contextEl instanceof HTMLElement) {
+    result = contextEl.querySelector(selector);
+  } else if (Object.prototype.toString.call(selector) === "[object String]") {
+    result = document.querySelector(`${settings.rootElement} ${selector}`);
+  }
+  return result;
+}
+
+/*
+  The findAll test helper uses `querySelectorAll` to search inside the test
+  DOM (based on app configuration for the rootElement).
+
+  Alternalively, a second argument may be passed which is an element as the
+  DOM context to search within.
+
+  @method findAll
+  @param {String} CSS selector to find elements in the test DOM
+  @param {HTMLElement} contextEl to query within, query from its contained DOM
+  @return {NodeList} A (non-live) list of zero or more HTMLElement objects
+  @public
+*/
+export function findAll(selector, contextEl) {
+  let result;
+  if (contextEl instanceof HTMLElement) {
     result = contextEl.querySelectorAll(selector);
   } else if (Object.prototype.toString.call(selector) === "[object String]") {
     result = document.querySelectorAll(`${settings.rootElement} ${selector}`);
   }
-  return (result.length === 0) ? null : (result.length === 1) ? result[0] : result;
-}
-
-
-/*
-  Since the find helper may return a NodeList or an HTMLElement the first helper
-  only returns the first matching element
-
-  @method first
-  @param {String} CSS selector to find one element in the test DOM
-  @param {HTMLElement} contextEl to query within, query from its contained DOM
-  @return {HTMLElement} first element found with matching selector
-  @public
-*/
-export function first(selector, contextEl) {
-  const el = find(selector, contextEl);
-  return (el instanceof NodeList) ? el[0] : el;
+  return result;
 }
