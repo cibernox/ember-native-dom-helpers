@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { fireEvent } from 'ember-native-dom-helpers/test-support/fire-event';
+import { fireEvent } from './fire-event';
 import wait from 'ember-test-helpers/wait';
 
 const { run } = Ember;

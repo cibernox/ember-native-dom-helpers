@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import { findWithAssert } from 'ember-native-dom-helpers/test-support/find-with-assert';
-import { focus } from 'ember-native-dom-helpers/test-support/focus';
-import { fireEvent } from 'ember-native-dom-helpers/test-support/fire-event';
+import { findWithAssert } from './find-with-assert';
+import { focus } from './focus';
+import { fireEvent } from './fire-event';
 import wait from 'ember-test-helpers/wait';
 
 const { run } = Ember;
