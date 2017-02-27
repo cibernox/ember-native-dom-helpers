@@ -16,18 +16,14 @@ test('with empty query result, findWithAssert raises an error', function(assert)
   });
 });
 
-/*
-test('find helper uses querySelector within test DOM', function(assert) {
+test('with a query result, findWithAssert helper is the same as find helper', function(assert) {
   const selector = 'input[type="text"]';
-  const firstInput = document.querySelector(selector);
 
   this.render(hbs`
     <input type="text" />
   `);
   let expected = document.querySelector(`#ember-testing ${selector}`);
-  let actual = find(selector);
+  let actual = findWithAssert(selector);
 
   assert.strictEqual(actual, expected, 'input found within #ember-testing');
-  assert.notStrictEqual(actual, firstInput, 'test runner input not selected with find');
 });
-*/
