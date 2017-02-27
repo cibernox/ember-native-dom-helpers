@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { find, first, fillIn, click, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { find, findAll, fillIn, click, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
 
 moduleForComponent('x-form', 'Integration | Component | x-form', {
   integration: true
@@ -9,12 +9,13 @@ moduleForComponent('x-form', 'Integration | Component | x-form', {
 test('form inputs exist', function(assert) {
   this.render(hbs`{{x-form}}`);
 
-  assert.equal(this.$('input[type="text"]').length, 1);
-  assert.equal(this.$('input[type="checkbox"]').length, 1);
-  assert.equal(this.$('button[type="submit"]').length, 1);
-  assert.equal(this.$('textarea').length, 1);
-  assert.equal(this.$('a.terms-show').length, 1);
-  assert.equal(this.$('button.terms-agree').length, 1);
+  assert.ok(find('input[type="text"]'));
+  assert.ok(find('input[type="checkbox"]'));
+  assert.ok(find('button[type="submit"]'));
+  assert.ok(find('textarea'));
+  assert.ok(find('a.terms-show'));
+  assert.equal(findAll('select option').length, 3);
+  assert.ok(find('button.terms-agree'));
 });
 
 test('can fill in a text input field', function(assert) {
@@ -109,6 +110,6 @@ test('can click the first link', function(assert) {
   let el = find('section');
   assert.ok(el.classList.contains('terms-hidden'), 'terms are hidden');
 
-  click(first('a'));
+  click('a');
   assert.ok(!el.classList.contains('terms-hidden'), 'terms are NOT hidden');
 });
