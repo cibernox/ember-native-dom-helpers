@@ -6,6 +6,13 @@ const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
 const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
 
 
+/*
+  @method fireEvent
+  @param {HTMLElement} element
+  @param {String} type
+  @param {Object} (optional) options
+  @private
+*/
 export function fireEvent(element, type, options = {}) {
   if (!element) {
     return;
@@ -30,6 +37,15 @@ export function fireEvent(element, type, options = {}) {
   element.dispatchEvent(event);
 }
 
+/*
+  @method buildBasicEvent
+  @param {String} type
+  @param {Object} (optional) options
+  @param {Boolean} (optional) bubbles
+  @param {Boolean} (optional) cancelable
+  @return {Event}
+  @private
+*/
 function buildBasicEvent(type, options = {}, bubbles = true, cancelable = true) {
   let event = document.createEvent('Events');
   event.initEvent(type, bubbles, cancelable);
@@ -37,6 +53,13 @@ function buildBasicEvent(type, options = {}, bubbles = true, cancelable = true) 
   return event;
 }
 
+/*
+  @method buildMouseEvent
+  @param {String} type
+  @param {Object} (optional) options
+  @return {Event}
+  @private
+*/
 function buildMouseEvent(type, options = {}) {
   let event;
   try {
@@ -64,6 +87,13 @@ function buildMouseEvent(type, options = {}) {
   return event;
 }
 
+/*
+  @method buildKeyboardEvent
+  @param {String} type
+  @param {Object} (optional) options
+  @return {Event}
+  @private
+*/
 function buildKeyboardEvent(type, options = {}) {
   let event;
   try {

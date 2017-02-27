@@ -4,6 +4,11 @@ import wait from 'ember-test-helpers/wait';
 
 const { run } = Ember;
 
+/*
+  @method focus
+  @param {HTMLElement} el
+  @private
+*/
 export function focus(el) {
   if (!el) { return; }
 
