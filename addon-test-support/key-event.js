@@ -1,4 +1,4 @@
-import { triggerEvent } from 'ember-native-dom-helpers/test-support/trigger-event';
+import { triggerEvent } from './trigger-event';
 
 /*
   @method keyEvent

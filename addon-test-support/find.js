@@ -1,4 +1,4 @@
-import settings from 'ember-native-dom-helpers/test-support/settings';
+import settings from './settings';
 
 /*
   The find test helper uses `querySelector` to search inside the test
