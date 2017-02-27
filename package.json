@@ -25,7 +25,8 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^5.1.7"
+    "ember-cli-babel": "^5.1.7",
+    "ember-cli-typescript": "github:emberwatch/ember-cli-typescript"
   },
   "devDependencies": {
     "@types/ember": "^2.7.36",
@@ -42,7 +43,6 @@
     "ember-cli-release": "^1.0.0-beta.2",
     "ember-cli-shims": "^1.0.2",
     "ember-cli-sri": "^2.1.0",
-    "ember-cli-typescript": "github:emberwatch/ember-cli-typescript",
     "ember-cli-uglify": "^1.2.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
