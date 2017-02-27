@@ -42,7 +42,7 @@ test('I can interact with my component', function(assert) {
   keyEvent('.other-input', 'keyup', 40); // down arrow
   triggerEvent('.some-drop-area', 'mouseenter');
   assert.ok(find('.result-of-event-happened'));
-  assert.equal(findAll('.result-list-item).length, 3);
+  assert.equal(findAll('.result-list-item').length, 3);
 })
 ```
 
