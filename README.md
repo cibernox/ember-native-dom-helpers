@@ -50,14 +50,14 @@ test('I can interact with my component', function(assert) {
 
 The main advantages are:
 
-- Fire native events: In Ember, when adding events with the `onclick={{action "foo"}}` syntax, 
-  dispatching jQuery events leads to the action being called twice. Besides there is subtle 
+- Fire native events: In Ember, when adding events with the `onclick={{action "foo"}}` syntax,
+  dispatching jQuery events leads to the action being called twice. Besides there is subtle
   differences between jQuery and Native events and can bite you. Firing native events fixes
   that problem but they are very verbose and there is browsers incompatibilities.
   This makes firing native events a no-brainer.
 
 - Runloop aware: This helpers automatically spawn a runloop, so you don't need to wrap
-  every interation with `Ember.run(() => /* interact with element */ );`. 
+  every interation with `Ember.run(() => /* interact with element */ );`.
 
 - `wait` by default: All the helpers return the `wait()` promise, making possible wait
   for asynchronous side-effects with `async/await`.
@@ -72,13 +72,13 @@ The main advantages are:
   });
   ```
 
-- More real behaviour: When a clicks on an element `click` is not the only event fired. In a 
+- More real behaviour: When a clicks on an element `click` is not the only event fired. In a
   real click the sequence of events is `mousedown`, `focus`, `mouseup`, `click`. When a user
   fills in an input the sequence of events is `focus`, `<mutate-value>`, `input` and `change`.
-  The helpers provided by this addon fire those events in the right order simulating more 
+  The helpers provided by this addon fire those events in the right order simulating more
   closely how a real user would interact with the page.
 
-## Standard DOM elements returned using a `find` helper
+## Standard DOM elements returned using a `find`/`findAll` helpers
 
 - The `find` helper uses `document.querySelector` and will return a single `HTMLElement` or `null`.
 - The `findAll` helper uses `document.querySelectorAll` and returns `NodeList` with zero or more elements.
@@ -91,6 +91,14 @@ import config from '../config/environment';
 const { APP: { rootElement } } = config;
 
 settings.rootElement = rootElement || settings.rootElement;
+```
+
+### What if I prefer jQuery collections over native DOM
+
+Fear not. If you prefer to use jQuery, just wrap the result and do your thing:
+
+```js
+assert.equal($(find('.my-class')).attr('aria-owns'), '#id123')
 ```
 
 ## Helpers
