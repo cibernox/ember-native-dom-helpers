@@ -6,6 +6,16 @@ import wait from 'ember-test-helpers/wait';
 
 const { run } = Ember;
 
+/*
+  @method clickEventSequence
+  @private
+*/
+export function clickEventSequence(el, options) {
+  run(() => fireEvent(el, 'mousedown', options));
+  focus(el);
+  run(() => fireEvent(el, 'mouseup', options));
+  run(() => fireEvent(el, 'click', options));
+}
 
 /*
   @method click
@@ -16,9 +26,6 @@ const { run } = Ember;
 */
 export function click(selector, options = {}) {
   let el = findWithAssert(selector);
-  run(() => fireEvent(el, 'mousedown', options));
-  focus(el);
-  run(() => fireEvent(el, 'mouseup', options));
-  run(() => fireEvent(el, 'click', options));
+  clickEventSequence(el, options);
   return wait();
 }
