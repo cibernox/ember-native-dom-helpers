@@ -10,5 +10,10 @@ module.exports = {
   "launch_in_dev": [
     "Firefox",
     "Chrome"
-  ]
+  ],
+  "browser_args": {
+    "Chrome": [
+      "--touch-events"
+    ]
+  }
 };
