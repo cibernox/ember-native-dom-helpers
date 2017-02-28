@@ -104,6 +104,7 @@ assert.equal($(find('.my-class')).attr('aria-owns'), '#id123')
 ## Helpers
 
 - `click(selector, eventOptions)`
+- `tap(selector, eventOptions)`
 - `fillIn(selector, text)`
 - `find(selector, contextHTMLElement)` (query for an element in test DOM, `#ember-testing`)
 - `findAll(selector, contextHTMLElement)` (query for elements in test DOM, `#ember-testing`)
