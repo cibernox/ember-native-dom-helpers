@@ -104,9 +104,17 @@ assert.equal($(find('.my-class')).attr('aria-owns'), '#id123')
 ## Helpers
 
 - `click(selector, eventOptions)`
+- `tap(selector, eventOptions)`
 - `fillIn(selector, text)`
 - `find(selector, contextHTMLElement)` (query for an element in test DOM, `#ember-testing`)
 - `findAll(selector, contextHTMLElement)` (query for elements in test DOM, `#ember-testing`)
 - `findWithAssert(selector, contextHTMLElement)` (same as `find`, but raises Error if no result)
 - `keyEvent(selector, type, keyCode)` (type being `keydown`, `keyup` or `keypress`)
 - `triggerEvent(selector, type, options)`
+
+## Notes of `tap`
+
+In order for `tap` to work, your browser has to support touch events. Desktop Chrome and Firefox
+have touch events disabled unless the device emulation mode is on.
+In order to enable touch events in your CI, you need to configure testem like the `testem.js`
+file on this repo.

@@ -5,12 +5,12 @@ const DEFAULT_EVENT_OPTIONS = { canBubble: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
 const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
 
-
 /*
   @method fireEvent
   @param {HTMLElement} element
   @param {String} type
   @param {Object} (optional) options
+  @return {Event} The dispatched event
   @private
 */
 export function fireEvent(element, type, options = {}) {
@@ -35,6 +35,7 @@ export function fireEvent(element, type, options = {}) {
     event = buildBasicEvent(type, options);
   }
   element.dispatchEvent(event);
+  return event;
 }
 
 /*
