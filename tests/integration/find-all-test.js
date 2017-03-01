@@ -2,7 +2,6 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { findAll } from 'ember-native-dom-helpers/test-support/helpers';
 
-
 moduleForComponent('find', 'Integration | Test Helper | findAll', {
   integration: true
 });
@@ -19,8 +18,8 @@ test('with empty query result, findAll resturns empty NodeList', function(assert
 });
 
 test('findAll helper uses querySelectorAll within test DOM', function(assert) {
-  const selector = 'input[type="text"]';
-  const firstInput = document.querySelector(selector);
+  let selector = 'input[type="text"]';
+  let firstInput = document.querySelector(selector);
 
   this.render(hbs`
     <input type="text" />

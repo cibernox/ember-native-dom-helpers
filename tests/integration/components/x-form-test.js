@@ -24,7 +24,7 @@ test('can fill in a text input field', function(assert) {
   let text = 'yada yada';
   let selector = 'input[type="text"]';
 
-  let value = find(selector).value;
+  let { value } = find(selector);
   assert.equal(value, '', 'nothing input yet');
   fillIn(selector, text);
 
@@ -37,7 +37,7 @@ test('can fill in a textarea field', function(assert) {
 
   let text = 'yada yada';
   let selector = 'textarea';
-  let value = find(selector).value;
+  let { value } = find(selector);
   assert.equal(value, '', 'nothing input yet');
   fillIn(selector, text);
 
@@ -83,7 +83,7 @@ test('can click to submit form', function(assert) {
 
   click('.terms-show');
   click('.terms-agree');
-  click('button[type="submit"]')
+  click('button[type="submit"]');
 
   el = find('.message');
   assert.ok(el.innerText !== '', 'message printed after submit');

@@ -2,7 +2,6 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { find } from 'ember-native-dom-helpers/test-support/helpers';
 
-
 moduleForComponent('find', 'Integration | Test Helper | find', {
   integration: true
 });
@@ -17,8 +16,8 @@ test('with empty query result, find returns null', function(assert) {
 });
 
 test('find helper uses querySelector within test DOM', function(assert) {
-  const selector = 'input[type="text"]';
-  const firstInput = document.querySelector(selector);
+  let selector = 'input[type="text"]';
+  let firstInput = document.querySelector(selector);
 
   this.render(hbs`
     <input type="text" />
@@ -57,6 +56,6 @@ test('find helper can use (optional) element as the context to query', function(
   assert.strictEqual(actual, expected, 'select found within #ember-testing');
 
   expected = document.querySelector('#ember-testing select option[selected]');
-  actual = find('option[selected]', actual); 
+  actual = find('option[selected]', actual);
   assert.strictEqual(actual, expected, 'option found within select element');
 });
