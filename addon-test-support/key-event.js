@@ -2,7 +2,7 @@ import { triggerEvent } from './trigger-event';
 
 /*
   @method keyEvent
-  @param {String} selector
+  @param {String|HTMLElement} selector
   @param {String} type
   @param {Number} keyCode
 */

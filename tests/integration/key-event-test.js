@@ -50,3 +50,14 @@ test('It can fire keypress events', function(assert) {
   this.render(hbs`<input class="target-element" onkeypress={{onKeyPress}} />`);
   keyEvent('.target-element', 'keypress', 40);
 });
+
+test('It accepts an HTMLElement as first argument', function(assert) {
+  assert.expect(2);
+  this.onKeyDown = (e) => {
+    assert.ok(true, 'a click event is fired');
+    assert.ok(e instanceof window.Event, 'It receives a native event');
+  };
+
+  this.render(hbs`<input class="target-element" onkeydown={{onKeyDown}} />`);
+  keyEvent(document.querySelector('.target-element'), 'keydown', 13);
+});

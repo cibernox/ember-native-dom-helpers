@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { findWithAssert } from './find-with-assert';
+import getElementWithAssert from './-private/get-element-with-assert';
 import { focus } from './focus';
 import { fireEvent } from './fire-event';
 import wait from 'ember-test-helpers/wait';
@@ -8,13 +8,13 @@ const { run } = Ember;
 
 /*
   @method fillIn
-  @param {String} selector
+  @param {String|HTMLElement} selector
   @param {String} text
   @return {RSVP.Promise}
   @public
 */
 export function fillIn(selector, text) {
-  let el = findWithAssert(selector);
+  let el = getElementWithAssert(selector);
   run(() => focus(el));
   run(() => el.value = text);
   run(() => fireEvent(el, 'input'));

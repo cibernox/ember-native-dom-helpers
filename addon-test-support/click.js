@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { findWithAssert } from './find-with-assert';
+import getElementWithAssert from './-private/get-element-with-assert';
 import { fireEvent } from './fire-event';
 import { focus } from './focus';
 import wait from 'ember-test-helpers/wait';
@@ -19,13 +19,12 @@ export function clickEventSequence(el, options) {
 
 /*
   @method click
-  @param {String} selector
+  @param {String|HTMLElement} selector
   @param {Object} options
   @return {RSVP.Promise}
   @public
 */
 export function click(selector, options = {}) {
-  let el = findWithAssert(selector);
-  clickEventSequence(el, options);
+  clickEventSequence(getElementWithAssert(selector), options);
   return wait();
 }

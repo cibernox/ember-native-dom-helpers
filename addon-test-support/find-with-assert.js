@@ -1,4 +1,4 @@
-import { find } from './find';
+import getElementWithAssert from './-private/get-element-with-assert';
 
 /*
   @method findWithAssert
@@ -8,10 +8,5 @@ import { find } from './find';
   @public
 */
 export function findWithAssert(selector, contextEl) {
-  let el = find(selector, contextEl);
-  if (el === null) {
-    throw new Error(`Element ${selector} not found.`);
-  } else {
-    return el;
-  }
+  return getElementWithAssert(selector, contextEl);
 }

@@ -118,3 +118,14 @@ test('It the touchend event is defaultPrevented, the focus and mouse events are 
 
   tap('.target-element');
 });
+
+test('It accepts an HTMLElement as first argument', function(assert) {
+  assert.expect(2);
+  this.onTouchStart = (e) => {
+    assert.ok(true, 'a click event is fired');
+    assert.ok(e instanceof window.Event, 'It receives a native event');
+  };
+
+  this.render(hbs`<input class="target-element" ontouchstart={{onTouchStart}} />`);
+  tap(document.querySelector('.target-element'));
+});

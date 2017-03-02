@@ -1,4 +1,4 @@
-import settings from './settings';
+import getElement from './-private/get-element';
 
 /*
   The find test helper uses `querySelector` to search inside the test
@@ -14,11 +14,5 @@ import settings from './settings';
   @public
 */
 export function find(selector, contextEl) {
-  let result;
-  if (contextEl instanceof HTMLElement) {
-    result = contextEl.querySelector(selector);
-  } else {
-    result = document.querySelector(`${settings.rootElement} ${selector}`);
-  }
-  return result;
+  return getElement(selector, contextEl);
 }
