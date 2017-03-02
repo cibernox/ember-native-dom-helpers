@@ -86,6 +86,14 @@ module.exports = {
       npm: {
         devDependencies: {}
       }
+    },
+    {
+      name: 'no-jquery',
+      npm: {
+        devDependencies: {
+          'ember-native-dom-event-dispatcher': '^0.5.4'
+        }
+      }
     }
   ]
 };
