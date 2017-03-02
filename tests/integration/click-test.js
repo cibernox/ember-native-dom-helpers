@@ -39,3 +39,14 @@ test('It fires mousedown, focus, mouseup and click events on the element with th
   `);
   click('.target-element');
 });
+
+test('It accepts an HTMLElement as first argument', function(assert) {
+  assert.expect(2);
+  this.onClick = (e) => {
+    assert.ok(true, 'a click event is fired');
+    assert.ok(e instanceof window.Event, 'It receives a native event');
+  };
+
+  this.render(hbs`<input class="target-element" onclick={{onClick}} />`);
+  click(document.querySelector('.target-element'));
+});

@@ -38,3 +38,14 @@ test('It fires a focus, updates the value, fires input and fires change on the e
   `);
   fillIn('.target-element', 'new value');
 });
+
+test('It accepts an HTMLElement as first argument', function(assert) {
+  assert.expect(2);
+  this.onInput = (e) => {
+    assert.ok(true, 'a click event is fired');
+    assert.ok(e instanceof window.Event, 'It receives a native event');
+  };
+
+  this.render(hbs`<input class="target-element" oninput={{onInput}} />`);
+  fillIn(document.querySelector('.target-element'), 'foo');
+});
