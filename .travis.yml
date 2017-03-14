@@ -7,7 +7,7 @@ dist: trusty
 sudo: false
 
 addons:
-  firefox: latest
+  firefox: latest-esr
   apt:
     packages:
      - google-chrome-stable
