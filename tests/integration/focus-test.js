@@ -18,8 +18,8 @@ test('It accepts an HTMLElement as first argument', function(assert) {
 });
 
 test('It blurs the focused input before firing focus event on another one', function(assert) {
-  const docIsFocused = document.hasFocus && document.hasFocus();
-  const assertions = docIsFocused ? 8 : 4;
+  let docIsFocused = document.hasFocus && document.hasFocus();
+  let assertions = docIsFocused ? 8 : 4;
   assert.expect(assertions);
 
   let index = 0;
