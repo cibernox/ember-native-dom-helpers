@@ -23,7 +23,6 @@ export function focus(el) {
           fireEvent(el, 'focusin');
           fireEvent(el, 'focus', null, false); // focus does not bubble
         } else {
-          document.activeElement.blur();
           el.focus();
         }
       });

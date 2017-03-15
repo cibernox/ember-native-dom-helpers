@@ -24,13 +24,13 @@ test('It blurs the focused input before firing focus event on another one', func
 
   let index = 0;
   this.onBlur = (e) => {
-    assert.equal(++index, 1, 'blur is fired first');
+    assert.equal(++index, 1, 'blur is fired before focus');
     assert.ok(true, 'a blur event is fired');
     assert.ok(e instanceof window.Event, 'It receives a native event');
     assert.equal(e.target.value, 'a');
   };
   this.onFocus = (e) => {
-    assert.equal(++index, docIsFocused ? 2 : 1, 'focus is fired after blur');
+    assert.equal(++index, docIsFocused ? 2 : 1, 'focus is fired');
     assert.ok(true, 'a focus event is fired');
     assert.ok(e instanceof window.Event, 'It receives a native event');
     assert.equal(e.target.value, 'b');
