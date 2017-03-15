@@ -1,0 +1,20 @@
+<h1>Signup example</h1>
+
+<form {{action "signup" on="submit"}}>
+  <p>
+    Email:
+    <input type="text" onchange={{action (mut email) value="target.value"}}>
+  </p>
+  <p>
+    Password:
+    <input type="password" onchange={{action (mut password) value="target.value"}}>
+  </p>
+  <p>
+    Password Confirmation:
+    <input type="password" onchange={{action (mut passwordConfirmation) value="target.value"}}>
+  </p>
+
+  <button type="submit" disabled={{isSaving}}>
+    {{if isSaving 'Loading, please wait...' 'Sign up'}}
+  </button>
+</form>
