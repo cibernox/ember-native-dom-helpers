@@ -18,7 +18,10 @@ test('It accepts an HTMLElement as first argument', function(assert) {
 });
 
 test('It blurs the focused input before firing focus event on another one', function(assert) {
-  assert.expect(8);
+  const docIsFocused = document.hasFocus && document.hasFocus();
+  const assertions = docIsFocused ? 8 : 4;
+  assert.expect(assertions);
+
   let index = 0;
   this.onBlur = (e) => {
     assert.equal(++index, 1, 'blur is fired first');
@@ -27,7 +30,7 @@ test('It blurs the focused input before firing focus event on another one', func
     assert.equal(e.target.value, 'a');
   };
   this.onFocus = (e) => {
-    assert.equal(++index, 2, 'focus is fired first');
+    assert.equal(++index, docIsFocused ? 2 : 1, 'focus is fired after blur');
     assert.ok(true, 'a focus event is fired');
     assert.ok(e instanceof window.Event, 'It receives a native event');
     assert.equal(e.target.value, 'b');
@@ -37,9 +40,7 @@ test('It blurs the focused input before firing focus event on another one', func
     <input class="other-element" onblur={{onBlur}} value="a" />
     <input class="target-element" onfocus={{onFocus}} value="b" />
   `);
-  let el = document.querySelector('.other-element');
-  focus(el);
+  document.querySelector('.other-element').focus();
 
-  el = document.querySelector('.target-element');
-  focus(el);
+  focus(document.querySelector('.target-element'));
 });
