@@ -25,7 +25,7 @@ test('Usage using `waitUntil` to test unsettled state', async function(assert) {
   fillIn('.signup-example-form__password-confirmation', '123123');
   let submitPromise = click('.signup-example-form__submit-btn');
 
-  waitUntil(() => find('.dashbord-loading-substate-header'));
+  await waitUntil(() => find('.dashbord-loading-substate-header'));
   assert.equal(find('.dashbord-loading-substate-header').textContent.trim(), 'Loading data for your dashboard. Please be patient.');
 
   await submitPromise;
