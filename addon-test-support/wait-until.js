@@ -1,7 +1,7 @@
 import Ember from 'ember';
 const { run, RSVP } = Ember;
 
-export function waitUntil(callback, timeout = 1000) {
+export function waitUntil(callback, { timeout = 1000 } = {}) {
   return new RSVP.Promise(function(resolve, reject) {
     let value = run(callback);
     if (value) {
