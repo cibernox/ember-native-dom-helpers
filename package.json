@@ -25,6 +25,7 @@
     "test": "ember try:each"
   },
   "dependencies": {
+    "broccoli-funnel": "^1.1.0",
     "ember-cli-babel": "^6.0.0-beta.9"
   },
   "devDependencies": {
@@ -44,8 +45,8 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
-    "ember-maybe-import-regenerator": "^0.1.5",
     "ember-load-initializers": "^0.6.0",
+    "ember-maybe-import-regenerator": "^0.1.5",
     "ember-resolver": "^3.0.0",
     "ember-source": "~2.12.0",
     "eslint-plugin-ember-suave": "^1.0.0",
