@@ -6,3 +6,4 @@ export { tap } from './tap';
 export { fillIn } from './fill-in';
 export { keyEvent } from './key-event';
 export { triggerEvent } from './trigger-event';
+export { visit } from './visit';
