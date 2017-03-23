@@ -35,15 +35,16 @@ moduleForComponent('my-component', 'Integration | Component | my-component', {
 });
 
 
-test('I can interact with my component', function(assert) {
+test('I can interact with my component', async function(assert) {
   this.render(hbs```
     {{my-component}}
   ```);
 
-  fillIn('.some-input');
-  click('.main-button');
-  keyEvent('.other-input', 'keyup', 40); // down arrow
-  triggerEvent('.some-drop-area', 'mouseenter');
+  await fillIn('.some-input');
+  await click('.main-button');
+  await keyEvent('.other-input', 'keyup', 40); // down arrow
+  await triggerEvent('.some-drop-area', 'mouseenter');
+  
   assert.ok(find('.result-of-event-happened'));
   assert.equal(findAll('.result-list-item').length, 3);
 })
