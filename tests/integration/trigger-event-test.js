@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { triggerEvent } from 'ember-native-dom-helpers';
 
 moduleForComponent('triggerEvent', 'Integration | Test Helper | triggerEvent', {
   integration: true

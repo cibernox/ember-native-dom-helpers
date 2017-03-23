@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { focus } from 'ember-native-dom-helpers/test-support/focus';
+import { focus } from 'ember-native-dom-helpers/focus';
 
 moduleForComponent('focus', 'Integration | Test Helper | focus', {
   integration: true

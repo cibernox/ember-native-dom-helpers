@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { tap } from 'ember-native-dom-helpers/test-support/helpers';
+import { tap } from 'ember-native-dom-helpers';
 
 moduleForComponent('tap', 'Integration | Test Helper | tap', {
   integration: true

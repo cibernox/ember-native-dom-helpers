@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { keyEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { keyEvent } from 'ember-native-dom-helpers';
 
 moduleForComponent('keyEvent', 'Integration | Test Helper | keyEvent', {
   integration: true

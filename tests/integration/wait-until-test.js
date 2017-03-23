@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { waitUntil } from 'ember-native-dom-helpers/test-support/helpers';
+import { waitUntil } from 'ember-native-dom-helpers';
 const { run } = Ember;
 
 moduleForComponent('wait-until', 'Integration | Test Helper | waitUntil', {

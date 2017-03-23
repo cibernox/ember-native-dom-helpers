@@ -1,5 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
-import { visit } from 'ember-native-dom-helpers/test-support/helpers';
+import { visit } from 'ember-native-dom-helpers';
 
 moduleForComponent('fillIn', 'Integration | Test Helper | visit', {
   integration: true
