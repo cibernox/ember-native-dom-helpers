@@ -5,7 +5,7 @@ import {
 
 setResolver(resolver);
 
-import settings from 'ember-native-dom-helpers/test-support/settings';
+import { settings } from 'ember-native-dom-helpers';
 import config from '../config/environment';
 const { APP: { rootElement } } = config;
 

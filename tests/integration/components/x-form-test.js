@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { find, findAll, fillIn, click, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { find, findAll, fillIn, click, keyEvent, triggerEvent } from 'ember-native-dom-helpers';
 
 moduleForComponent('x-form', 'Integration | Component | x-form', {
   integration: true

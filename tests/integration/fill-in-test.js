@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { fillIn } from 'ember-native-dom-helpers/test-support/helpers';
+import { fillIn } from 'ember-native-dom-helpers';
 
 moduleForComponent('fillIn', 'Integration | Test Helper | fillIn', {
   integration: true

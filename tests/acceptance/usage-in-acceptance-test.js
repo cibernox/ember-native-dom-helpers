@@ -1,6 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
-import { visit, click, find, fillIn, waitUntil } from 'ember-native-dom-helpers/test-support/helpers';
+import { visit, click, find, fillIn, waitUntil } from 'ember-native-dom-helpers';
 
 moduleForAcceptance('Acceptance | usage in acceptance', {
   beforeEach() {
