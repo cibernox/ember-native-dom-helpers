@@ -59,7 +59,7 @@ However now this helper can be replace by the `async`/`await` syntax in ES2017 y
 easier to read tests:
 
 ```js
-import { visit, click, find, fillIn, waitUntil } from 'ember-native-dom-helpers/test-support/helpers';
+import { visit, click, find, fillIn } from 'ember-native-dom-helpers/test-support/helpers';
 
 moduleForAcceptance('Acceptance | Sign up');
 
@@ -128,6 +128,41 @@ Fear not. If you prefer to use jQuery, just wrap the result and do your thing:
 
 ```js
 assert.equal($(find('.my-class')).attr('aria-owns'), '#id123')
+```
+
+## Testing an unsettled world
+
+There is one new helper in this addon that enables some testing patters that weren't
+previously easy to perform using traditional methods.
+
+Since the `andThen` helper waits for the app to settle (no pending requests or promises)
+and in integration tests every interation is wrapped in `Ember.run`, there was no easy way
+of testing transient state like loading substates or the state of a components while some promise
+is pending without a awkward setup of timeouts.
+
+Now however thanks to explicit usage of promises and the `waitUntil` helper you can
+perform assertions on unsettled states:
+
+```js
+import { visit, click, find, fillIn, waitUntil } from 'ember-native-dom-helpers/test-support/helpers';
+
+moduleForAcceptance('Acceptance | Sign up');
+
+test('Usage awaiting the world to settle', async function(assert) {
+  await visit('/login');
+
+  await fillIn('.email', '007@gov.uk');
+  await fillIn('.password', 'goldeneye');
+  let promise = click('.submit-btn');
+
+  // We wait until the loading substate, that takes 200ms to appear, is displayed
+  waitUntil(() => find('.susbstate-spinner'));
+  assert.equal(find('.loading-substate-header').textContent.trim(), 'Loading mission. Please wait, Mr. Bond');
+
+  await promise; // now we wait until the dashboard is fully loaded
+  assert.equal(currentUrl(), '/dashboard');
+  assert.equal(find('.section-header').textContent, 'Main dashboard');
+});
 ```
 
 ## Helpers
