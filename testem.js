@@ -4,7 +4,7 @@ module.exports = {
   "disable_watching": true,
   "firefox_user_js": "./firefox_config.js",
   "launch_in_ci": [
-    "Firefox",
+    // "Firefox",
     "Chrome"
   ],
   "launch_in_dev": [
