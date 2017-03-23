@@ -28,7 +28,7 @@ when using only standard DOM APIs (i.e. without jQuery).
 ### Integration tests
 
 ```js
-import { click, fillIn, find, findAll, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { click, fillIn, find, findAll, keyEvent, triggerEvent } from 'ember-native-dom-helpers';
 
 moduleForComponent('my-component', 'Integration | Component | my-component', {
   integration: true
@@ -59,7 +59,7 @@ However now this helper can be replace by the `async`/`await` syntax in ES2017 y
 easier to read tests:
 
 ```js
-import { visit, click, find, fillIn } from 'ember-native-dom-helpers/test-support/helpers';
+import { visit, click, find, fillIn } from 'ember-native-dom-helpers';
 
 moduleForAcceptance('Acceptance | Sign up');
 
@@ -115,7 +115,7 @@ The main advantages are:
 - To use a different value from your `config/environment.js` settings, add to `tests/test-helper.js`…
 
 ```js
-import settings from 'ember-native-dom-helpers/test-support/settings';
+import { settings } from 'ember-native-dom-helpers';
 import config from '../config/environment';
 const { APP: { rootElement } } = config;
 
@@ -144,7 +144,7 @@ Now however thanks to explicit usage of promises and the `waitUntil` helper you 
 perform assertions on unsettled states:
 
 ```js
-import { visit, click, find, fillIn, waitUntil } from 'ember-native-dom-helpers/test-support/helpers';
+import { visit, click, find, fillIn, waitUntil } from 'ember-native-dom-helpers';
 
 moduleForAcceptance('Acceptance | Sign up');
 
