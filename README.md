@@ -24,6 +24,9 @@ when using only standard DOM APIs (i.e. without jQuery).
 
 ## Usage
 
+
+### Integration tests
+
 ```js
 import { click, fillIn, find, findAll, keyEvent, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
 
@@ -44,6 +47,32 @@ test('I can interact with my component', function(assert) {
   assert.ok(find('.result-of-event-happened'));
   assert.equal(findAll('.result-list-item').length, 3);
 })
+```
+
+### Acceptance tests
+
+You can use the exact same helpers for you integration tests. All interaction helpers like
+`click`, `fillIn` et al. return a promise that that fullfils when "the world has settled"
+(that is, there is no pending requests or promises and the runloop has be drained), which
+is what the `andThen` acceptance helper used to do.
+However now this helper can be replace by the `async`/`await` syntax in ES2017 yielding
+easier to read tests:
+
+```js
+import { visit, click, find, fillIn, waitUntil } from 'ember-native-dom-helpers/test-support/helpers';
+
+moduleForAcceptance('Acceptance | Sign up');
+
+test('Usage awaiting the world to settle', async function(assert) {
+  await visit('/sign-up');
+
+  await fillIn('.first-name', 'Chuck');
+  await fillIn('.last-name', 'Berry');
+  await click('.submit-btn');
+
+  assert.ok(find('.welcome-msg'), 'There is a welcome banner');
+  assert.equal(find('.welcome-msg-name'), 'Chuck');
+});
 ```
 
 ## Advantages compared with `this.$(selector).click()`
@@ -111,6 +140,8 @@ assert.equal($(find('.my-class')).attr('aria-owns'), '#id123')
 - `findWithAssert(selector, contextHTMLElement)` (same as `find`, but raises Error if no result)
 - `keyEvent(selectorOrHTMLElement, type, keyCode)` (type being `keydown`, `keyup` or `keypress`)
 - `triggerEvent(selectorOrHTMLElement, type, options)`
+- `visit(url)` (only available in acceptance. Raises an error in integration)
+- `waitUntil(function, options)` (Polls the page until the given callback returns a truthy value, or timesout after 1s)
 
 ## Notes of `tap`
 
