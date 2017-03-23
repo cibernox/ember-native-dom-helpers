@@ -1,8 +1,12 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
-import { visit, click, fillIn, waitUntil } from 'ember-native-dom-helpers/test-support/helpers';
+import { visit, click, find, fillIn, waitUntil } from 'ember-native-dom-helpers/test-support/helpers';
 
-moduleForAcceptance('Acceptance | usage in acceptance');
+moduleForAcceptance('Acceptance | usage in acceptance', {
+  beforeEach() {
+    window.server.timing = 300;
+  }
+});
 
 test('Usage awaiting the world to settle', async function(assert) {
   await visit('/signup-example');
