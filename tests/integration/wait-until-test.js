@@ -43,7 +43,6 @@ test('It returns a promise that resolves when the given callback returns a non-f
   assert.ok(document.querySelector('#wait-until-step3'), 'The third element appeared');
 });
 
-
 test('It waits until the given callback returns true', async function(assert) {
   setTimeout(() => run(() => this.set('timeout1', true)), 100);
   setTimeout(() => run(() => this.set('timeout2', true)), 200);
