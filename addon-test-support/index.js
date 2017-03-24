@@ -8,4 +8,7 @@ export { keyEvent } from './key-event';
 export { triggerEvent } from './trigger-event';
 export { visit } from './visit';
 export { waitUntil } from './wait-until';
+export { currentURL } from './current-url';
+export { currentPath } from './current-path';
+export { currentRouteName } from './current-route-name';
 export { default as settings } from './settings';
