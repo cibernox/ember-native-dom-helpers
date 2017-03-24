@@ -2,7 +2,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { findWithAssert } from 'ember-native-dom-helpers';
 
-moduleForComponent('find', 'Integration | Test Helper | findWithAssert', {
+moduleForComponent('findWithAssert', 'Integration | Test Helper | findWithAssert', {
   integration: true
 });
 

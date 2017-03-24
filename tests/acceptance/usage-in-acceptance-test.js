@@ -1,6 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
-import { visit, click, find, fillIn, waitUntil } from 'ember-native-dom-helpers';
+import { visit, click, find, fillIn, waitUntil, currentURL, currentRouteName } from 'ember-native-dom-helpers';
 
 moduleForAcceptance('Acceptance | usage in acceptance', {
   beforeEach() {
@@ -23,6 +23,8 @@ if (window.jQuery) {
 
   test('Usage using `waitUntil` to test unsettled state', async function(assert) {
     await visit('/signup-example');
+    assert.equal(currentURL(), '/signup-example', 'The URL has updated');
+    assert.equal(currentRouteName(), 'signup-example', 'The currentRouteName has updated');
 
     assert.ok(find('.signup-example-form'), 'The signup form is displayed');
     fillIn('.signup-example-form__email', 'some@email.com');
@@ -34,6 +36,8 @@ if (window.jQuery) {
     assert.equal(find('.dashbord-loading-substate-header').textContent.trim(), 'Loading data for your dashboard. Please be patient.');
 
     await submitPromise;
+    assert.equal(currentURL(), '/dashboard-example/1', 'The URL has updated');
+    assert.equal(currentRouteName(), 'dashboard-example', 'The currentRouteName has updated');
     assert.ok(find('.dashboard-example-header'), 'We are on the dashboard now');
   });
 }
