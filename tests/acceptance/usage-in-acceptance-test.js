@@ -1,7 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 import { visit, click, find, fillIn, waitUntil, currentURL, currentRouteName } from 'ember-native-dom-helpers';
-import RSVP from 'rsvp';
 
 moduleForAcceptance('Acceptance | usage in acceptance');
 
