@@ -2,5 +2,8 @@
   "name": "ember-native-dom-helpers",
   "dependencies": {
     "ember": "canary"
+  },
+  "resolutions": {
+    "ember": "canary"
   }
 }

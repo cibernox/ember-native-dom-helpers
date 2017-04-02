@@ -1,8 +1,8 @@
 /* eslint-env node */
+/* eslint-disable new-cap */
 module.exports = function(app) {
   let express = require('express');
   let signupRouter = express.Router();
-
 
   signupRouter.post('/', function(req, res) {
     setTimeout(function() {

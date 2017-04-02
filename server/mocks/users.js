@@ -1,4 +1,5 @@
 /* eslint-env node */
+/* eslint-disable new-cap */
 module.exports = function(app) {
   let express = require('express');
   let usersRouter = express.Router();
