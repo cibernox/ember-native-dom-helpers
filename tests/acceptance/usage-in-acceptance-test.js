@@ -1,12 +1,9 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 import { visit, click, find, fillIn, waitUntil, currentURL, currentRouteName } from 'ember-native-dom-helpers';
+import RSVP from 'rsvp';
 
-moduleForAcceptance('Acceptance | usage in acceptance', {
-  beforeEach() {
-    window.server.timing = 300;
-  }
-});
+moduleForAcceptance('Acceptance | usage in acceptance');
 
 test('Usage awaiting the world to settle', async function(assert) {
   await visit('/signup-example');
@@ -15,6 +12,7 @@ test('Usage awaiting the world to settle', async function(assert) {
   await fillIn('.signup-example-form__email', 'some@email.com');
   await fillIn('.signup-example-form__password', '123123');
   await fillIn('.signup-example-form__password-confirmation', '123123');
+  debugger;
   await click('.signup-example-form__submit-btn');
 
   assert.ok(find('.dashboard-example-header'), 'We are on the dashboard now');
