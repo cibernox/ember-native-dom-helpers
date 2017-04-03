@@ -16,6 +16,22 @@ test('Usage awaiting the world to settle', async function(assert) {
   assert.ok(find('.dashboard-example-header'), 'We are on the dashboard now');
 });
 
+test('Traditional usage with `andThen`', function(assert) {
+  visit('/signup-example');
+
+  andThen(function() {
+    assert.ok(find('.signup-example-form'), 'The signup form is displayed');
+    fillIn('.signup-example-form__email', 'some@email.com');
+    fillIn('.signup-example-form__password', '123123');
+    fillIn('.signup-example-form__password-confirmation', '123123');
+    click('.signup-example-form__submit-btn');
+  });
+
+  andThen(function() {
+    assert.ok(find('.dashboard-example-header'), 'We are on the dashboard now');
+  });
+});
+
 test('Usage using `waitUntil` to test unsettled state', async function(assert) {
   await visit('/signup-example');
   assert.equal(currentURL(), '/signup-example', 'The URL has updated');
