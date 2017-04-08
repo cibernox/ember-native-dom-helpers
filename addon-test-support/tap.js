@@ -21,5 +21,5 @@ export function tap(selector, options = {}) {
   if (!touchstartEv.defaultPrevented && !touchendEv.defaultPrevented) {
     clickEventSequence(el);
   }
-  return wait();
+  return (window.wait || wait)();
 }

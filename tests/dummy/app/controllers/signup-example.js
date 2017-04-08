@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import fetch from 'ember-network/fetch';
+import fetch from 'fetch';
 
 export default Ember.Controller.extend({
   actions: {

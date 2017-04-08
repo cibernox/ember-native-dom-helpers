@@ -28,5 +28,5 @@ export function focus(el) {
       });
     }
   }
-  return wait();
+  return (window.wait || wait)();
 }

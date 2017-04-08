@@ -19,5 +19,5 @@ export function fillIn(selector, text) {
   run(() => el.value = text);
   run(() => fireEvent(el, 'input'));
   run(() => fireEvent(el, 'change'));
-  return wait();
+  return (window.wait || wait)();
 }

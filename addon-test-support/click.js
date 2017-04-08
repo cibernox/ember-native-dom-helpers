@@ -26,5 +26,5 @@ export function clickEventSequence(el, options) {
 */
 export function click(selector, options = {}) {
   clickEventSequence(getElementWithAssert(selector), options);
-  return wait();
+  return (window.wait || wait)();
 }
