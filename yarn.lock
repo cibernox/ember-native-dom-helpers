@@ -88,13 +88,13 @@ ansi-escapes@^1.1.0:
   version "1.4.0"
   resolved ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e
 
+ansi-regex@*, ansi-regex@^2.0.0:
+  version "2.1.1"
+  resolved ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df
+
 ansi-regex@^0.2.0, ansi-regex@^0.2.1:
   version "0.2.1"
   resolved ansi-regex-0.2.1.tgz#0d8e946967a3d8143f93e24e298525fc1b2235f9
-
-ansi-regex@^2.0.0:
-  version "2.1.1"
-  resolved ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df
 
 ansi-styles@^1.1.0:
   version "1.1.0"
@@ -235,6 +235,10 @@ ast-traverse@~0.1.1:
 ast-types@0.8.12:
   version "0.8.12"
   resolved ast-types-0.8.12.tgz#a0d90e4351bb887716c83fd637ebf818af4adfcc
+
+ast-types@0.8.15:
+  version "0.8.15"
+  resolved ast-types-0.8.15.tgz#8eef0827f04dff0ec8857ba925abe3fea6194e52
 
 ast-types@0.9.6:
   version "0.9.6"
@@ -955,21 +959,6 @@ bluebird@^3.1.1, bluebird@^3.4.6:
   version "3.5.0"
   resolved bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c
 
-body-parser@^1.17.1:
-  version "1.17.1"
-  resolved body-parser-1.17.1.tgz#75b3bc98ddd6e7e0d8ffe750dfaca5c66993fa47
-  dependencies:
-    bytes "2.4.0"
-    content-type "~1.0.2"
-    debug "2.6.1"
-    depd "~1.1.0"
-    http-errors "~1.6.1"
-    iconv-lite "0.4.15"
-    on-finished "~2.3.0"
-    qs "6.4.0"
-    raw-body "~2.2.0"
-    type-is "~1.6.14"
-
 body@^5.1.0:
   version "5.1.0"
   resolved body-5.1.0.tgz#e4ba0ce410a46936323367609ecb4e6553125069
@@ -1393,10 +1382,6 @@ bytes@1:
 bytes@2.3.0:
   version "2.3.0"
   resolved bytes-2.3.0.tgz#d5b680a165b6201739acb611542aabc2d8ceb070
-
-bytes@2.4.0:
-  version "2.4.0"
-  resolved bytes-2.4.0.tgz#7d97196f9d5baf7f6935e25985549edd2a6c2339
 
 calculate-cache-key-for-tree@^1.0.0:
   version "1.1.0"
@@ -1825,7 +1810,7 @@ debug@2.6.3, debug@^2.1.0, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0:
   dependencies:
     ms "0.7.2"
 
-debuglog@^1.0.1:
+debuglog@*, debuglog@^1.0.1:
   version "1.0.1"
   resolved debuglog-1.0.1.tgz#aa24ffb9ac3df9a2351837cfb2d279360cd78492
 
@@ -2717,7 +2702,7 @@ expand-tilde@^1.2.2:
   dependencies:
     os-homedir "^1.0.1"
 
-express@^4.10.7, express@^4.12.3, express@^4.8.5:
+express@^4.10.7, express@^4.12.3:
   version "4.15.2"
   resolved express-4.15.2.tgz#af107fc148504457f2dca9a6f2571d7129b97b35
   dependencies:
@@ -3122,7 +3107,7 @@ glob-parent@^2.0.0:
   dependencies:
     is-glob "^2.0.0"
 
-"glob@3 || 4", glob@^4.0.5:
+"glob@3 || 4":
   version "4.5.3"
   resolved glob-4.5.3.tgz#c6cb73d3226c1efef04de3c56d012f03377ee15f
   dependencies:
@@ -3197,7 +3182,7 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-graceful-fs@^4.1.2, graceful-fs@^4.1.3, graceful-fs@^4.1.4, graceful-fs@^4.1.6, graceful-fs@^4.1.9, graceful-fs@~4.1.2:
+graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.3, graceful-fs@^4.1.4, graceful-fs@^4.1.6, graceful-fs@^4.1.9, graceful-fs@~4.1.2:
   version "4.1.11"
   resolved graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658
 
@@ -3337,7 +3322,11 @@ homedir-polyfill@^1.0.0:
   dependencies:
     parse-passwd "^1.0.0"
 
-hosted-git-info@^2.1.4, hosted-git-info@^2.1.5, hosted-git-info@~2.1.4:
+hosted-git-info@^2.1.4, hosted-git-info@^2.1.5:
+  version "2.4.1"
+  resolved hosted-git-info-2.4.1.tgz#4b0445e41c004a8bd1337773a4ff790ca40318c8
+
+hosted-git-info@~2.1.4:
   version "2.1.5"
   resolved hosted-git-info-2.1.5.tgz#0ba81d90da2e25ab34a332e6ec77936e1598118b
 
@@ -3365,7 +3354,7 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-iconv-lite@0.4.15, iconv-lite@^0.4.5, iconv-lite@~0.4.13:
+iconv-lite@^0.4.5, iconv-lite@~0.4.13:
   version "0.4.15"
   resolved iconv-lite-0.4.15.tgz#fe265a218ac6a57cfe854927e9d04c19825eddeb
 
@@ -3377,7 +3366,7 @@ ignore@^3.2.0:
   version "3.2.7"
   resolved ignore-3.2.7.tgz#4810ca5f1d8eca5595213a34b94f2eb4ed926bbd
 
-imurmurhash@^0.1.4:
+imurmurhash@*, imurmurhash@^0.1.4:
   version "0.1.4"
   resolved imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea
 
@@ -3532,13 +3521,9 @@ is-fullwidth-code-point@^2.0.0:
   version "2.0.0"
   resolved is-fullwidth-code-point-2.0.0.tgz#a3b30a5c4f199183167aaab93beefae3ddfb654f
 
-is-git-url@0.2.0:
+is-git-url@0.2.0, is-git-url@^0.2.0:
   version "0.2.0"
   resolved is-git-url-0.2.0.tgz#b9ce0fb044821c88880213d602db03bdb255da1b
-
-is-git-url@^0.2.0:
-  version "0.2.3"
-  resolved is-git-url-0.2.3.tgz#445200d6fbd6da028fb5e01440d9afc93f3ccb64
 
 is-glob@^2.0.0, is-glob@^2.0.1:
   version "2.0.1"
@@ -3899,7 +3884,7 @@ lodash._basefor@^3.0.0:
   version "3.0.3"
   resolved lodash._basefor-3.0.3.tgz#7550b4e9218ef09fad24343b612021c79b4c20c2
 
-lodash._baseindexof@^3.0.0:
+lodash._baseindexof@*, lodash._baseindexof@^3.0.0:
   version "3.1.0"
   resolved lodash._baseindexof-3.1.0.tgz#fe52b53a1c6761e42618d654e4a25789ed61822c
 
@@ -3915,6 +3900,13 @@ lodash._basetostring@^3.0.0:
   version "3.0.1"
   resolved lodash._basetostring-3.0.1.tgz#d1861d877f824a52f669832dcaf3ee15566a07d5
 
+lodash._baseuniq@*:
+  version "4.6.0"
+  resolved lodash._baseuniq-4.6.0.tgz#0ebb44e456814af7905c6212fa2c9b2d51b841e8
+  dependencies:
+    lodash._createset "~4.0.0"
+    lodash._root "~3.0.0"
+
 lodash._baseuniq@^3.0.0:
   version "3.0.3"
   resolved lodash._baseuniq-3.0.3.tgz#2123fa0db2d69c28d5beb1c1f36d61522a740234
@@ -3927,11 +3919,11 @@ lodash._basevalues@^3.0.0:
   version "3.0.0"
   resolved lodash._basevalues-3.0.0.tgz#5b775762802bde3d3297503e26300820fdf661b7
 
-lodash._bindcallback@^3.0.0:
+lodash._bindcallback@*, lodash._bindcallback@^3.0.0:
   version "3.0.1"
   resolved lodash._bindcallback-3.0.1.tgz#e531c27644cf8b57a99e17ed95b35c748789392e
 
-lodash._cacheindexof@^3.0.0:
+lodash._cacheindexof@*, lodash._cacheindexof@^3.0.0:
   version "3.0.2"
   resolved lodash._cacheindexof-3.0.2.tgz#3dc69ac82498d2ee5e3ce56091bafd2adc7bde92
 
@@ -3943,13 +3935,17 @@ lodash._createassigner@^3.0.0:
     lodash._isiterateecall "^3.0.0"
     lodash.restparam "^3.0.0"
 
-lodash._createcache@^3.0.0:
+lodash._createcache@*, lodash._createcache@^3.0.0:
   version "3.1.2"
   resolved lodash._createcache-3.1.2.tgz#56d6a064017625e79ebca6b8018e17440bdcf093
   dependencies:
     lodash._getnative "^3.0.0"
 
-lodash._getnative@^3.0.0:
+lodash._createset@~4.0.0:
+  version "4.0.3"
+  resolved lodash._createset-4.0.3.tgz#0f4659fbb09d75194fa9e2b88a6644d363c9fe26
+
+lodash._getnative@*, lodash._getnative@^3.0.0:
   version "3.9.1"
   resolved lodash._getnative-3.9.1.tgz#570bc7dede46d61cdcde687d65d3eecbaa3aaff5
 
@@ -3961,7 +3957,7 @@ lodash._reinterpolate@^3.0.0, lodash._reinterpolate@~3.0.0:
   version "3.0.0"
   resolved lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d
 
-lodash._root@^3.0.0:
+lodash._root@^3.0.0, lodash._root@~3.0.0:
   version "3.0.1"
   resolved lodash._root-3.0.1.tgz#fba1c4524c19ee9a5f8136b4609f017cf4ded692
 
@@ -4011,11 +4007,11 @@ lodash.flatten@^3.0.2:
     lodash._baseflatten "^3.0.0"
     lodash._isiterateecall "^3.0.0"
 
-lodash.isarguments@^3.0.0:
+lodash.isarguments@*, lodash.isarguments@^3.0.0:
   version "3.1.0"
   resolved lodash.isarguments-3.1.0.tgz#2f573d85c6a24289ff00663b491c1d338ff3458a
 
-lodash.isarray@^3.0.0:
+lodash.isarray@*, lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55
 
@@ -4031,7 +4027,7 @@ lodash.istypedarray@^3.0.0:
   version "3.0.6"
   resolved lodash.istypedarray-3.0.6.tgz#c9a477498607501d8e8494d283b87c39281cef62
 
-lodash.keys@^3.0.0:
+lodash.keys@*, lodash.keys@^3.0.0:
   version "3.1.2"
   resolved lodash.keys-3.1.2.tgz#4dbc0472b156be50a0b286855d1bd0b0c656098a
   dependencies:
@@ -4088,7 +4084,7 @@ lodash.pairs@^3.0.0:
   dependencies:
     lodash.keys "^3.0.0"
 
-lodash.restparam@^3.0.0:
+lodash.restparam@*, lodash.restparam@^3.0.0:
   version "3.6.1"
   resolved lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805
 
@@ -4373,7 +4369,7 @@ moment-timezone@^0.3.0:
   version "2.18.1"
   resolved moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f
 
-morgan@^1.3.2, morgan@^1.8.1:
+morgan@^1.8.1:
   version "1.8.1"
   resolved morgan-1.8.1.tgz#f93023d3887bd27b78dfd6023cea7892ee27a4b1
   dependencies:
@@ -5033,14 +5029,6 @@ raw-body@~1.1.0:
     bytes "1"
     string_decoder "0.10"
 
-raw-body@~2.2.0:
-  version "2.2.0"
-  resolved raw-body-2.2.0.tgz#994976cf6a5096a41162840492f0bdc5d6e7fb96
-  dependencies:
-    bytes "2.4.0"
-    iconv-lite "0.4.15"
-    unpipe "1.0.0"
-
 rc@^1.1.7:
   version "1.2.1"
   resolved rc-1.2.1.tgz#2e03e8e42ee450b8cb3dce65be1bf8974e1dfd95
@@ -5095,7 +5083,7 @@ read@1, read@~1.0.1, read@~1.0.7:
   dependencies:
     mute-stream "~0.0.4"
 
-"readable-stream@1 || 2", readable-stream@^2, "readable-stream@^2.0.0 || ^1.1.13", readable-stream@^2.0.2, readable-stream@~2.0.5:
+"readable-stream@1 || 2", readable-stream@^2, readable-stream@^2.0.2, readable-stream@~2.0.5:
   version "2.0.6"
   resolved readable-stream-2.0.6.tgz#8f90341e68a53ccc928788dacfcd11b36eb9b78e
   dependencies:
@@ -5106,7 +5094,7 @@ read@1, read@~1.0.1, read@~1.0.7:
     string_decoder "~0.10.x"
     util-deprecate "~1.0.1"
 
-readable-stream@^2.1.4, readable-stream@^2.2.2:
+"readable-stream@^2.0.0 || ^1.1.13", readable-stream@^2.1.4, readable-stream@^2.2.2:
   version "2.2.9"
   resolved readable-stream-2.2.9.tgz#cf78ec6f4a6d1eb43d26488cac97f042e74b7fc8
   dependencies:
@@ -5127,7 +5115,7 @@ readable-stream@~1.0.2:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readdir-scoped-modules@^1.0.0:
+readdir-scoped-modules@*, readdir-scoped-modules@^1.0.0:
   version "1.0.2"
   resolved readdir-scoped-modules-1.0.2.tgz#9fafa37d286be5d92cbaebdee030dc9b5f406747
   dependencies:
@@ -5160,11 +5148,20 @@ realize-package-specifier@~3.0.1:
     dezalgo "^1.0.1"
     npm-package-arg "^4.1.1"
 
-recast@0.10.33, recast@^0.10.10:
+recast@0.10.33:
   version "0.10.33"
   resolved recast-0.10.33.tgz#942808f7aa016f1fa7142c461d7e5704aaa8d697
   dependencies:
     ast-types "0.8.12"
+    esprima-fb "~15001.1001.0-dev-harmony-fb"
+    private "~0.1.5"
+    source-map "~0.5.0"
+
+recast@^0.10.10:
+  version "0.10.43"
+  resolved recast-0.10.43.tgz#b95d50f6d60761a5f6252e15d80678168491ce7f
+  dependencies:
+    ast-types "0.8.15"
     esprima-fb "~15001.1001.0-dev-harmony-fb"
     private "~0.1.5"
     source-map "~0.5.0"
@@ -5764,17 +5761,17 @@ stringstream@~0.0.4:
   version "0.0.5"
   resolved stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878
 
+strip-ansi@*, strip-ansi@^3.0.0, strip-ansi@^3.0.1:
+  version "3.0.1"
+  resolved strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf
+  dependencies:
+    ansi-regex "^2.0.0"
+
 strip-ansi@^0.3.0:
   version "0.3.0"
   resolved strip-ansi-0.3.0.tgz#25f48ea22ca79187f3174a4db8759347bb126220
   dependencies:
     ansi-regex "^0.2.1"
-
-strip-ansi@^3.0.0, strip-ansi@^3.0.1:
-  version "3.0.1"
-  resolved strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf
-  dependencies:
-    ansi-regex "^2.0.0"
 
 strip-bom@^2.0.0:
   version "2.0.0"
@@ -6070,7 +6067,7 @@ unique-string@^1.0.0:
   dependencies:
     crypto-random-string "^1.0.0"
 
-unpipe@1.0.0, unpipe@~1.0.0:
+unpipe@~1.0.0:
   version "1.0.0"
   resolved unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec
 
@@ -6106,7 +6103,7 @@ uuid@^3.0.0:
   version "3.0.1"
   resolved uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1
 
-validate-npm-package-license@^3.0.1:
+validate-npm-package-license@*, validate-npm-package-license@^3.0.1:
   version "3.0.1"
   resolved validate-npm-package-license-3.0.1.tgz#2804babe712ad3379459acfbe24746ab2c303fbc
   dependencies:
@@ -6219,7 +6216,15 @@ wrappy@1, wrappy@~1.0.1:
   version "1.0.2"
   resolved wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f
 
-write-file-atomic@^1.1.2, write-file-atomic@~1.1.4:
+write-file-atomic@^1.1.2:
+  version "1.3.1"
+  resolved write-file-atomic-1.3.1.tgz#7d45ba32316328dd1ec7d90f60ebc0d845bb759a
+  dependencies:
+    graceful-fs "^4.1.11"
+    imurmurhash "^0.1.4"
+    slide "^1.1.5"
+
+write-file-atomic@~1.1.4:
   version "1.1.4"
   resolved write-file-atomic-1.1.4.tgz#b1f52dc2e8dc0e3cb04d187a25f758a38a90ca3b
   dependencies:
