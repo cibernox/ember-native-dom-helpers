@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import getElementWithAssert from './-private/get-element-with-assert';
 import { fireEvent } from './fire-event';
 import wait from 'ember-test-helpers/wait';
 
@@ -6,11 +7,12 @@ const { run } = Ember;
 
 /*
   @method focus
-  @param {HTMLElement} el
-  @private
+  @param {String|HTMLElement} selector
+  @public
 */
-export function focus(el) {
-  if (!el) { return; }
+export function focus(selector) {
+  if (!selector) { return; }
+  let el = getElementWithAssert(selector);
 
   if (el.tagName === 'INPUT' || el.contentEditable || el.tagName === 'A') {
     let type = el.type;

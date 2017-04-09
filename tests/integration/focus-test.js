@@ -17,6 +17,17 @@ test('It accepts an HTMLElement as first argument', function(assert) {
   focus(document.querySelector('.target-element'));
 });
 
+test('It accepts a CSS selector as first argument', function(assert) {
+  assert.expect(2);
+  this.onFocus = (e) => {
+    assert.ok(true, 'a focus event is fired');
+    assert.ok(e instanceof window.Event, 'It receives a native event');
+  };
+
+  this.render(hbs`<input class="target-element" onfocus={{onFocus}} />`);
+  focus('.target-element');
+});
+
 test('It blurs the focused input before firing focus event on another one', function(assert) {
   let docIsFocused = document.hasFocus && document.hasFocus();
   let assertions = docIsFocused ? 8 : 4;
