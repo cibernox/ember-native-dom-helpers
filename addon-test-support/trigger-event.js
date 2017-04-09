@@ -16,5 +16,5 @@ const { run } = Ember;
 export function triggerEvent(selector, type, options) {
   let el = getElementWithAssert(selector);
   run(() => fireEvent(el, type, options));
-  return wait();
+  return (window.wait || wait)();
 }

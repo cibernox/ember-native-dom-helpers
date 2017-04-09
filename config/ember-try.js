@@ -89,6 +89,14 @@ module.exports = {
     },
     {
       name: 'no-jquery',
+      bower: {
+        dependencies: {
+          'ember': 'components/ember#canary'
+        },
+        resolutions: {
+          'ember': 'canary'
+        }
+      },
       npm: {
         devDependencies: {
           'ember-native-dom-event-dispatcher': '^0.5.4'
