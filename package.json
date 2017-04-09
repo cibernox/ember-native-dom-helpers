@@ -47,7 +47,6 @@
     "ember-fetch": "cibernox/ember-fetch#make-it-wait",
     "ember-load-initializers": "^1.0.0",
     "ember-maybe-import-regenerator": "^0.1.5",
-    "ember-native-dom-event-dispatcher": "0.5.4",
     "ember-resolver": "^4.0.0",
     "eslint-plugin-ember-suave": "^1.0.0",
     "loader.js": "^4.2.3"
