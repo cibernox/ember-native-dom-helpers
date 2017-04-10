@@ -8,6 +8,7 @@ const { run } = Ember;
 /*
   @method focus
   @param {String|HTMLElement} selector
+  @return {RSVP.Promise}
   @public
 */
 export function focus(selector) {
