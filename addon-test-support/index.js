@@ -4,6 +4,7 @@ export { findWithAssert } from './find-with-assert';
 export { click } from './click';
 export { tap } from './tap';
 export { fillIn } from './fill-in';
+export { flushScrollAndWait } from './flush-scroll-and-wait';
 export { keyEvent } from './key-event';
 export { triggerEvent } from './trigger-event';
 export { visit } from './visit';
