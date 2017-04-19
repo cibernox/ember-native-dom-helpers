@@ -1,4 +1,6 @@
 /* eslint-env node */
+'use strict';
+
 let browsers = [
   'ie 9',
   'last 1 Chrome versions',
