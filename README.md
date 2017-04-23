@@ -24,7 +24,6 @@ when using only standard DOM APIs (i.e. without jQuery).
 
 ## Usage
 
-
 ### Integration tests
 
 ```js
@@ -44,7 +43,7 @@ test('I can interact with my component', async function(assert) {
   await click('.main-button');
   await keyEvent('.other-input', 'keyup', 40); // down arrow
   await triggerEvent('.some-drop-area', 'mouseenter');
-  
+
   assert.ok(find('.result-of-event-happened'));
   assert.equal(findAll('.result-list-item').length, 3);
 })
@@ -52,7 +51,7 @@ test('I can interact with my component', async function(assert) {
 
 ### Acceptance tests
 
-You can use the exact same helpers for you integration tests. All interaction helpers like
+You can use the exact same helpers for you acceptance tests. All interaction helpers like
 `click`, `fillIn` et al. return a promise that that fullfils when "the world has settled"
 (that is, there is no pending requests or promises and the runloop has be drained), which
 is what the `andThen` acceptance helper used to do.
@@ -90,7 +89,8 @@ The main advantages are:
   every interation with `Ember.run(() => /* interact with element */ );`.
 
 - `wait` by default: All the helpers return the `wait()` promise, making possible wait
-  for asynchronous side-effects with `async/await`.
+  for asynchronous side-effects with `async/await`. (Note that for using async/await in
+  browsers without native support you must install [ember-maybe-import-regenerator](https://github.com/machty/ember-maybe-import-regenerator))
 
   ```js
   test('some test', async function(assert) {
@@ -101,6 +101,7 @@ The main advantages are:
     assert.ok('something happened');
   });
   ```
+
 
 - More real behaviour: When a clicks on an element `click` is not the only event fired. In a
   real click the sequence of events is `mousedown`, `focus`, `mouseup`, `click`. When a user
