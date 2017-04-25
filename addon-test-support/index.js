@@ -11,5 +11,6 @@ export { waitUntil } from './wait-until';
 export { currentURL } from './current-url';
 export { currentPath } from './current-path';
 export { focus } from './focus';
+export { scrollTo } from './scroll-to';
 export { currentRouteName } from './current-route-name';
 export { default as settings } from './settings';
