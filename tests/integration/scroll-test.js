@@ -1,8 +1,8 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { scrollTop, scrollLeft } from 'ember-native-dom-helpers';
+import { scrollTo } from 'ember-native-dom-helpers';
 
-moduleForComponent('flush-scroll', 'Integration | Test Helper | flushScroll', {
+moduleForComponent('scrollTo', 'Integration | Test Helper | scrollTo', {
   integration: true
 });
 
@@ -23,7 +23,7 @@ test('Scroll in vertical direction is async, not a problem', async function(asse
          height: 100px;
        }
     </style>
-  
+
     <div class="container" onscroll={{action callback}}>
       <ul>
       <li class="item">A</li>
@@ -35,7 +35,7 @@ test('Scroll in vertical direction is async, not a problem', async function(asse
     </div>
     `);
 
-  await scrollTop('.container', scrollAmount);
+  await scrollTo('.container', 0, scrollAmount);
 
   assert.equal(currentScrollPosition, scrollAmount, 'After use of the `scrollTop` a paint cycle is triggered and the callback is called');
 });
@@ -60,7 +60,7 @@ test('Scroll in horizontal direction is async, not a problem', async function(as
          display: inline-block;
        }
     </style>
-  
+
     <div class="container" onscroll={{action callback}}>
       <div class="item">A</div>
       <div class="item">B</div>
@@ -70,7 +70,7 @@ test('Scroll in horizontal direction is async, not a problem', async function(as
     </div>
     `);
 
-  await scrollLeft('.container', scrollAmount);
+  await scrollTo('.container', scrollAmount, 0);
 
   assert.equal(currentScrollPosition, scrollAmount, 'After use of the `scrollLeft` a paint cycle is triggered and the callback is called');
 });
