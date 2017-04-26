@@ -174,10 +174,11 @@ test('Usage awaiting the world to settle', async function(assert) {
 - `fillIn(selectorOrHTMLElement, text)`
 - `find(selector, contextHTMLElement)` (query for an element in test DOM, `#ember-testing`)
 - `findAll(selector, contextHTMLElement)` (query for elements in test DOM, `#ember-testing`)
-- `findWithAssert(selector, contextHTMLElement)` (same as `find`, but raises Error if no result)
+- `findWithAssert(selector, contextHTMLElement)` (same as `find`, but raises an Error if no result)
 - `keyEvent(selectorOrHTMLElement, type, keyCode)` (type being `keydown`, `keyup` or `keypress`)
 - `triggerEvent(selectorOrHTMLElement, type, options)`
 - `focus(selectorOrHTMLElement)`
+- `scrollTo(selectorOrHTMLElement, x, y)`
 - `visit(url)` (only available in acceptance. Raises an error in integration)
 - `waitUntil(function, options)` (Polls the page until the given callback returns a truthy value, or timesout after 1s)
 
