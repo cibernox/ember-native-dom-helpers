@@ -22,11 +22,16 @@ export function focus(selector) {
         // Firefox does not trigger the `focusin` event if the window
         // does not have focus. If the document does not have focus then
         // fire `focusin` event as well.
-        if (document.hasFocus && !document.hasFocus()) {
+        let browserIsNotFocused = document.hasFocus && !document.hasFocus();
+
+        if (browserIsNotFocused) {
           fireEvent(el, 'focusin');
-          fireEvent(el, 'focus', null, false); // focus does not bubble
-        } else {
-          el.focus();
+        }
+
+        el.focus(); // makes `document.activeElement` be `el`. If the browser is focused, it also fires a focus event
+
+        if (browserIsNotFocused) {
+          fireEvent(el, 'focus', null, false); // if the browser is not focused the previous `el.focus()` didn't fire an event, so we simulate it
         }
       });
     }
