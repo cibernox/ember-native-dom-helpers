@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { blur } from 'ember-native-dom-helpers/blur';
+import { blur } from 'ember-native-dom-helpers';
 
 moduleForComponent('blur', 'Integration | Test Helper | blur', {
   integration: true
