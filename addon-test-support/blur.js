@@ -19,12 +19,16 @@ export function blur(selector) {
 
   if (isFocusable(el)) {
     run(null, function() {
+      let browserIsNotFocused = document.hasFocus && !document.hasFocus();
+
+      // makes `document.activeElement` be `body`.
+      // If the browser is focused, it also fires a blur event
       el.blur();
 
       // Chrome/Firefox does not trigger the `blur` event if the window
       // does not have focus. If the document does not have focus then
       // fire `blur` event via native event.
-      if (document.hasFocus && !document.hasFocus()) {
+      if (browserIsNotFocused) {
         fireEvent(el, 'blur', { bubble: false });
       }
     });
