@@ -23,7 +23,9 @@ export function blur(selector) {
         // does not have focus. If the document does not have focus then
         // fire `blur` event via native event.
         if (document.hasFocus && !document.hasFocus()) {
-          fireEvent(el, 'blur', null, false); // blur does not bubble
+          fireEvent(el, 'blur', {
+            bubble: false
+          });
         } else {
           el.blur();
         }

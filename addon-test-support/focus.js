@@ -19,19 +19,23 @@ export function focus(selector) {
     let type = el.type;
     if (type !== 'checkbox' && type !== 'radio' && type !== 'hidden') {
       run(null, function() {
+        let browserIsNotFocused = document.hasFocus && !document.hasFocus();
+
         // Firefox does not trigger the `focusin` event if the window
         // does not have focus. If the document does not have focus then
         // fire `focusin` event as well.
-        let browserIsNotFocused = document.hasFocus && !document.hasFocus();
-
         if (browserIsNotFocused) {
           fireEvent(el, 'focusin');
         }
 
-        el.focus(); // makes `document.activeElement` be `el`. If the browser is focused, it also fires a focus event
+        // makes `document.activeElement` be `el`. If the browser is focused, it also fires a focus event
+        el.focus();
 
+        // if the browser is not focused the previous `el.focus()` didn't fire an event, so we simulate it
         if (browserIsNotFocused) {
-          fireEvent(el, 'focus', null, false); // if the browser is not focused the previous `el.focus()` didn't fire an event, so we simulate it
+          fireEvent(el, 'focus', {
+            bubble: false
+          });
         }
       });
     }

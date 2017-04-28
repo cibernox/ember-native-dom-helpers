@@ -42,14 +42,12 @@ export function fireEvent(element, type, options = {}) {
   @method buildBasicEvent
   @param {String} type
   @param {Object} (optional) options
-  @param {Boolean} (optional) bubbles
-  @param {Boolean} (optional) cancelable
   @return {Event}
   @private
 */
-function buildBasicEvent(type, options = {}, bubbles = true, cancelable = true) {
+function buildBasicEvent(type, options = {}) {
   let event = document.createEvent('Events');
-  event.initEvent(type, bubbles, cancelable);
+  event.initEvent(type, true, true);
   merge(event, options);
   return event;
 }
