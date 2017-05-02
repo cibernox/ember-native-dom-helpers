@@ -94,11 +94,54 @@ function buildMouseEvent(type, options = {}) {
   @private
 */
 function buildKeyboardEvent(type, options = {}) {
-  let event;
+  return buildBasicEvent(type, options);
+}
+
+/**
+ * TODO: figure out what is a better solution for keyboard event.
+ * It seems that if we use KeyboardEvent, its not bubbling correctly.
+ *
+ * @method buildKeyboardEvent
+ * @param {String} type
+ * @param {Object} [options]
+ * @return {Event}
+ * @private
+ */
+function _buildKeyboardEvent(type, options = {}) {
+  let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
+  let event, eventMethodName;
+
   try {
-    event = document.createEvent('KeyEvents');
-    let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
-    event.initKeyEvent(
+    event = new KeyboardEvent(type, eventOpts);
+    Object.defineProperty(event, 'charCode', {
+      get() {
+        return this.key;
+      }
+    });
+
+    return event;
+  } catch(e) {
+    // left intentionally blank
+  }
+
+  try {
+    event = document.createEvent('KeyboardEvents');
+    eventMethodName = 'initKeyboardEvent';
+  } catch(e) {
+    // left intentionally blank
+  }
+
+  if (!event) {
+    try {
+      event = document.createEvent('KeyEvents');
+      eventMethodName = 'initKeyEvent';
+    } catch(e) {
+      // left intentionally blank
+    }
+  }
+
+  if (event) {
+    event[eventMethodName](
       type,
       eventOpts.canBubble,
       eventOpts.cancelable,
@@ -110,8 +153,9 @@ function buildKeyboardEvent(type, options = {}) {
       eventOpts.keyCode,
       eventOpts.charCode
     );
-  } catch (e) {
+  } else {
     event = buildBasicEvent(type, options);
   }
+
   return event;
 }
