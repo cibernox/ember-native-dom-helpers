@@ -175,7 +175,7 @@ test('Usage awaiting the world to settle', async function(assert) {
 - `find(selector, contextHTMLElement)` (query for an element in test DOM, `#ember-testing`)
 - `findAll(selector, contextHTMLElement)` (query for elements in test DOM, `#ember-testing`)
 - `findWithAssert(selector, contextHTMLElement)` (same as `find`, but raises an Error if no result)
-- `keyEvent(selectorOrHTMLElement, type, keyCode)` (type being `keydown`, `keyup` or `keypress`)
+- `keyEvent(selectorOrHTMLElement, type, keyCode, modifiers)` (type being `keydown`, `keyup` or `keypress`, modifiers being object with `{ ctrlKey: false, altKey: false, shiftKey: false, metaKey: false }`)
 - `triggerEvent(selectorOrHTMLElement, type, options)`
 - `focus(selectorOrHTMLElement)`
 - `blur(selectorOrHTMLElement)`
