@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 const { merge } = Ember;
-const DEFAULT_EVENT_OPTIONS = { canBubble: true, cancelable: true };
+const DEFAULT_EVENT_OPTIONS = { bubbles: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
 const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
 
@@ -66,7 +66,7 @@ function buildMouseEvent(type, options = {}) {
     let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
     event.initMouseEvent(
       type,
-      eventOpts.canBubble,
+      eventOpts.bubbles,
       eventOpts.cancelable,
       window,
       eventOpts.detail,
@@ -94,28 +94,26 @@ function buildMouseEvent(type, options = {}) {
   @private
 */
 function buildKeyboardEvent(type, options = {}) {
-  return buildBasicEvent(type, options);
-}
-
-/**
- * TODO: figure out what is a better solution for keyboard event.
- * It seems that if we use KeyboardEvent, its not bubbling correctly.
- *
- * @method buildKeyboardEvent
- * @param {String} type
- * @param {Object} [options]
- * @return {Event}
- * @private
- */
-function _buildKeyboardEvent(type, options = {}) {
   let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
   let event, eventMethodName;
 
   try {
     event = new KeyboardEvent(type, eventOpts);
-    Object.defineProperty(event, 'charCode', {
+
+    // Property definitions are required for B/C for keyboard event usage
+    // If this properties are not defined, when listening for key events
+    // keyCode/which will be 0. Also, keyCode and which now are string
+    // and if app compare it with === with integer key definitions,
+    // there will be a fail.
+    Object.defineProperty(event, 'keyCode', {
       get() {
-        return this.key;
+        return parseInt(this.key);
+      }
+    });
+
+    Object.defineProperty(event, 'which', {
+      get() {
+        return parseInt(this.key);
       }
     });
 
@@ -143,7 +141,7 @@ function _buildKeyboardEvent(type, options = {}) {
   if (event) {
     event[eventMethodName](
       type,
-      eventOpts.canBubble,
+      eventOpts.bubbles,
       eventOpts.cancelable,
       window,
       eventOpts.ctrlKey,
