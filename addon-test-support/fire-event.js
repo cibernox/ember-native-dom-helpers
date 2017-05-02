@@ -47,7 +47,16 @@ export function fireEvent(element, type, options = {}) {
 */
 function buildBasicEvent(type, options = {}) {
   let event = document.createEvent('Events');
-  event.initEvent(type, true, true);
+
+  let bubbles = options.bubbles !== undefined ? options.bubbles : true;
+  let cancelable = options.cancelable !== undefined ? options.cancelable : true;
+
+  delete options.bubbles;
+  delete options.cancelable;
+
+  // bubbles and cancelable are readonly, so they can be
+  // set when initializing event
+  event.initEvent(type, bubbles, cancelable);
   merge(event, options);
   return event;
 }
@@ -105,6 +114,9 @@ function buildKeyboardEvent(type, options = {}) {
     // keyCode/which will be 0. Also, keyCode and which now are string
     // and if app compare it with === with integer key definitions,
     // there will be a fail.
+    //
+    // https://w3c.github.io/uievents/#interface-keyboardevent
+    // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
     Object.defineProperty(event, 'keyCode', {
       get() {
         return parseInt(this.key);

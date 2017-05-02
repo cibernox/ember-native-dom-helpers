@@ -29,7 +29,7 @@ export function blur(selector) {
       // does not have focus. If the document does not have focus then
       // fire `blur` event via native event.
       if (browserIsNotFocused) {
-        fireEvent(el, 'blur', { bubble: false });
+        fireEvent(el, 'blur', { bubbles: false });
       }
     });
   }

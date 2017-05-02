@@ -25,7 +25,9 @@ export function focus(selector) {
       // does not have focus. If the document does not have focus then
       // fire `focusin` event as well.
       if (browserIsNotFocused) {
-        fireEvent(el, 'focusin');
+        fireEvent(el, 'focusin', {
+          bubbles: false
+        });
       }
 
       // makes `document.activeElement` be `el`. If the browser is focused, it also fires a focus event
@@ -34,7 +36,7 @@ export function focus(selector) {
       // if the browser is not focused the previous `el.focus()` didn't fire an event, so we simulate it
       if (browserIsNotFocused) {
         fireEvent(el, 'focus', {
-          bubble: false
+          bubbles: false
         });
       }
     });
