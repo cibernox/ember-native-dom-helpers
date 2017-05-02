@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 const { merge } = Ember;
-const DEFAULT_EVENT_OPTIONS = { canBubble: true, cancelable: true };
+const DEFAULT_EVENT_OPTIONS = { bubbles: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
 const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
 
@@ -42,13 +42,20 @@ export function fireEvent(element, type, options = {}) {
   @method buildBasicEvent
   @param {String} type
   @param {Object} (optional) options
-  @param {Boolean} (optional) bubbles
-  @param {Boolean} (optional) cancelable
   @return {Event}
   @private
 */
-function buildBasicEvent(type, options = {}, bubbles = true, cancelable = true) {
+function buildBasicEvent(type, options = {}) {
   let event = document.createEvent('Events');
+
+  let bubbles = options.bubbles !== undefined ? options.bubbles : true;
+  let cancelable = options.cancelable !== undefined ? options.cancelable : true;
+
+  delete options.bubbles;
+  delete options.cancelable;
+
+  // bubbles and cancelable are readonly, so they can be
+  // set when initializing event
   event.initEvent(type, bubbles, cancelable);
   merge(event, options);
   return event;
@@ -68,7 +75,7 @@ function buildMouseEvent(type, options = {}) {
     let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
     event.initMouseEvent(
       type,
-      eventOpts.canBubble,
+      eventOpts.bubbles,
       eventOpts.cancelable,
       window,
       eventOpts.detail,
@@ -96,13 +103,57 @@ function buildMouseEvent(type, options = {}) {
   @private
 */
 function buildKeyboardEvent(type, options = {}) {
-  let event;
+  let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
+  let event, eventMethodName;
+
   try {
-    event = document.createEvent('KeyEvents');
-    let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
-    event.initKeyEvent(
+    event = new KeyboardEvent(type, eventOpts);
+
+    // Property definitions are required for B/C for keyboard event usage
+    // If this properties are not defined, when listening for key events
+    // keyCode/which will be 0. Also, keyCode and which now are string
+    // and if app compare it with === with integer key definitions,
+    // there will be a fail.
+    //
+    // https://w3c.github.io/uievents/#interface-keyboardevent
+    // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+    Object.defineProperty(event, 'keyCode', {
+      get() {
+        return parseInt(this.key);
+      }
+    });
+
+    Object.defineProperty(event, 'which', {
+      get() {
+        return parseInt(this.key);
+      }
+    });
+
+    return event;
+  } catch(e) {
+    // left intentionally blank
+  }
+
+  try {
+    event = document.createEvent('KeyboardEvents');
+    eventMethodName = 'initKeyboardEvent';
+  } catch(e) {
+    // left intentionally blank
+  }
+
+  if (!event) {
+    try {
+      event = document.createEvent('KeyEvents');
+      eventMethodName = 'initKeyEvent';
+    } catch(e) {
+      // left intentionally blank
+    }
+  }
+
+  if (event) {
+    event[eventMethodName](
       type,
-      eventOpts.canBubble,
+      eventOpts.bubbles,
       eventOpts.cancelable,
       window,
       eventOpts.ctrlKey,
@@ -112,8 +163,9 @@ function buildKeyboardEvent(type, options = {}) {
       eventOpts.keyCode,
       eventOpts.charCode
     );
-  } catch (e) {
+  } else {
     event = buildBasicEvent(type, options);
   }
+
   return event;
 }
