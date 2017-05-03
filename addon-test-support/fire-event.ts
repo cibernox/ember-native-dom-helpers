@@ -1,23 +1,16 @@
 import Ember from 'ember';
+import { EventOptions } from './-private/types';
 
 const { merge } = Ember;
-const DEFAULT_EVENT_OPTIONS = { bubbles: true, cancelable: true };
+const DEFAULT_EVENT_OPTIONS: EventOptions = { bubbles: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
 const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
 
-/*
-  @method fireEvent
-  @param {HTMLElement} element
-  @param {String} type
-  @param {Object} (optional) options
-  @return {Event} The dispatched event
-  @private
-*/
-export function fireEvent(element, type, options = {}) {
+export function fireEvent(element: HTMLElement, type: string, options: EventOptions = {}): Event {
   if (!element) {
     return;
   }
-  let event;
+  let event: Event;
   if (KEYBOARD_EVENT_TYPES.indexOf(type) > -1) {
     event = buildKeyboardEvent(type, options);
   } else if (MOUSE_EVENT_TYPES.indexOf(type) > -1) {
@@ -38,41 +31,19 @@ export function fireEvent(element, type, options = {}) {
   return event;
 }
 
-/*
-  @method buildBasicEvent
-  @param {String} type
-  @param {Object} (optional) options
-  @return {Event}
-  @private
-*/
-function buildBasicEvent(type, options = {}) {
+function buildBasicEvent(type: string, { bubbles = true, cancelable = true, ...otherOptions }: EventOptions = {}): Event {
   let event = document.createEvent('Events');
 
-  let bubbles = options.bubbles !== undefined ? options.bubbles : true;
-  let cancelable = options.cancelable !== undefined ? options.cancelable : true;
-
-  delete options.bubbles;
-  delete options.cancelable;
-
-  // bubbles and cancelable are readonly, so they can be
-  // set when initializing event
+  // bubbles and cancelable are readonly, so they can be set when initializing event
   event.initEvent(type, bubbles, cancelable);
-  merge(event, options);
+  merge(event, otherOptions);
   return event;
 }
 
-/*
-  @method buildMouseEvent
-  @param {String} type
-  @param {Object} (optional) options
-  @return {Event}
-  @private
-*/
-function buildMouseEvent(type, options = {}) {
-  let event;
+function buildMouseEvent(type: string, options: EventOptions = {}): Event {
   try {
-    event = document.createEvent('MouseEvents');
-    let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
+    let event = document.createEvent('MouseEvents');
+    let eventOpts: EventOptions = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
     event.initMouseEvent(
       type,
       eventOpts.bubbles,
@@ -89,10 +60,10 @@ function buildMouseEvent(type, options = {}) {
       eventOpts.metaKey,
       eventOpts.button,
       eventOpts.relatedTarget);
-  } catch (e) {
-    event = buildBasicEvent(type, options);
+    return event;
+  } catch(e) {
+    return buildBasicEvent(type, options);
   }
-  return event;
 }
 
 /*
@@ -102,7 +73,7 @@ function buildMouseEvent(type, options = {}) {
   @return {Event}
   @private
 */
-function buildKeyboardEvent(type, options = {}) {
+function buildKeyboardEvent(type: string, options: EventOptions = {}): KeyboardEvent {
   let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
   let event, eventMethodName;
 

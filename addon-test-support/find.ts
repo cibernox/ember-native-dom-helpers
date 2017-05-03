@@ -1,5 +1,5 @@
 import getElement from './-private/get-element';
-
+import { ElementOrSelector } from './-private/types';
 /*
   The find test helper uses `querySelector` to search inside the test
   DOM (based on app configuration for the rootElement).
@@ -8,11 +8,8 @@ import getElement from './-private/get-element';
   DOM context to search within.
 
   @method find
-  @param {String} CSS selector to find one or more elements in the test DOM
-  @param {HTMLElement} contextEl to query within, query from its contained DOM
-  @return {null|HTMLElement} null or an element
   @public
 */
-export function find(selector, contextEl) {
+export function find(selector: ElementOrSelector, contextEl: ElementOrSelector) : ElementOrSelector {
   return getElement(selector, contextEl);
 }

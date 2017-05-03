@@ -4,6 +4,7 @@
   @class TestSupportSettings
 */
 class TestSupportSettings {
+  private _rootElement: string;
 
   constructor(init = { rootElement: '#ember-testing' }) {
     this._rootElement = init.rootElement;
