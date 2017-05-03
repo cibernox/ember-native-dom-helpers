@@ -27,7 +27,8 @@
   "dependencies": {
     "broccoli-funnel": "^1.1.0",
     "ember-cli-typescript": "^0.4.0",
-    "ember-cli-babel": "^6.1.0"
+    "ember-cli-babel": "^6.1.0",
+    "typescript": "^2.1"
   },
   "devDependencies": {
     "@types/ember": "^2.7.34",
@@ -51,8 +52,7 @@
     "ember-maybe-import-regenerator": "^0.1.5",
     "ember-resolver": "^4.0.0",
     "eslint-plugin-ember-suave": "^1.0.0",
-    "loader.js": "^4.2.3",
-    "typescript": "^2.1"
+    "loader.js": "^4.2.3"
   },
   "engines": {
     "node": ">= 4"
