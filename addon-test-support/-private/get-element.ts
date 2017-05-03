@@ -1,13 +1,7 @@
 import settings from '../settings';
+import { ElementOrSelector } from './types';
 
-/*
-  @method getElement
-  @param {String|HTMLElement} selectorOrElement
-  @param {HTMLElement} contextEl to query within, query from its contained DOM
-  @return HTMLElement
-  @private
-*/
-export default function getElement(selectorOrElement, contextEl) {
+export default function getElement(selectorOrElement: ElementOrSelector, contextEl: ElementOrSelector) : HTMLElement {
   if (selectorOrElement instanceof HTMLElement) {
     return selectorOrElement;
   }
