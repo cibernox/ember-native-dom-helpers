@@ -5,11 +5,11 @@ export default function getElement(selectorOrElement: ElementOrSelector, context
   if (selectorOrElement instanceof HTMLElement) {
     return selectorOrElement;
   }
-  let result: HTMLElement;
+  let result;
   if (contextEl instanceof HTMLElement) {
     result = contextEl.querySelector(selectorOrElement);
   } else {
     result = document.querySelector(`${settings.rootElement} ${selectorOrElement}`);
   }
-  return result;
+  return result as HTMLElement;
 }
