@@ -5,7 +5,7 @@ export default function getElement(selectorOrElement: ElementOrSelector, context
   if (selectorOrElement instanceof HTMLElement) {
     return selectorOrElement;
   }
-  let result;
+  let result: HTMLElement;
   if (contextEl instanceof HTMLElement) {
     result = contextEl.querySelector(selectorOrElement);
   } else {
