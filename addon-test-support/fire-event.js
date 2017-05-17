@@ -25,8 +25,8 @@ export function fireEvent(element, type, options = {}) {
     let x = rect.left + 1;
     let y = rect.top + 1;
     let simulatedCoordinates = {
-      screenX: x + 5,
-      screenY: y + 95,
+      screenX: x + 5,   // Those numbers don't really mean anything.
+      screenY: y + 95,  // They're just to make the screenX/Y be different of clientX/Y..
       clientX: x,
       clientY: y
     };
@@ -89,7 +89,7 @@ function buildMouseEvent(type, options = {}) {
       eventOpts.metaKey,
       eventOpts.button,
       eventOpts.relatedTarget);
-  } catch (e) {
+  } catch(e) {
     event = buildBasicEvent(type, options);
   }
   return event;
