@@ -50,3 +50,14 @@ test('It accepts an HTMLElement as first argument', function(assert) {
   this.render(hbs`<input class="target-element" onclick={{onClick}} />`);
   click(document.querySelector('.target-element'));
 });
+
+test('works in the SVG namespace', function(assert) {
+  assert.expect(1);
+  this.onClick = () => {
+    assert.ok(true, 'a click event is fired');
+  };
+
+  this.render(hbs`<svg><path id="the-path" {{action onClick}}></path></svg>`);
+  click('#the-path');
+});
+
