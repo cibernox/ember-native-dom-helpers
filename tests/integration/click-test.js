@@ -61,3 +61,13 @@ test('works in the SVG namespace', function(assert) {
   click('#the-path');
 });
 
+test('works when it receives an SVG Element', function(assert) {
+  assert.expect(1);
+  this.onClick = () => {
+    assert.ok(true, 'a click event is fired');
+  };
+
+  this.render(hbs`<svg><path id="the-path" {{action onClick}}></path></svg>`);
+  click(document.querySelector('#the-path'));
+});
+
