@@ -21,7 +21,6 @@ See the [Grand Testing Unification RFC][emberjs/rfcs/pull/119]
 test helpers, we are working though a few points on what changes are needed
 when using only standard DOM APIs (i.e. without jQuery).
 
-
 ## Usage
 
 ### Integration tests
@@ -166,6 +165,13 @@ test('Usage awaiting the world to settle', async function(assert) {
   assert.equal(find('.section-header').textContent, 'Main dashboard');
 });
 ```
+
+## I WANT IT NOW, IS THERE A SHORTCUT?
+
+Yes, there is an codemod that will help you transform your test suite to this new style "automatically".
+Check https://github.com/simonihmig/ember-native-dom-helpers-codemod.
+
+The codemod can't make a *perfect* convertion, but it will do most of the work for you.
 
 ## Helpers
 
