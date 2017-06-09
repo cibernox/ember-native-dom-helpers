@@ -145,7 +145,7 @@ Now however thanks to explicit usage of promises and the `waitUntil` helper you 
 perform assertions on unsettled states:
 
 ```js
-import { visit, click, find, fillIn, waitUntil } from 'ember-native-dom-helpers';
+import { visit, click, find, fillIn, waitUntil, currentURL } from 'ember-native-dom-helpers';
 
 moduleForAcceptance('Acceptance | Sign up');
 
@@ -161,7 +161,7 @@ test('Usage awaiting the world to settle', async function(assert) {
   assert.equal(find('.loading-substate-header').textContent.trim(), 'Loading mission. Please wait, Mr. Bond');
 
   await promise; // now we wait until the dashboard is fully loaded
-  assert.equal(currentUrl(), '/dashboard');
+  assert.equal(currentURL(), '/dashboard');
   assert.equal(find('.section-header').textContent, 'Main dashboard');
 });
 ```
