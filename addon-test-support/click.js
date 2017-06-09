@@ -20,11 +20,19 @@ export function clickEventSequence(el, options) {
 /*
   @method click
   @param {String|HTMLElement} selector
+  @param {HTMLElement} context
   @param {Object} options
   @return {RSVP.Promise}
   @public
 */
-export function click(selector, options = {}) {
-  clickEventSequence(getElementWithAssert(selector), options);
+export function click(selector, context, options) {
+  let element;
+  if (context instanceof HTMLElement) {
+    element = getElementWithAssert(selector, context);
+  } else {
+    options = context || {};
+    element = getElementWithAssert(selector);
+  }
+  clickEventSequence(element, options);
   return (window.wait || wait)();
 }
