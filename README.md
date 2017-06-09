@@ -161,7 +161,7 @@ test('Usage awaiting the world to settle', async function(assert) {
   assert.equal(find('.loading-substate-header').textContent.trim(), 'Loading mission. Please wait, Mr. Bond');
 
   await promise; // now we wait until the dashboard is fully loaded
-  assert.equal(currentUrl(), '/dashboard');
+  assert.equal(currentURL(), '/dashboard');
   assert.equal(find('.section-header').textContent, 'Main dashboard');
 });
 ```
