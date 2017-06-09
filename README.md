@@ -145,7 +145,7 @@ Now however thanks to explicit usage of promises and the `waitUntil` helper you 
 perform assertions on unsettled states:
 
 ```js
-import { visit, click, find, fillIn, waitUntil } from 'ember-native-dom-helpers';
+import { visit, click, find, fillIn, waitUntil, currentURL } from 'ember-native-dom-helpers';
 
 moduleForAcceptance('Acceptance | Sign up');
 
