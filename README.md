@@ -188,6 +188,9 @@ The codemod can't make a *perfect* convertion, but it will do most of the work f
 - `scrollTo(selectorOrHTMLElement, x, y)`
 - `visit(url)` (only available in acceptance. Raises an error in integration)
 - `waitUntil(function, options)` (Polls the page until the given callback returns a truthy value, or timesout after 1s)
+- `currentURL()` Identical to the one provided by Ember.
+- `currentPath()` Identical to the one provided by Ember.
+- `currentRouteName()` Identical to the one provided by Ember.
 
 
 ## Notes of `tap`
