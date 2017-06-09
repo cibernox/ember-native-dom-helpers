@@ -8,9 +8,7 @@ sudo: false
 
 addons:
   firefox: latest-esr
-  apt:
-    packages:
-     - google-chrome-stable
+  chrome: stable
 
 cache:
   yarn: true
