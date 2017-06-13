@@ -1,3 +1,6 @@
+# 0.5.0
+- [BREAKING] Change return value of `findAll` to be an `Array` (instead of a `NodeList`).
+
 # 0.4.2
 -  [BUGFIX] Allow `click` to receive a context element as second argument like the
    default `click` helper from Ember does. If a context element is provided, the options object can be passed as third argument.
