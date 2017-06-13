@@ -10,7 +10,7 @@ import settings from './settings';
   @method findAll
   @param {String} CSS selector to find elements in the test DOM
   @param {HTMLElement} contextEl to query within, query from its contained DOM
-  @return {NodeList} A (non-live) list of zero or more HTMLElement objects
+  @return {Array} An array of zero or more HTMLElement objects
   @public
 */
 export function findAll(selector, contextEl) {
