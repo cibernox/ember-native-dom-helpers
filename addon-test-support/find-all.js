@@ -20,5 +20,13 @@ export function findAll(selector, contextEl) {
   } else {
     result = document.querySelectorAll(`${settings.rootElement} ${selector}`);
   }
-  return result;
+  return toArray(result);
+}
+
+function toArray(nodelist) {
+  let array = new Array(nodelist.length);
+  for (let i = 0; i < nodelist.length; i++) {
+    array[i] = nodelist[i];
+  }
+  return array;
 }
