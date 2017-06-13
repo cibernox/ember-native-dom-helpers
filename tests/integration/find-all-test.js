@@ -13,7 +13,7 @@ test('with empty query result, findAll resturns empty NodeList', function(assert
   `);
   let expected = document.querySelectorAll('.hidden');
   let actual = findAll('.hidden');
-  assert.ok(actual instanceof NodeList, 'NodeList instance found');
+  assert.ok(Array.isArray(actual), 'Array found');
   assert.strictEqual(actual.length, expected.length, 'empty NodeList returned for an empty query');
 });
 
@@ -45,7 +45,7 @@ test('findAll returns the resulting node list', function(assert) {
 
   let expected = document.querySelectorAll('#ember-testing li:last-child');
   let actual = findAll('li:last-child');
-  assert.ok(actual instanceof NodeList, 'NodeList instance found');
+  assert.ok(Array.isArray(actual), 'Array found');
   assert.strictEqual(actual[0], expected[0], 'one li:last-child element found within #ember-testing');
   assert.strictEqual(actual[1], expected[1], 'two li:last-child elements found within #ember-testing');
 });
