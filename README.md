@@ -111,7 +111,7 @@ The main advantages are:
 ## Standard DOM elements returned using a `find`/`findAll` helpers
 
 - The `find` helper uses `document.querySelector` and will return a single `HTMLElement` or `null`.
-- The `findAll` helper uses `document.querySelectorAll` and returns `NodeList` with zero or more elements.
+- The `findAll` helper uses `document.querySelectorAll` and returns an `Array` with zero or more elements.
 - Both `find` and `findAll` helpers query the DOM within `#ember-testing`.
 - To use a different value from your `config/environment.js` settings, add to `tests/test-helper.js`…
 
