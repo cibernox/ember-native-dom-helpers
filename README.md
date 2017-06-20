@@ -85,7 +85,7 @@ The main advantages are:
   This makes firing native events a no-brainer.
 
 - Runloop aware: This helpers automatically spawn a runloop, so you don't need to wrap
-  every interation with `Ember.run(() => /* interact with element */ );`.
+  every interaction with `Ember.run(() => /* interact with element */ );`.
 
 - `wait` by default: All the helpers return the `wait()` promise, making possible wait
   for asynchronous side-effects with `async/await`. (Note that for using async/await in
@@ -137,7 +137,7 @@ There is one new helper in this addon that enables some testing patters that wer
 previously easy to perform using traditional methods.
 
 Since the `andThen` helper waits for the app to settle (no pending requests or promises)
-and in integration tests every interation is wrapped in `Ember.run`, there was no easy way
+and in integration tests every interaction is wrapped in `Ember.run`, there was no easy way
 of testing transient state like loading substates or the state of a components while some promise
 is pending without a awkward setup of timeouts.
 
