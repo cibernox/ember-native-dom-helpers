@@ -4,7 +4,7 @@ import settings from './settings';
   The findAll test helper uses `querySelectorAll` to search inside the test
   DOM (based on app configuration for the rootElement).
 
-  Alternalively, a second argument may be passed which is an element as the
+  Alternatively, a second argument may be passed which is an element as the
   DOM context to search within.
 
   @method findAll
