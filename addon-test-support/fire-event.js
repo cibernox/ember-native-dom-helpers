@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
-const { merge } = Ember;
+const { merge, Logger } = Ember;
 const DEFAULT_EVENT_OPTIONS = { bubbles: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
 const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
+const FILE_SELECTION_EVENT_TYPES = ['change'];
 
 /*
   @method fireEvent
@@ -31,6 +32,8 @@ export function fireEvent(element, type, options = {}) {
       clientY: y
     };
     event = buildMouseEvent(type, merge(simulatedCoordinates, options));
+  } else if (FILE_SELECTION_EVENT_TYPES.indexOf(type) > -1 && element.files) {
+    event = buildFileEvent(type, element, options);
   } else {
     event = buildBasicEvent(type, options);
   }
@@ -166,6 +169,52 @@ function buildKeyboardEvent(type, options = {}) {
   } else {
     event = buildBasicEvent(type, options);
   }
+
+  return event;
+}
+
+/*
+  @method buildFileEvent
+  @param {String} type
+  @param {Array} array of flies
+  @param {HTMLElement} element
+  @return {Event}
+  @private
+*/
+function buildFileEvent(type, element, files = []) {
+  let event = buildBasicEvent(type);
+
+  if (files.length > 0) {
+    try {
+      Object.defineProperty(element.files, 'item', {
+        value(index) {
+          return typeof index === 'number' ? this[index] : null;
+        }
+      });
+
+      files.forEach(function(file, index) {
+        Object.defineProperty(element.files, index, {
+          value: file
+        });
+      });
+
+      Object.defineProperty(element.files, 'length', {
+        value: files.length
+      });
+    } catch(error) {
+      if (/FileList doesn't have an indexed property setter for/.test(error.message)) {
+        Object.defineProperty(element, 'files', {
+          value: files
+        });
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  Object.defineProperty(event, 'target', {
+    value: element
+  });
 
   return event;
 }

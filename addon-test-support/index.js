@@ -14,4 +14,5 @@ export { focus } from './focus';
 export { blur } from './blur';
 export { scrollTo } from './scroll-to';
 export { currentRouteName } from './current-route-name';
+export { selectFiles } from './select-files';
 export { default as settings } from './settings';
