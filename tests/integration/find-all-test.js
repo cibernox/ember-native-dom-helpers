@@ -52,14 +52,38 @@ test('findAll returns the resulting node list', function(assert) {
 
 test('findAll helper can use (optional) element as the context to query', function(assert) {
   this.render(hbs`
-    <select>
-      <option value="">Choose one</option>
-      <option value="0">Zero</option>
-      <option value="1" selected="selected">One</option>
-    </select>
+    <div>
+      <span>One</span>
+      <span>Two</span>
+      <span>Three</span>
+    </div>
+    <div class="second-set">
+      <span>One</span>
+      <span>Two</span>
+      <span>Three</span>
+    </div>
   `);
 
-  let expected = document.querySelectorAll('#ember-testing select option');
-  let actual = findAll('option', document.querySelector('select'));
-  assert.equal(actual.length, expected.length, 'select options found within #ember-testing');
+  let expected = document.querySelectorAll('#ember-testing .second-set span');
+  let actual = findAll('span', document.querySelector('.second-set'));
+  assert.equal(actual.length, expected.length);
+});
+
+test('findAll helper can use (optional) selector as the context to query', function(assert) {
+  this.render(hbs`
+    <div>
+      <span>One</span>
+      <span>Two</span>
+      <span>Three</span>
+    </div>
+    <div class="second-set">
+      <span>One</span>
+      <span>Two</span>
+      <span>Three</span>
+    </div>
+  `);
+
+  let expected = document.querySelectorAll('#ember-testing .second-set span');
+  let actual = findAll('span', '.second-set');
+  assert.equal(actual.length, expected.length);
 });
