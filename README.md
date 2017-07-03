@@ -179,7 +179,7 @@ The codemod can't make a *perfect* convertion, but it will do most of the work f
 - `tap(selectorOrHTMLElement, eventOptions)`
 - `fillIn(selectorOrHTMLElement, text)`
 - `find(selector, contextHTMLElement)` (query for an element in test DOM, `#ember-testing`)
-- `findAll(selector, contextHTMLElement)` (query for elements in test DOM, `#ember-testing`)
+- `findAll(selector, context)` (query for elements in test DOM, `#ember-testing`)
 - `findWithAssert(selector, contextHTMLElement)` (same as `find`, but raises an Error if no result)
 - `keyEvent(selectorOrHTMLElement, type, keyCode, modifiers)` (type being `keydown`, `keyup` or `keypress`, modifiers being object with `{ ctrlKey: false, altKey: false, shiftKey: false, metaKey: false }`)
 - `triggerEvent(selectorOrHTMLElement, type, options)`
