@@ -186,7 +186,7 @@ The codemod can't make a *perfect* convertion, but it will do most of the work f
 - `focus(selectorOrHTMLElement)`
 - `blur(selectorOrHTMLElement)`
 - `scrollTo(selectorOrHTMLElement, x, y)`
-- `selectFiles(selectorOrHTMLElement, files = [])` (selects the file(s)/Blob(s) to the given `input[type=file]`.
+- `selectFiles(selectorOrHTMLElement, files = [])` (selects the file(s)/Blob(s) to the given `input[type=file]`. [Example](https://github.com/cibernox/ember-native-dom-helpers/blob/2f5f4d1df29d0d546505b515ca3e11721a86274b/tests/integration/select-files-test.js#L32-L35)
 - `visit(url)` (only available in acceptance. Raises an error in integration)
 - `waitUntil(function, options)` (Polls the page until the given callback returns a truthy value, or timesout after 1s)
 - `currentURL()` Identical to the one provided by Ember.
