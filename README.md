@@ -50,7 +50,7 @@ test('I can interact with my component', async function(assert) {
 
 ### Acceptance tests
 
-You can use the exact same helpers for you acceptance tests. All interaction helpers like
+You can use the exact same helpers for your acceptance tests. All interaction helpers like
 `click`, `fillIn` et al. return a promise that that fullfils when "the world has settled"
 (that is, there is no pending requests or promises and the runloop has be drained), which
 is what the `andThen` acceptance helper used to do.
