@@ -82,7 +82,7 @@ The main advantages are:
   dispatching jQuery events leads to the action being called twice. Besides there is subtle
   differences between jQuery and Native events and can bite you. Firing native events fixes
   that problem but they are very verbose and there is browsers incompatibilities.
-  This makes firing native events a no-brainer.
+  This addon makes firing native events a no-brainer.
 
 - Runloop aware: This helpers automatically spawn a runloop, so you don't need to wrap
   every interaction with `Ember.run(() => /* interact with element */ );`.
