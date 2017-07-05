@@ -1,6 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
-import { visit, click, find, fillIn, waitUntil, currentURL, currentRouteName } from 'ember-native-dom-helpers';
+import { visit, click, find, fillIn, waitUntil, currentURL, currentRouteName, selectFiles } from 'ember-native-dom-helpers';
 
 moduleForAcceptance('Acceptance | usage in acceptance', {
   beforeEach() {
@@ -55,3 +55,14 @@ test('Usage using `waitUntil` to test unsettled state', async function(assert) {
   assert.equal(currentRouteName(), 'dashboard-example', 'The currentRouteName has updated');
   assert.ok(find('.dashboard-example-header'), 'We are on the dashboard now');
 });
+
+test('Usage `selectFiles`', async function(assert) {
+  await visit('/signup-example');
+
+  let blob = new Blob(['foo', 'bar'], { type: 'text/plain' });
+  let file = new File([blob], 'avatar.png');
+
+  selectFiles('.signup-example-form__avatar', file);
+  assert.equal(find('.signup-example-form__avatar-file-name').innerText, 'avatar.png', 'The file name is showed');
+});
+

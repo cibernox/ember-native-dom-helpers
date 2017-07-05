@@ -2,6 +2,10 @@
 
 <form class="signup-example-form" {{action "signup" on="submit"}}>
   <p>
+    Avatar File: <span class="signup-example-form__avatar-file-name" >{{avatarFileName}}</span>
+    <input type="file" class="signup-example-form__avatar" onchange={{action "onFileSelected"}} />
+  </p>
+  <p>
     Email:
     <input type="text" class="signup-example-form__email" onchange={{action (mut email) value="target.value"}}>
   </p>
