@@ -15,7 +15,7 @@ const rAF = window.requestAnimationFrame || function(cb) {
   @private
 */
 function waitForScrollEvent() {
-  let waitForEvent = new RSVP.Promise((resolve) => {
+  let waitForEvent = new RSVP.Promise(function(resolve) {
     rAF(resolve);
   });
   return waitForEvent.then(() => wait());

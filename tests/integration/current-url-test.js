@@ -6,7 +6,7 @@ moduleForComponent('currentURL', 'Integration | Test Helper | currentURL', {
 });
 
 test('It raises an error in integration', function(assert) {
-  assert.throws(() => {
+  assert.throws(function() {
     currentURL();
   }, 'currentURL is only available during acceptance tests');
 });

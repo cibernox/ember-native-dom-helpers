@@ -40,7 +40,7 @@ test('Throws assertion if multiple files passed to a single file input', functio
 
   this.render(hbs`<input class="target-element" type="file" onchange={{onChange}} />`);
 
-  assert.throws(() => {
+  assert.throws(function() {
     selectFiles('.target-element', [
       new Blob(['texters'], { type: 'plain/text' }),
       new Blob(['images_texters'], { type: 'image/jpeg' })
@@ -53,7 +53,7 @@ test('It does not add a file to a non file input', function(assert) {
 
   this.render(hbs`<input class="target-element" type="number" onchange={{onChange}} />`);
 
-  assert.throws(() => {
+  assert.throws(function() {
     selectFiles('.target-element', [new Blob(['texters'], { type: 'plain/text' })]);
   }, 'throws assertion if used on a non file input element');
 });
