@@ -4,7 +4,6 @@ import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
 
 const { Application } = Ember;
-
 let App;
 
 App = Application.extend({

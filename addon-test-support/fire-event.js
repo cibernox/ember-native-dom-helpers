@@ -192,7 +192,7 @@ function buildFileEvent(type, element, files = []) {
         }
       });
 
-      files.forEach(function(file, index) {
+      files.forEach((file, index) => {
         Object.defineProperty(element.files, index, {
           value: file
         });

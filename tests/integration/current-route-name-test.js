@@ -6,7 +6,7 @@ moduleForComponent('currentRouteName', 'Integration | Test Helper | currentRoute
 });
 
 test('It raises an error in integration', function(assert) {
-  assert.throws(function() {
+  assert.throws(() => {
     currentRouteName();
   }, 'currentRouteName is only available during acceptance tests');
 });
