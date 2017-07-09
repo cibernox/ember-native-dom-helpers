@@ -6,7 +6,7 @@ moduleForComponent('visit', 'Integration | Test Helper | visit', {
 });
 
 test('It raises an error in integration', function(assert) {
-  assert.throws(function() {
+  assert.throws(() => {
     visit('/somewhere');
   }, 'visit is only available during acceptance tests');
 });

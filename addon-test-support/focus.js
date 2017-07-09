@@ -18,7 +18,7 @@ export function focus(selector) {
   let el = getElementWithAssert(selector);
 
   if (isFocusable(el)) {
-    run(null, function() {
+    run(null, () => {
       let browserIsNotFocused = document.hasFocus && !document.hasFocus();
 
       // Firefox does not trigger the `focusin` event if the window

@@ -18,7 +18,7 @@ export function blur(selector) {
   let el = getElementWithAssert(selector);
 
   if (isFocusable(el)) {
-    run(null, function() {
+    run(null, () => {
       let browserIsNotFocused = document.hasFocus && !document.hasFocus();
 
       // makes `document.activeElement` be `body`.

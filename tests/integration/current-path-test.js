@@ -6,7 +6,7 @@ moduleForComponent('currentPath', 'Integration | Test Helper | currentPath', {
 });
 
 test('It raises an error in integration', function(assert) {
-  assert.throws(function() {
+  assert.throws(() => {
     currentPath();
   }, 'currentPath is only available during acceptance tests');
 });
