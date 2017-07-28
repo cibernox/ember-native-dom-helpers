@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import { isBlank } from '@ember/utils';
 import Mirage from 'ember-cli-mirage';
-
-const { isBlank } = Ember;
 
 export default function() {
   this.timing = 800;

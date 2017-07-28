@@ -1,7 +1,6 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { getProperties, set } from '@ember/object';
 import fetch from 'fetch';
-
-const { Controller, set, getProperties } = Ember;
 
 export default Controller.extend({
   actions: {

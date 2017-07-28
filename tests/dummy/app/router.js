@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import EmRouter from '@ember/routing/router';
 import config from './config/environment';
-
-const { Router: EmRouter } = Ember;
 
 const Router = EmRouter.extend({
   location: config.locationType,
