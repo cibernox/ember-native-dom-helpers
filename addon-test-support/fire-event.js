@@ -184,29 +184,11 @@ function buildFileEvent(type, element, files = []) {
 
   if (files.length > 0) {
     try {
-      Object.defineProperty(element.files, 'item', {
-        value(index) {
-          return typeof index === 'number' ? this[index] : null;
-        }
-      });
-
-      files.forEach(function(file, index) {
-        Object.defineProperty(element.files, index, {
-          value: file
-        });
-      });
-
-      Object.defineProperty(element.files, 'length', {
-        value: files.length
+      Object.defineProperty(element, 'files', {
+        value: files
       });
     } catch(error) {
-      if (/FileList doesn't have an indexed property setter for/.test(error.message)) {
-        Object.defineProperty(element, 'files', {
-          value: files
-        });
-      } else {
-        throw error;
-      }
+      throw error;
     }
   }
 
