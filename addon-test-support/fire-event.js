@@ -183,13 +183,14 @@ function buildFileEvent(type, element, files = []) {
   let event = buildBasicEvent(type);
 
   if (files.length > 0) {
-    try {
-      Object.defineProperty(element, 'files', {
-        value: files
-      });
-    } catch(error) {
-      throw error;
-    }
+    Object.defineProperty(files, 'item', {
+      value(index) {
+        return typeof index === 'number' ? this[index] : null;
+      }
+    });
+    Object.defineProperty(element, 'files', {
+      value: files
+    });
   }
 
   Object.defineProperty(event, 'target', {

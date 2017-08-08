@@ -35,6 +35,23 @@ test('Ability to handle multiple files', function(assert) {
   ]);
 });
 
+test('Ability to use the item method to grab files', function(assert) {
+  assert.expect(5);
+  this.onChange = (e) => {
+    assert.equal(e.target.files.length, 2, 'files are present');
+    assert.equal(e.target.files.item(0).type, 'plain/text', 'first file has the set type');
+    assert.equal(e.target.files.item(0).size, 7, 'first file has the set size');
+    assert.equal(e.target.files.item(1).type, 'image/jpeg', 'second file has the set type');
+    assert.equal(e.target.files.item(1).size, 14, 'second file has the set size');
+  };
+
+  this.render(hbs`<input class="target-element" type="file" multiple onchange={{onChange}} />`);
+  selectFiles('.target-element', [
+    new Blob(['texters'], { type: 'plain/text' }),
+    new Blob(['images_texters'], { type: 'image/jpeg' })
+  ]);
+});
+
 test('Throws assertion if multiple files passed to a single file input', function(assert) {
   assert.expect(1);
 
