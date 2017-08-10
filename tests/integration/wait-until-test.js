@@ -2,6 +2,7 @@ import { run } from '@ember/runloop';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { waitUntil } from 'ember-native-dom-helpers';
+import RSVP from 'rsvp';
 
 moduleForComponent('wait-until', 'Integration | Test Helper | waitUntil', {
   integration: true
@@ -80,11 +81,11 @@ test('It waits until the given callback returns true', async function(assert) {
 test('It was a default timeout of 1 second', async function(assert) {
   assert.expect(2);
   this.render(hbs``);
-  let initialTime = +new Date();
+  let initialTime = Date.now();
   try {
     await waitUntil(() => document.querySelector('#wait-until-step1'));
   } catch(e) {
-    let finalTime = +new Date();
+    let finalTime = Date.now();
     assert.equal(e, 'waitUntil timed out');
     let elapsedTime = finalTime - initialTime;
     assert.ok(elapsedTime >= 1000 && elapsedTime <= 1500, 'The default timeout is 1s');
@@ -94,11 +95,11 @@ test('It was a default timeout of 1 second', async function(assert) {
 test('The default timeout can be adjusted using passing options as a second argument', async function(assert) {
   assert.expect(2);
   this.render(hbs``);
-  let initialTime = +new Date();
+  let initialTime = Date.now();
   try {
     await waitUntil(() => document.querySelector('#wait-until-step1'), { timeout: 2000 });
   } catch(e) {
-    let finalTime = +new Date();
+    let finalTime = Date.now();
     assert.equal(e, 'waitUntil timed out');
     let elapsedTime = finalTime - initialTime;
     assert.ok(elapsedTime >= 2000 && elapsedTime <= 2500, 'The timeout was set to 2s');
@@ -109,5 +110,21 @@ test('The promise resolved with the return value of the callback', async functio
   assert.expect(1);
   this.render(hbs`<span id="wait-until-thing"></span>`);
   let element = await waitUntil(() => document.querySelector('#wait-until-thing'));
-  assert.equal(element.id, 'wait-until-thing', 'waitUntil resoleved with the DOM element');
+  assert.equal(element.id, 'wait-until-thing', 'waitUntil resolved with the DOM element');
+});
+
+test('When callback immediately returns truthy, promise is resolved and callback is not called again', async function(assert) {
+  let count = 0;
+  function cb() {
+    count++;
+    return true;
+  }
+  let initialTime = Date.now();
+  await waitUntil(cb);
+  let finalTime = Date.now();
+  let elapsedTime = finalTime - initialTime;
+  assert.equal(count, 1, 'Callback was called');
+  assert.ok(elapsedTime < 10, 'The Promise resolved immediately');
+  await new RSVP.Promise((resolve) => setTimeout(resolve, 20));
+  assert.equal(count, 1, 'Callback was called just once');
 });

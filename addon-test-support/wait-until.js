@@ -6,6 +6,7 @@ export function waitUntil(callback, { timeout = 1000 } = {}) {
     let value = run(callback);
     if (value) {
       resolve(value);
+      return;
     }
     let time = 0;
     let tick = function() {
