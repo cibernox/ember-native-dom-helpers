@@ -1,6 +1,4 @@
-import Ember from 'ember';
-
-const { merge, Logger } = Ember;
+import { merge } from '@ember/polyfills';
 const DEFAULT_EVENT_OPTIONS = { bubbles: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
 const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
@@ -185,31 +183,14 @@ function buildFileEvent(type, element, files = []) {
   let event = buildBasicEvent(type);
 
   if (files.length > 0) {
-    try {
-      Object.defineProperty(element.files, 'item', {
-        value(index) {
-          return typeof index === 'number' ? this[index] : null;
-        }
-      });
-
-      files.forEach(function(file, index) {
-        Object.defineProperty(element.files, index, {
-          value: file
-        });
-      });
-
-      Object.defineProperty(element.files, 'length', {
-        value: files.length
-      });
-    } catch(error) {
-      if (/FileList doesn't have an indexed property setter for/.test(error.message)) {
-        Object.defineProperty(element, 'files', {
-          value: files
-        });
-      } else {
-        throw error;
+    Object.defineProperty(files, 'item', {
+      value(index) {
+        return typeof index === 'number' ? this[index] : null;
       }
-    }
+    });
+    Object.defineProperty(element, 'files', {
+      value: files
+    });
   }
 
   Object.defineProperty(event, 'target', {

@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import RSVP from 'rsvp';
 import getElementWithAssert from './-private/get-element-with-assert';
 import wait from 'ember-test-helpers/wait';
 
-const { RSVP } = Ember;
 const rAF = window.requestAnimationFrame || function(cb) {
   setTimeout(cb, 17);
 };

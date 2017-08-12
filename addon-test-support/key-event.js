@@ -1,7 +1,5 @@
+import { merge } from '@ember/polyfills';
 import { triggerEvent } from './trigger-event';
-import Ember from 'ember';
-
-const { merge } = Ember;
 
 /**
  * @public

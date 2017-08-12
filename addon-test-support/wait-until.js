@@ -1,5 +1,5 @@
-import Ember from 'ember';
-const { run, RSVP } = Ember;
+import { run } from '@ember/runloop';
+import RSVP from 'rsvp';
 
 export function waitUntil(callback, { timeout = 1000 } = {}) {
   return new RSVP.Promise(function(resolve, reject) {

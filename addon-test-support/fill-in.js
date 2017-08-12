@@ -1,10 +1,8 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 import getElementWithAssert from './-private/get-element-with-assert';
 import { focus } from './focus';
 import { fireEvent } from './fire-event';
 import wait from 'ember-test-helpers/wait';
-
-const { run } = Ember;
 
 /*
   @method fillIn

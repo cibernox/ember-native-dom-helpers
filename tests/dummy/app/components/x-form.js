@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { set, get } from '@ember/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'form',
 
   agreed: false,
@@ -20,11 +21,11 @@ export default Ember.Component.extend({
       this.element.querySelector('.terms-hidden').classList.remove('terms-hidden');
     },
     agree() {
-      this.set('agreed', true);
+      set(this, 'agreed', true);
     },
     selected(evt) {
-      this.set('selectedValue', evt.target.value);
-      this.get('onSelect')(evt.target.value);
+      set(this, 'selectedValue', evt.target.value);
+      get(this, 'onSelect')(evt.target.value);
     },
     submit() {
       this.submit();
@@ -38,10 +39,10 @@ export default Ember.Component.extend({
   },
 
   submit() {
-    if (this.get('agreed')) {
-      this.set('message', 'All your base are mine');
+    if (get(this, 'agreed')) {
+      set(this, 'message', 'All your base are mine');
     } else {
-      this.set('message', 'you must agree to my terms');
+      set(this, 'message', 'you must agree to my terms');
     }
   }
 });

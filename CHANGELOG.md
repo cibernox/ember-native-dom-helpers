@@ -1,3 +1,6 @@
+# 0.5.3
+- [BUGFIX] Fix problem `selectFiles` on browsers that consider `FileList`s readonly (which they all should)
+
 # 0.5.0
 - [BREAKING] Change return value of `findAll` to be an `Array` (instead of a `NodeList`).
 
