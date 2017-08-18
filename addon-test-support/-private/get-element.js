@@ -8,7 +8,7 @@ import settings from '../settings';
   @private
 */
 export default function getElement(selectorOrElement, contextEl) {
-  if (selectorOrElement instanceof HTMLElement || selectorOrElement instanceof SVGElement) {
+  if (selectorOrElement instanceof Window || selectorOrElement instanceof HTMLElement || selectorOrElement instanceof SVGElement) {
     return selectorOrElement;
   }
   let result;
