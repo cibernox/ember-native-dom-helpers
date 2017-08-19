@@ -20,7 +20,16 @@ export function fireEvent(element, type, options = {}) {
   if (KEYBOARD_EVENT_TYPES.indexOf(type) > -1) {
     event = buildKeyboardEvent(type, options);
   } else if (MOUSE_EVENT_TYPES.indexOf(type) > -1) {
-    let rect = element.getBoundingClientRect();
+    let rect;
+    if (element instanceof Window) {
+      rect = element.document.documentElement.getBoundingClientRect();
+    } else if (element instanceof Document) {
+      rect = element.documentElement.getBoundingClientRect();
+    } else if (element instanceof HTMLElement || element instanceof SVGElement) {
+      rect = element.getBoundingClientRect();
+    } else {
+      return;
+    }
     let x = rect.left + 1;
     let y = rect.top + 1;
     let simulatedCoordinates = {
