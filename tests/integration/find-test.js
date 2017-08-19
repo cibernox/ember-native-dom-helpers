@@ -61,7 +61,7 @@ test('find helper can use (optional) element as the context to query', function(
 });
 
 test('find can use window and document', function(assert) {
-  this.render(hbs`<body></body>`);
+  this.render(hbs`<div>Empty</div>`);
 
   assert.ok(find(window) instanceof Window, 'window is returned for window');
   assert.ok(find(document) instanceof Document, 'document is returned for document');

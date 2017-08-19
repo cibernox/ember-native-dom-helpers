@@ -32,7 +32,11 @@ function waitForScrollEvent() {
 */
 export function scrollTo(selector, x, y) {
   let el = getElementWithAssert(selector);
-  el.scrollTop = y;
-  el.scrollLeft = x;
+  if (el instanceof HTMLElement) {
+    el.scrollTop = y;
+    el.scrollLeft = x;
+  } else if (el instanceof Window) {
+    el.scrollTo(x, y);
+  }
   return waitForScrollEvent();
 }

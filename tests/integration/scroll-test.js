@@ -74,3 +74,19 @@ test('Scroll in horizontal direction is async, not a problem', async function(as
 
   assert.equal(currentScrollPosition, scrollAmount, 'After use of the `scrollLeft` a paint cycle is triggered and the callback is called');
 });
+
+test('Scroll on window works', async function(assert) {
+  this.render(hbs`
+    <style>
+       html, body {
+         height: 200vh;
+         overflow-y: auto;
+         width: 100vw;
+       }
+    </style>
+    `);
+
+  await scrollTo(window, 0, 100);
+
+  assert.equal(window.scrollY, 100, 'scrollTo scrolls window the appropriate amount');
+});
