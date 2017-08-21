@@ -28,3 +28,18 @@ test('It accepts an HTMLElement as first argument', function(assert) {
   this.render(hbs`<input class="target-element" onmouseenter={{onMouseEnter}} />`);
   triggerEvent(document.querySelector('.target-element'), 'mouseenter');
 });
+
+test('It fires events on window', async function(assert) {
+  assert.expect(2);
+
+  this.onMouseEnter = (e) => {
+    assert.ok(true, 'a click event is fired');
+    assert.ok(e instanceof window.Event, 'It receives a native event');
+  };
+
+  window.addEventListener('mouseenter', this.onMouseEnter);
+
+  this.render(hbs`<div>Empty</div>`);
+
+  await triggerEvent(window, 'mouseenter');
+});

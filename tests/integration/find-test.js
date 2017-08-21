@@ -59,3 +59,10 @@ test('find helper can use (optional) element as the context to query', function(
   actual = find('option[selected]', actual);
   assert.strictEqual(actual, expected, 'option found within select element');
 });
+
+test('find can use window and document', function(assert) {
+  this.render(hbs`<div>Empty</div>`);
+
+  assert.ok(find(window) instanceof Window, 'window is returned for window');
+  assert.ok(find(document) instanceof Document, 'document is returned for document');
+});
