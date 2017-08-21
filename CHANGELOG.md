@@ -1,3 +1,7 @@
+# 0.5.4
+- [BUGFIX] Support passing `document` and `window` to helpers
+- [BUGFIX] Early exit `waitUntil` polling if the condition is true immediately.
+
 # 0.5.3
 - [BUGFIX] Fix problem `selectFiles` on browsers that consider `FileList`s readonly (which they all should)
 
