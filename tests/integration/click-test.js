@@ -25,7 +25,7 @@ test('It fires mousedown, focus, mouseup and click events on the element with th
     assert.ok(e instanceof window.Event, 'It receives a native event');
   };
   this.onClick = (e) => {
-    assert.equal(++index, 4, 'click is fired third');
+    assert.equal(++index, 4, 'click is fired fourth');
     assert.ok(true, 'a click event is fired');
     assert.ok(e instanceof window.Event, 'It receives a native event');
   };

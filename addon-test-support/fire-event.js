@@ -99,6 +99,10 @@ function buildMouseEvent(type, options = {}) {
       eventOpts.metaKey,
       eventOpts.button,
       eventOpts.relatedTarget);
+
+    if (eventOpts.target !== undefined) {
+      Object.defineProperty(event, 'target', { value: eventOpts.target });
+    }
   } catch(e) {
     event = buildBasicEvent(type, options);
   }
