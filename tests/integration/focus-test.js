@@ -28,6 +28,20 @@ test('It accepts a CSS selector as first argument', function(assert) {
   focus('.target-element');
 });
 
+test('it sets focus for contenteditable HTMLElement', function(assert) {
+  this.render(hbs`<div class="target-element" contenteditable></div>`);
+  focus('.target-element');
+
+  assert.ok(document.querySelector('.target-element:focus'));
+});
+
+test('it does not set focus for non-contenteditable HTMLElement', function(assert) {
+  this.render(hbs`<div class="target-element"></div>`);
+  focus('.target-element');
+
+  assert.notOk(document.querySelector('.target-element:focus'));
+});
+
 test('It blurs the focused input before firing focus event on another one', function(assert) {
   let docIsFocused = document.hasFocus && document.hasFocus();
   let assertions = docIsFocused ? 8 : 4;

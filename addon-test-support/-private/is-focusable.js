@@ -6,5 +6,5 @@ export default function isFocusable(el) {
     return false;
   }
 
-  return focusableTags.indexOf(tagName) > -1 || el.contentEditable;
+  return focusableTags.indexOf(tagName) > -1 || el.contentEditable === 'true';
 }
