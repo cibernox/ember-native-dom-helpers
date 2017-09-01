@@ -7,16 +7,18 @@ import settings from '../settings';
   @return HTMLElement
   @private
 */
-export default function getElement(selectorOrElement, contextEl) {
-  if (selectorOrElement instanceof Window || 
-      selectorOrElement instanceof Document || 
-      selectorOrElement instanceof HTMLElement || 
-      selectorOrElement instanceof SVGElement) {
+export default function getElement(selectorOrElement, context) {
+  if (selectorOrElement instanceof Window ||
+    selectorOrElement instanceof Document ||
+    selectorOrElement instanceof HTMLElement ||
+    selectorOrElement instanceof SVGElement) {
     return selectorOrElement;
   }
   let result;
-  if (contextEl instanceof HTMLElement) {
-    result = contextEl.querySelector(selectorOrElement);
+  if (context instanceof HTMLElement) {
+    result = context.querySelector(selectorOrElement);
+  } else if (typeof context === 'string') {
+    result = document.querySelector(`${settings.rootElement} ${context} ${selectorOrElement}`);
   } else {
     result = document.querySelector(`${settings.rootElement} ${selectorOrElement}`);
   }

@@ -60,6 +60,29 @@ test('find helper can use (optional) element as the context to query', function(
   assert.strictEqual(actual, expected, 'option found within select element');
 });
 
+test('find helper can use (optional) selector as the context to query', function(assert) {
+  this.render(hbs`
+    <select class="first-select">
+      <option value="">Choose one</option>
+      <option value="0">Zero</option>
+      <option value="1" selected="selected">One</option>
+    </select>
+    <select class="second-select">
+      <option value="">Choose one</option>
+      <option value="2">Two</option>
+      <option value="1" selected="selected">Three</option>
+    </select>
+  `);
+
+  let expected = document.querySelector('#ember-testing select');
+  let actual = find('select');
+  assert.strictEqual(actual, expected, 'select found within #ember-testing');
+
+  expected = document.querySelector('#ember-testing .second-select option[selected]');
+  actual = find('option[selected]', '.second-select');
+  assert.strictEqual(actual, expected, 'option found within select element');
+});
+
 test('find can use window and document', function(assert) {
   this.render(hbs`<div>Empty</div>`);
 
