@@ -19,18 +19,11 @@ test('It returns a promise that resolves when the given callback returns a non-f
     {{#if timeout3}}<span id="wait-until-step3">Step 1</span>{{/if}}
   `);
 
-  assert.notOk(document.querySelector('#wait-until-step1')
-    || document.querySelector('#wait-until-step2')
-    || document.querySelector('#wait-until-step3'),
-    'No element is rendered'
-  );
+  assert.notOk(document.querySelector('#wait-until-step1') || document.querySelector('#wait-until-step2') || document.querySelector('#wait-until-step3'), 'No element is rendered');
 
   await waitUntil(() => document.querySelector('#wait-until-step1'));
   assert.ok(document.querySelector('#wait-until-step1'), 'The first element appeared');
-  assert.notOk(document.querySelector('#wait-until-step2')
-    || document.querySelector('#wait-until-step3'),
-    'The second and third element are not rendered'
-  );
+  assert.notOk(document.querySelector('#wait-until-step2') || document.querySelector('#wait-until-step3'), 'The second and third element are not rendered');
 
   await waitUntil(() => document.querySelector('#wait-until-step2'));
   assert.ok(document.querySelector('#wait-until-step1'), 'The first element appeared');
@@ -54,18 +47,11 @@ test('It waits until the given callback returns true', async function(assert) {
     {{#if timeout3}}<span id="wait-until-step3">Step 1</span>{{/if}}
   `);
 
-  assert.notOk(document.querySelector('#wait-until-step1')
-    || document.querySelector('#wait-until-step2')
-    || document.querySelector('#wait-until-step3'),
-    'No element is rendered'
-  );
+  assert.notOk(document.querySelector('#wait-until-step1') || document.querySelector('#wait-until-step2') || document.querySelector('#wait-until-step3'), 'No element is rendered');
 
   await waitUntil(() => document.querySelector('#wait-until-step1'));
   assert.ok(document.querySelector('#wait-until-step1'), 'The first element appeared');
-  assert.notOk(document.querySelector('#wait-until-step2')
-    || document.querySelector('#wait-until-step3'),
-    'The second and third element are not rendered'
-  );
+  assert.notOk(document.querySelector('#wait-until-step2') || document.querySelector('#wait-until-step3'), 'The second and third element are not rendered');
 
   await waitUntil(() => document.querySelector('#wait-until-step2'));
   assert.ok(document.querySelector('#wait-until-step1'), 'The first element appeared');
