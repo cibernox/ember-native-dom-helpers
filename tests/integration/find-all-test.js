@@ -6,7 +6,7 @@ moduleForComponent('findAll', 'Integration | Test Helper | findAll', {
   integration: true
 });
 
-test('with empty query result, findAll resturns empty NodeList', function(assert) {
+test('with empty query result, findAll returns empty NodeList', function(assert) {
   this.render(hbs`
     <p class='hiding'>You can't find me</p>
     <p class='hiding'>I'm hidden as well</p>
@@ -84,6 +84,6 @@ test('findAll helper can use (optional) selector as the context to query', funct
   `);
 
   let expected = document.querySelectorAll('#ember-testing .second-set span');
-  let actual = findAll('span', '.second-set');
+  let actual = findAll('span', document.querySelector('.second-set'));
   assert.equal(actual.length, expected.length);
 });
