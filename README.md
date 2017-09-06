@@ -157,7 +157,7 @@ test('Usage awaiting the world to settle', async function(assert) {
   let promise = click('.submit-btn');
 
   // We wait until the loading substate, that takes 200ms to appear, is displayed
-  await waitUntil(() => find('.susbstate-spinner'));
+  await waitUntil(() => find('.substate-spinner'));
   assert.equal(find('.loading-substate-header').textContent.trim(), 'Loading mission. Please wait, Mr. Bond');
 
   await promise; // now we wait until the dashboard is fully loaded
