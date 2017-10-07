@@ -174,6 +174,8 @@ function buildKeyboardEvent(type, options = {}) {
       eventOpts.charCode
     );
   } else {
+    options.which = options.keyCode = parseInt(options.key);
+
     event = buildBasicEvent(type, options);
   }
 
