@@ -44,7 +44,7 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-disable-prototype-extensions": "^1.1.2",
     "ember-export-application-global": "^2.0.0",
-    "ember-fetch": "rwjblue/ember-fetch#patch-1",
+    "ember-fetch": "^3.4.2",
     "ember-load-initializers": "^1.0.0",
     "ember-maybe-import-regenerator": "^0.1.5",
     "ember-resolver": "^4.0.0",
