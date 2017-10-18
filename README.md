@@ -171,7 +171,7 @@ test('Usage awaiting the world to settle', async function(assert) {
 Yes, there is an codemod that will help you transform your test suite to this new style "automatically".
 Check https://github.com/simonihmig/ember-native-dom-helpers-codemod.
 
-The codemod can't make a *perfect* convertion, but it will do most of the work for you.
+The codemod can't make a *perfect* conversion, but it will do most of the work for you.
 
 ## Helpers
 
