@@ -38,7 +38,7 @@ test('I can interact with my component', async function(assert) {
     {{my-component}}
   ```);
 
-  await fillIn('.some-input');
+  await fillIn('.some-input', 'some text');
   await click('.main-button');
   await keyEvent('.other-input', 'keyup', 40); // down arrow
   await triggerEvent('.some-drop-area', 'mouseenter');
