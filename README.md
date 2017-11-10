@@ -189,6 +189,7 @@ The codemod can't make a *perfect* conversion, but it will do most of the work f
 - `selectFiles(selectorOrHTMLElement, files = [])` (selects the file(s)/Blob(s) to the given `input[type=file]`. [Example](https://github.com/cibernox/ember-native-dom-helpers/blob/2f5f4d1df29d0d546505b515ca3e11721a86274b/tests/integration/select-files-test.js#L32-L35)
 - `visit(url)` (only available in acceptance. Raises an error in integration)
 - `waitUntil(function, options)` (Polls the page until the given callback returns a truthy value, or timesout after 1s)
+- `waitFor(selector, options)` (Convenience for the most common use-case of waitUntil. It polls the page until the element with the given selector is on the page or timesout after 1s. It accepts a `count: 3` option to await for a specific number of matches)
 - `currentURL()` Identical to the one provided by Ember.
 - `currentPath()` Identical to the one provided by Ember.
 - `currentRouteName()` Identical to the one provided by Ember.

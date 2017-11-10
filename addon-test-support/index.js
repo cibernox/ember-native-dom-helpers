@@ -8,6 +8,7 @@ export { keyEvent } from './key-event';
 export { triggerEvent } from './trigger-event';
 export { visit } from './visit';
 export { waitUntil } from './wait-until';
+export { waitFor } from './wait-for';
 export { currentURL } from './current-url';
 export { currentPath } from './current-path';
 export { focus } from './focus';
