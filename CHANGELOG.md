@@ -1,3 +1,6 @@
+# 0.5.5
+- [FEATURE] New `waitFor(selector, options)` helper, convenience for the most common cases of `waitUntil`.
+
 # 0.5.4
 - [BUGFIX] Support passing `document` and `window` to helpers
 - [BUGFIX] Early exit `waitUntil` polling if the condition is true immediately.
