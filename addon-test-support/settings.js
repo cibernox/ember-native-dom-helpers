@@ -5,7 +5,7 @@
 */
 class TestSupportSettings {
 
-  constructor(init = { rootElement: '#ember-testing' }) {
+  constructor(init = { rootElement: '#ember-testing > .ember-view' }) {
     this._rootElement = init.rootElement;
   }
 
