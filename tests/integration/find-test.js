@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { find } from 'ember-native-dom-helpers';
+import { find, settings } from 'ember-native-dom-helpers';
 
 moduleForComponent('find', 'Integration | Test Helper | find', {
   integration: true
@@ -65,4 +65,10 @@ test('find can use window and document', function(assert) {
 
   assert.ok(find(window) instanceof Window, 'window is returned for window');
   assert.ok(find(document) instanceof Document, 'document is returned for document');
+});
+
+test('find without args returns root element', function(assert) {
+  this.render(hbs`<div></div>`);
+
+  assert.strictEqual(find(), document.querySelector(settings.rootElement), 'find() returns rootElement');
 });

@@ -7,7 +7,7 @@ import settings from '../settings';
   @return HTMLElement
   @private
 */
-export default function getElement(selectorOrElement, contextEl) {
+export default function getElement(selectorOrElement = '', contextEl) {
   if (selectorOrElement instanceof Window || 
       selectorOrElement instanceof Document || 
       selectorOrElement instanceof HTMLElement || 
