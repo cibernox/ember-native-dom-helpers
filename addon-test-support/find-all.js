@@ -9,13 +9,13 @@ import settings from './settings';
 
   @method findAll
   @param {String} CSS selector to find elements in the test DOM
-  @param {HTMLElement} context to query within, query from its contained DOM
+  @param {Element} context to query within, query from its contained DOM
   @return {Array} An array of zero or more HTMLElement objects
   @public
 */
 export function findAll(selector, context) {
   let result;
-  if (context instanceof HTMLElement) {
+  if (context instanceof Element) {
     result = context.querySelectorAll(selector);
   } else {
     result = document.querySelectorAll(`${settings.rootElement} ${selector}`);

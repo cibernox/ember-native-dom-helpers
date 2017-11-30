@@ -87,3 +87,22 @@ test('findAll helper can use (optional) selector as the context to query', funct
   let actual = findAll('span', document.querySelector('.second-set'));
   assert.equal(actual.length, expected.length);
 });
+
+test('findAll helper can use (optional) svg element as the context to query', function(assert) {
+  this.render(hbs`
+    <svg>
+      <g>One</g>
+      <g>Two</g>
+      <g>Three</g>
+    </svg>
+    <svg class="second-set">
+      <g>One</g>
+      <g>Two</g>
+      <g>Three</g>
+    </svg>
+  `);
+
+  let expected = document.querySelectorAll('#ember-testing .second-set g');
+  let actual = findAll('g', document.querySelector('.second-set'));
+  assert.equal(actual.length, expected.length);
+});
