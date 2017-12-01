@@ -1,3 +1,6 @@
+# 0.5.8
+- [BUGFIX] Better check the existence of a tabindex attribute on the element.
+
 # 0.5.7
 - [BUGFIX] Non-focusable-by-default elements (p.e. `<div>`) are now focusable if they have tabindex.
 
