@@ -16,4 +16,5 @@ export { blur } from './blur';
 export { scrollTo } from './scroll-to';
 export { currentRouteName } from './current-route-name';
 export { selectFiles } from './select-files';
+export { typeText } from './type-text';
 export { default as settings } from './settings';
