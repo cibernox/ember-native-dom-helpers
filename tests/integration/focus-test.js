@@ -35,7 +35,21 @@ test('it sets focus for contenteditable HTMLElement', function(assert) {
   assert.ok(document.querySelector('.target-element:focus'));
 });
 
-test('it does not set focus for non-contenteditable HTMLElement', function(assert) {
+test('it sets focus on non-focusable-by-default elements with tabindex set to a possitive number', function(assert) {
+  this.render(hbs`<div class="target-element" tabindex="0"></div>`);
+  focus('.target-element');
+
+  assert.ok(document.querySelector('.target-element:focus'));
+});
+
+test('it sets focus on non-focusable-by-default elements with tabindex set to a -1', function(assert) {
+  this.render(hbs`<div class="target-element" tabindex="-1"></div>`);
+  focus('.target-element');
+
+  assert.ok(document.querySelector('.target-element:focus'));
+});
+
+test('it does not set focus for non-contenteditable HTMLElement without tabindex', function(assert) {
   this.render(hbs`<div class="target-element"></div>`);
   focus('.target-element');
 
