@@ -2,6 +2,7 @@ import { run } from '@ember/runloop';
 import getElementWithAssert from './-private/get-element-with-assert';
 import { focus } from './focus';
 import { fireEvent } from './fire-event';
+import { keyEvent } from './key-event';
 import wait from 'ember-test-helpers/wait';
 
 const BACKSPACE_CODE = 8;
@@ -16,18 +17,18 @@ export function typeText(selector, text) {
   let el = getElementWithAssert(selector);
 
   run(() => focus(el));
-  run(() => fireEvent(el, 'keydown', { key: BACKSPACE_CODE }));
+  keyEvent(el, 'keydown', BACKSPACE_CODE);
   run(() => el.value = '');
-  run(() => fireEvent(el, 'input'));
-  run(() => fireEvent(el, 'keyup', { key: BACKSPACE_CODE }));
+  keyEvent(el, 'input');
+  keyEvent(el, 'keyup', BACKSPACE_CODE);
 
   let splittedValue = text.toString().split('');
 
   splittedValue.forEach((character) => {
-    run(() => fireEvent(el, 'keydown', { key: character.codePointAt(0) }));
+    keyEvent(el, 'keydown',  character.codePointAt(0));
     run(() => el.value = el.value + character);
-    run(() => fireEvent(el, 'input'));
-    run(() => fireEvent(el, 'keyup', { key: character.codePointAt(0) }));
+    keyEvent(el, 'input');
+    keyEvent(el, 'keyup',  character.codePointAt(0));
   });
 
   run(() => fireEvent(el, 'change'));
