@@ -1,3 +1,9 @@
+# 0.5.7
+- [BUGFIX] Non-focusable-by-default elements (p.e. `<div>`) are now focusable if they have tabindex.
+
+# 0.5.6
+- [FEATURE] `find()` invoked with no argument now returns the root element.
+
 # 0.5.5
 - [FEATURE] New `waitFor(selector, options)` helper, convenience for the most common cases of `waitUntil`.
 
