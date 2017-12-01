@@ -6,45 +6,25 @@ moduleForComponent('typeText', 'Integration | Test Helper | typeText', {
   integration: true
 });
 
-test('It calls the input and change twice, once for cleaning and once for filling', function(assert) {
-  assert.expect(4);
-  let onChangeIndex = 0;
+test('It calls the change event after successfull writing', function(assert) {
+  assert.expect(1);
+
   this.onChange = (e) => {
-    let { value }  = e.target;
-    if (onChangeIndex === 0) {
-      assert.equal(value, '');
-    } else {
-      assert.equal(value, 'new value');
-    }
-    onChangeIndex += 1;
+    assert.equal(e.target.value, 'new value');
   };
-
-  let onInputIndex = 0;
-  this.onInput = (e) => {
-    let { value }  = e.target;
-    if (onInputIndex === 0) {
-      assert.equal(value, '');
-    } else {
-      assert.equal(value, 'new value');
-    }
-    onInputIndex += 1;
-  };
-
-  this.value = 'old value';
 
   this.render(hbs`
     <input class="target-element"
       value={{value}}
-      onchange={{onChange}}
-      oninput={{onInput}} />
+      onchange={{onChange}} />
   `);
   typeText('.target-element', 'new value');
 });
 
-test('It calls keydown and keyup events for backspace, and then for each character', function(assert) {
+test('It calls keydown, input and keyup events for backspace, and then for each character', function(assert) {
   let message = '12345';
 
-  assert.expect(2 * (message.length + 1));
+  assert.expect(3 * (message.length + 1));
 
   let onKeyDownIndex = -1;
   this.onKeyDown = (e) => {
@@ -55,6 +35,16 @@ test('It calls keydown and keyup events for backspace, and then for each charact
       assert.equal(String.fromCharCode(keyCode), message[onKeyUpIndex]);
     }
     onKeyDownIndex += 1;
+  };
+
+  let onInputIndex = 0;
+  this.onInput = (e) => {
+    if (onInputIndex === 0) {
+      assert.equal(e.target.value, '');
+    } else {
+      assert.equal(e.target.value, message.substr(0, onInputIndex));
+    }
+    onInputIndex += 1;
   };
 
   let onKeyUpIndex = -1;
@@ -74,7 +64,9 @@ test('It calls keydown and keyup events for backspace, and then for each charact
     <input class="target-element"
       value={{value}}
       onkeydown={{onKeyDown}}
-      onkeyup={{onKeyUp}} />
+      onkeyup={{onKeyUp}}
+      oninput={{onInput}}
+       />
   `);
   typeText('.target-element', message);
 });

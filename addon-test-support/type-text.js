@@ -16,21 +16,20 @@ export function typeText(selector, text) {
   let el = getElementWithAssert(selector);
 
   run(() => focus(el));
-  run(() => fireEvent(el, 'keydown', {key: BACKSPACE_CODE}));
+  run(() => fireEvent(el, 'keydown', { key: BACKSPACE_CODE }));
   run(() => el.value = '');
-  run(() => fireEvent(el, 'keyup', {key: BACKSPACE_CODE}));
   run(() => fireEvent(el, 'input'));
-  run(() => fireEvent(el, 'change'));
+  run(() => fireEvent(el, 'keyup', { key: BACKSPACE_CODE }));
 
   let splittedValue = text.toString().split('');
 
-  splittedValue.forEach(character => {
-    run(() => fireEvent(el, 'keydown', {key: character.codePointAt(0)}));
+  splittedValue.forEach((character) => {
+    run(() => fireEvent(el, 'keydown', { key: character.codePointAt(0) }));
     run(() => el.value = el.value + character);
-    run(() => fireEvent(el, 'keyup', {key: character.codePointAt(0)}));
+    run(() => fireEvent(el, 'input'));
+    run(() => fireEvent(el, 'keyup', { key: character.codePointAt(0) }));
   });
 
-  run(() => fireEvent(el, 'input'));
   run(() => fireEvent(el, 'change'));
   return (window.wait || wait)();
 }
