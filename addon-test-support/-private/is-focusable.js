@@ -5,6 +5,8 @@ export default function isFocusable(el) {
   if (type === 'hidden') {
     return false;
   }
-
-  return focusableTags.indexOf(tagName) > -1 || el.contentEditable === 'true' || el.tabIndex !== undefined;
+  if (focusableTags.indexOf(tagName) > -1 || el.contentEditable === 'true') {
+    return true;
+  }
+  return el.attributes.hasOwnProperty('tabindex');
 }
