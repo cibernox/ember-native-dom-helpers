@@ -8,5 +8,5 @@ export default function isFocusable(el) {
   if (focusableTags.indexOf(tagName) > -1 || el.contentEditable === 'true') {
     return true;
   }
-  return el.attributes.hasOwnProperty('tabindex');
+  return el.hasAttribute('tabindex');
 }
