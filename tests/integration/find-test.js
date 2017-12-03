@@ -72,3 +72,11 @@ test('find without args returns root element', function(assert) {
 
   assert.strictEqual(find(), document.querySelector(settings.rootElement), 'find() returns rootElement');
 });
+
+test('find works with the right rootElement', function(assert) {
+  this.render(hbs`<div id="first-child"></div>`);
+
+  let firstChild = document.querySelector('#first-child');
+
+  assert.strictEqual(find(':first-child'), firstChild, ':first-child returns the first element');
+});
