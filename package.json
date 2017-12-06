@@ -1,6 +1,6 @@
 {
   "name": "ember-native-dom-helpers",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "Test helpers for your integration tests that fire native events",
   "keywords": [
     "ember-addon",

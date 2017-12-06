@@ -1,3 +1,6 @@
+# 0.5.9
+- [ENHANCEMENT] Add support for content editable elements in the `fillIn` helper.
+
 # 0.5.8
 - [BUGFIX] Better check the existence of a tabindex attribute on the element.
 
