@@ -1,3 +1,6 @@
+# 0.6.1
+- [REVERT BREAKING] Revert: "Fixes rootElement to match that of `this.$()[0]`"
+
 # 0.6.0
 - [BREAKING] Fixes rootElement to match that of `this.$()[0]`
 - [ENHANCEMENT] Add support for content editable elements in the `fillIn` helper.
