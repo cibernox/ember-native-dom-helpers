@@ -51,8 +51,8 @@ test('I can interact with my component', async function(assert) {
 ### Acceptance tests
 
 You can use the exact same helpers for your acceptance tests. All interaction helpers like
-`click`, `fillIn` et al. return a promise that that fullfils when "the world has settled"
-(that is, there is no pending requests or promises and the runloop has be drained), which
+`click`, `fillIn` et al. return a promise that fullfils when "the world has settled"
+(that is, there is no pending requests or promises and the runloop has been drained), which
 is what the `andThen` acceptance helper used to do.
 However now this helper can be replace by the `async`/`await` syntax in ES2017 yielding
 easier to read tests:
@@ -81,7 +81,7 @@ The main advantages are:
 - Fire native events: In Ember, when adding events with the `onclick={{action "foo"}}` syntax,
   dispatching jQuery events leads to the action being called twice. Besides there is subtle
   differences between jQuery and Native events and can bite you. Firing native events fixes
-  that problem but they are very verbose and there is browsers incompatibilities.
+  that problem but they are very verbose and there are browsers incompatibilities.
   This addon makes firing native events a no-brainer.
 
 - Runloop aware: This helpers automatically spawn a runloop, so you don't need to wrap
