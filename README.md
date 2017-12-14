@@ -81,7 +81,7 @@ The main advantages are:
 - Fire native events: In Ember, when adding events with the `onclick={{action "foo"}}` syntax,
   dispatching jQuery events leads to the action being called twice. Besides there is subtle
   differences between jQuery and Native events and can bite you. Firing native events fixes
-  that problem but they are very verbose and there is browsers incompatibilities.
+  that problem but they are very verbose and there are browsers incompatibilities.
   This addon makes firing native events a no-brainer.
 
 - Runloop aware: This helpers automatically spawn a runloop, so you don't need to wrap
