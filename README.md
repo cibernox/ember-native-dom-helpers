@@ -6,7 +6,7 @@ Test helpers for integration tests that mimic the behaviour of the acceptance
 test helpers provided by Ember.
 
 Use this addon as a way to start the gradual migration towards the future
-"testing unification" [RFC][emberjs/rfcs/pull/119] which proposes only native DOM.
+["testing unification" RFC][emberjs/rfcs/pull/119], which proposes only native DOM.
 
 See the [Grand Testing Unification RFC][emberjs/rfcs/pull/119]
 
@@ -17,8 +17,8 @@ See the [Grand Testing Unification RFC][emberjs/rfcs/pull/119]
 [shared-test-helpers]: https://github.com/rwjblue/rfcs/blob/42/text/0000-grand-testing-unification.md#shared-test-helpers
 [example-migration-of-component-integration-test]: https://github.com/rwjblue/rfcs/blob/42/text/0000-grand-testing-unification.md#example-migration-of-component-integration-test
 
-**Status**: (Pre) 1.0, although we have a good idea what the needs are for
-test helpers, we are working though a few points on what changes are needed
+**Status**: (Pre) 1.0, although we have a good idea about what the needs are for
+test helpers, we are working through a few points on what changes are needed
 when using only standard DOM APIs (i.e. without jQuery).
 
 ## Usage
@@ -51,11 +51,10 @@ test('I can interact with my component', async function(assert) {
 ### Acceptance tests
 
 You can use the exact same helpers for your acceptance tests. All interaction helpers like
-`click`, `fillIn` et al. return a promise that fullfils when "the world has settled"
-(that is, there is no pending requests or promises and the runloop has been drained), which
-is what the `andThen` acceptance helper used to do.
-However now this helper can be replace by the `async`/`await` syntax in ES2017 yielding
-easier to read tests:
+`click`, `fillIn`, et al., return a promise that fullfils when "the world has settled"
+(that is, there are no pending requests or promises, and the runloop has been drained), which
+is what the `andThen` acceptance helper used to do. However, this helper can now be replaced 
+by the `async`/`await` syntax in ES2017, yielding easier-to-read tests:
 
 ```js
 import { visit, click, find, fillIn } from 'ember-native-dom-helpers';
@@ -78,18 +77,18 @@ test('Usage awaiting the world to settle', async function(assert) {
 
 The main advantages are:
 
-- Fire native events: In Ember, when adding events with the `onclick={{action "foo"}}` syntax,
-  dispatching jQuery events leads to the action being called twice. Besides there is subtle
-  differences between jQuery and Native events and can bite you. Firing native events fixes
-  that problem but they are very verbose and there are browsers incompatibilities.
-  This addon makes firing native events a no-brainer.
+- Fires native events: In Ember, when adding events with the `onclick={{action "foo"}}` syntax,
+  dispatching jQuery events leads to the action being called twice. Additionally, there are subtle 
+  differences between jQuery and Native events that can bite you. Firing native events fixes that 
+  problem, but they are very verbose and there are browser incompatibilities. This addon makes 
+  firing native events a no-brainer.
 
-- Runloop aware: This helpers automatically spawn a runloop, so you don't need to wrap
+- Runloop aware: These helpers automatically spawn a runloop, so you don't need to wrap
   every interaction with `Ember.run(() => /* interact with element */ );`.
 
-- `wait` by default: All the helpers return the `wait()` promise, making possible wait
-  for asynchronous side-effects with `async/await`. (Note that for using async/await in
-  browsers without native support you must install [ember-maybe-import-regenerator](https://github.com/machty/ember-maybe-import-regenerator))
+- `wait` by default: All the helpers return the `wait()` promise, making it possible to 
+  wait for asynchronous side-effects with `async/await`. (Note that for using async/await 
+  in browsers without native support you must install [ember-maybe-import-regenerator](https://github.com/machty/ember-maybe-import-regenerator)).
 
   ```js
   test('some test', async function(assert) {
@@ -101,11 +100,10 @@ The main advantages are:
   });
   ```
 
-
-- More real behaviour: When a clicks on an element `click` is not the only event fired. In a
-  real click the sequence of events is `mousedown`, `focus`, `mouseup`, `click`. When a user
-  fills in an input the sequence of events is `focus`, `<mutate-value>`, `input` and `change`.
-  The helpers provided by this addon fire those events in the right order simulating more
+- More realistic behaviour: When a user clicks on an element, `click` is not the only event fired. 
+  In a real click, the sequence of events is `mousedown`, `focus`, `mouseup`, `click`. When a user
+  fills in an input the sequence of events is `focus`, `<mutate-value>`, `input`, and `change`.
+  The helpers provided by this addon fire those events in the right order, simulating more
   closely how a real user would interact with the page.
 
 ## Standard DOM elements returned using a `find`/`findAll` helpers
@@ -123,7 +121,7 @@ const { APP: { rootElement } } = config;
 settings.rootElement = rootElement || settings.rootElement;
 ```
 
-### What if I prefer jQuery collections over native DOM
+### What if I prefer jQuery collections over native DOM?
 
 Fear not. If you prefer to use jQuery, just wrap the result and do your thing:
 
@@ -133,15 +131,15 @@ assert.equal($(find('.my-class')).attr('aria-owns'), '#id123')
 
 ## Testing an unsettled world
 
-There is one new helper in this addon that enables some testing patters that weren't
+There is one new helper in this addon that enables some testing patterns that weren't
 previously easy to perform using traditional methods.
 
-Since the `andThen` helper waits for the app to settle (no pending requests or promises)
-and in integration tests every interaction is wrapped in `Ember.run`, there was no easy way
-of testing transient state like loading substates or the state of a components while some promise
-is pending without a awkward setup of timeouts.
+Since the `andThen` helper waits for the app to settle (no pending requests or promises),
+and every integration test interaction is wrapped in `Ember.run`, there is no easy way
+to test transient state, like loading substates or the state of a component, while some 
+promise is pending, without an awkward setup of timeouts.
 
-Now however thanks to explicit usage of promises and the `waitUntil` helper you can
+Now, however, thanks to explicit usage of promises and the `waitUntil` helper, you can
 perform assertions on unsettled states:
 
 ```js
@@ -168,7 +166,7 @@ test('Usage awaiting the world to settle', async function(assert) {
 
 ## I WANT IT NOW, IS THERE A SHORTCUT?
 
-Yes, there is an codemod that will help you transform your test suite to this new style "automatically".
+Yes, there is a codemod that will help you transform your test suite to this new style "automatically".
 Check https://github.com/simonihmig/ember-native-dom-helpers-codemod.
 
 The codemod can't make a *perfect* conversion, but it will do most of the work for you.
@@ -187,9 +185,9 @@ The codemod can't make a *perfect* conversion, but it will do most of the work f
 - `blur(selectorOrHTMLElement)`
 - `scrollTo(selectorOrHTMLElement, x, y)`
 - `selectFiles(selectorOrHTMLElement, files = [])` (selects the file(s)/Blob(s) to the given `input[type=file]`. [Example](https://github.com/cibernox/ember-native-dom-helpers/blob/2f5f4d1df29d0d546505b515ca3e11721a86274b/tests/integration/select-files-test.js#L32-L35)
-- `visit(url)` (only available in acceptance. Raises an error in integration)
+- `visit(url)` (only available in acceptance. Raises an error in integration.)
 - `waitUntil(function, options)` (Polls the page until the given callback returns a truthy value, or timesout after 1s)
-- `waitFor(selector, options)` (Convenience for the most common use-case of waitUntil. It polls the page until the element with the given selector is on the page or timesout after 1s. It accepts a `count: 3` option to await for a specific number of matches)
+- `waitFor(selector, options)` (Convenience for the most common use-case of `waitUntil`. It polls the page until the element with the given selector is on the page, or timesout after 1s. It accepts a `count: 3` option to await a specific number of matches.)
 - `currentURL()` Identical to the one provided by Ember.
 - `currentPath()` Identical to the one provided by Ember.
 - `currentRouteName()` Identical to the one provided by Ember.
@@ -198,6 +196,5 @@ The codemod can't make a *perfect* conversion, but it will do most of the work f
 ## Notes of `tap`
 
 In order for `tap` to work, your browser has to support touch events. Desktop Chrome and Firefox
-have touch events disabled unless the device emulation mode is on.
-In order to enable touch events in your CI, you need to configure testem like the `testem.js`
-file on this repo.
+have touch events disabled unless the device emulation mode is on. To enable touch events in your 
+CI, you need to configure testem like the `testem.js` file on this repo.
