@@ -183,7 +183,7 @@ function buildKeyboardEvent(type, options = {}) {
 /*
   @method buildFileEvent
   @param {String} type
-  @param {Array} array of flies
+  @param {Array} array of files
   @param {HTMLElement} element
   @return {Event}
   @private
