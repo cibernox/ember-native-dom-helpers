@@ -8,7 +8,7 @@ import wait from 'ember-test-helpers/wait';
 /*
   @method selectFiles
   @param {String|HTMLElement} selector
-  @param {Array} flies
+  @param {Array} files
   @return {RSVP.Promise}
   @public
 */
