@@ -3,6 +3,7 @@ import getElementWithAssert from './-private/get-element-with-assert';
 import { fireEvent } from './fire-event';
 import { focus } from './focus';
 import wait from 'ember-test-helpers/wait';
+import { deprecate } from '@ember/debug';
 
 /*
   @method clickEventSequence
@@ -24,6 +25,11 @@ export function clickEventSequence(el, options) {
   @public
 */
 export function click(selector, context, options) {
+  deprecate(
+    'Importing `click` from "ember-native-dom-helpers" is deprecated. Since `ember-cli-qunit` 4.3 and `ember-cli-mocha` 0.15.0 you can use `import { click } from "@ember/test-helpers";`',
+    false,
+    { until: '0.7', id: 'ember-native-dom-helpers-click' }
+  );
   let element;
   if (context instanceof HTMLElement) {
     element = getElementWithAssert(selector, context);
