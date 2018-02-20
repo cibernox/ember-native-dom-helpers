@@ -16,6 +16,7 @@ module.exports = {
       '-headless'
     ],
     Chrome: [
+      process.env.TRAVIS ? '--no-sandbox' : null,
       '--touch-events',
       '--disable-gpu',
       '--headless',
