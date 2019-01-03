@@ -1,5 +1,18 @@
 ![Build Status](https://travis-ci.org/cibernox/ember-native-dom-helpers.svg?branch=master)
 
+# IMPORTANT: You probably don't need this addon.
+
+In Ember, since `ember-(cli-)qunit` 3.X (around late 2017) there is a new testing API that already
+provides almost identical test helpers from the ones in this addon.
+
+This addon was used as an experiment that helped bikeshed the API of the helpers that are now part
+of default testing API, like `click`, `tap`, `fillIn` and others.
+
+The only two helpers in this addon that are not part of the default set of helpers that ship with Ember's
+test harness are `scrollTo(selectorOrHTMLElement, x, y)` and `selectFiles(selectorOrHTMLElement, files = [])`.
+
+Unless you want to use those, you are better served using the helpers provided by `@ember/test-helpers`.
+
 # ember-native-dom-helpers
 
 Test helpers for integration tests that mimic the behaviour of the acceptance
@@ -53,7 +66,7 @@ test('I can interact with my component', async function(assert) {
 You can use the exact same helpers for your acceptance tests. All interaction helpers like
 `click`, `fillIn`, et al., return a promise that fullfils when "the world has settled"
 (that is, there are no pending requests or promises, and the runloop has been drained), which
-is what the `andThen` acceptance helper used to do. However, this helper can now be replaced 
+is what the `andThen` acceptance helper used to do. However, this helper can now be replaced
 by the `async`/`await` syntax in ES2017, yielding easier-to-read tests:
 
 ```js
@@ -78,16 +91,16 @@ test('Usage awaiting the world to settle', async function(assert) {
 The main advantages are:
 
 - Fires native events: In Ember, when adding events with the `onclick={{action "foo"}}` syntax,
-  dispatching jQuery events leads to the action being called twice. Additionally, there are subtle 
-  differences between jQuery and Native events that can bite you. Firing native events fixes that 
-  problem, but they are very verbose and there are browser incompatibilities. This addon makes 
+  dispatching jQuery events leads to the action being called twice. Additionally, there are subtle
+  differences between jQuery and Native events that can bite you. Firing native events fixes that
+  problem, but they are very verbose and there are browser incompatibilities. This addon makes
   firing native events a no-brainer.
 
 - Runloop aware: These helpers automatically spawn a runloop, so you don't need to wrap
   every interaction with `Ember.run(() => /* interact with element */ );`.
 
-- `wait` by default: All the helpers return the `wait()` promise, making it possible to 
-  wait for asynchronous side-effects with `async/await`. (Note that for using async/await 
+- `wait` by default: All the helpers return the `wait()` promise, making it possible to
+  wait for asynchronous side-effects with `async/await`. (Note that for using async/await
   in browsers without native support you must install [ember-maybe-import-regenerator](https://github.com/machty/ember-maybe-import-regenerator)).
 
   ```js
@@ -100,7 +113,7 @@ The main advantages are:
   });
   ```
 
-- More realistic behaviour: When a user clicks on an element, `click` is not the only event fired. 
+- More realistic behaviour: When a user clicks on an element, `click` is not the only event fired.
   In a real click, the sequence of events is `mousedown`, `focus`, `mouseup`, `click`. When a user
   fills in an input the sequence of events is `focus`, `<mutate-value>`, `input`, and `change`.
   The helpers provided by this addon fire those events in the right order, simulating more
@@ -136,7 +149,7 @@ previously easy to perform using traditional methods.
 
 Since the `andThen` helper waits for the app to settle (no pending requests or promises),
 and every integration test interaction is wrapped in `Ember.run`, there is no easy way
-to test transient state, like loading substates or the state of a component, while some 
+to test transient state, like loading substates or the state of a component, while some
 promise is pending, without an awkward setup of timeouts.
 
 Now, however, thanks to explicit usage of promises and the `waitUntil` helper, you can
@@ -196,5 +209,5 @@ The codemod can't make a *perfect* conversion, but it will do most of the work f
 ## Notes of `tap`
 
 In order for `tap` to work, your browser has to support touch events. Desktop Chrome and Firefox
-have touch events disabled unless the device emulation mode is on. To enable touch events in your 
+have touch events disabled unless the device emulation mode is on. To enable touch events in your
 CI, you need to configure testem like the `testem.js` file on this repo.
