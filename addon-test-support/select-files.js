@@ -23,7 +23,7 @@ export function selectFiles(selector, files = []) {
     files = [files];
   }
 
-  assert(`Can only handle multiple slection when an input is set to allow for multiple files.
+  assert(`Can only handle multiple selection when an input is set to allow for multiple files.
           Please add the property "multiple" to your file input.`,
           element.multiple || files.length <= 1);
 
