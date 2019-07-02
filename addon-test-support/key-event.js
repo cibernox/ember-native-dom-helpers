@@ -1,4 +1,4 @@
-import { merge } from '@ember/polyfills';
+import { assign } from '@ember/polyfills';
 import { triggerEvent } from './trigger-event';
 import { deprecate } from '@ember/debug';
 
@@ -16,5 +16,5 @@ export function keyEvent(selector, type, keyCode, modifiers = { ctrlKey: false, 
     false,
     { until: '0.7', id: 'ember-native-dom-helpers-key-event' }
   );
-  return triggerEvent(selector, type, merge({ keyCode, which: keyCode, key: keyCode }, modifiers));
+  return triggerEvent(selector, type, assign({ keyCode, which: keyCode, key: keyCode }, modifiers));
 }

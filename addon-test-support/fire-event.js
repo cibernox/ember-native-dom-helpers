@@ -1,4 +1,4 @@
-import { merge } from '@ember/polyfills';
+import { assign } from '@ember/polyfills';
 const DEFAULT_EVENT_OPTIONS = { bubbles: true, cancelable: true };
 const KEYBOARD_EVENT_TYPES = ['keydown', 'keypress', 'keyup'];
 const MOUSE_EVENT_TYPES = ['click', 'mousedown', 'mouseup', 'dblclick', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover'];
@@ -38,7 +38,7 @@ export function fireEvent(element, type, options = {}) {
       clientX: x,
       clientY: y
     };
-    event = buildMouseEvent(type, merge(simulatedCoordinates, options));
+    event = buildMouseEvent(type, assign(simulatedCoordinates, options));
   } else if (FILE_SELECTION_EVENT_TYPES.indexOf(type) > -1 && element.files) {
     event = buildFileEvent(type, element, options);
   } else {
@@ -67,7 +67,7 @@ function buildBasicEvent(type, options = {}) {
   // bubbles and cancelable are readonly, so they can be
   // set when initializing event
   event.initEvent(type, bubbles, cancelable);
-  merge(event, options);
+  assign(event, options);
   return event;
 }
 
@@ -82,7 +82,7 @@ function buildMouseEvent(type, options = {}) {
   let event;
   try {
     event = document.createEvent('MouseEvents');
-    let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
+    let eventOpts = assign(assign({}, DEFAULT_EVENT_OPTIONS), options);
     event.initMouseEvent(
       type,
       eventOpts.bubbles,
@@ -113,7 +113,7 @@ function buildMouseEvent(type, options = {}) {
   @private
 */
 function buildKeyboardEvent(type, options = {}) {
-  let eventOpts = merge(merge({}, DEFAULT_EVENT_OPTIONS), options);
+  let eventOpts = assign(assign({}, DEFAULT_EVENT_OPTIONS), options);
   let event, eventMethodName;
 
   try {
