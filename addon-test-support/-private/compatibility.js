@@ -1,11 +1,10 @@
-//
 // This is a wrapper around `@ember/test-helpers` that we need for compatibility
 // reasons. Apps and addons using ember-qunit v4 aren't supposed to depend directly on
 // `@ember/test-helpers` and just use the one that their version of
 // `ember-qunit` or `ember-mocha` provides.
 // Apps and addons using ember-qunit v5 directly depend on
 // `@ember/test-helpers`.
-const { require } = window;
+import require from 'require';
 
 let waitFn;
 
