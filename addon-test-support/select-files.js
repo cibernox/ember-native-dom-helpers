@@ -3,7 +3,7 @@ import { assert } from '@ember/debug';
 import { isArray } from '@ember/array';
 import getElementWithAssert from './-private/get-element-with-assert';
 import { fireEvent } from './fire-event';
-import wait from 'ember-test-helpers/wait';
+import { wait } from './-private/compatibility';
 
 /*
   @method selectFiles
