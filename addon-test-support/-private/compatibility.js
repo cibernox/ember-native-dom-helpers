@@ -15,8 +15,8 @@ if (require.has('ember-test-helpers/wait')) {
   // conditions `ember-test-helpers/wait` can still be in the pending state
   // at this point, so its exports are still undefined.
   waitFn = (...args) => require('ember-test-helpers/wait').default(...args);
-} else if (require.has('@ember-test/helpers')) {
-  waitFn = (...args) => require('@ember-test/helpers').wait(...args);
+} else if (require.has('@ember/test-helpers')) {
+  waitFn = (...args) => require('@ember/test-helpers').wait(...args);
 }
 
 export let wait = waitFn;
