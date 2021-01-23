@@ -10,13 +10,8 @@ export function waitUntil(callback, { timeout = 1000 } = {}) {
   );
 
   return new RSVP.Promise(function(resolve, reject) {
-    let value = run(callback);
-    if (value) {
-      resolve(value);
-      return;
-    }
     let time = 0;
-    let tick = function() {
+    function tick() {
       time += 10;
       let value = run(callback);
       if (value) {
