@@ -3,7 +3,7 @@ import getElementWithAssert from './-private/get-element-with-assert';
 import isFormControl from './-private/is-form-control';
 import { focus } from './focus';
 import { fireEvent } from './fire-event';
-import wait from 'ember-test-helpers/wait';
+import { wait } from './-private/compatibility';
 import { deprecate } from '@ember/debug';
 
 /*

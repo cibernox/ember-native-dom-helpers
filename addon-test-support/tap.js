@@ -2,7 +2,7 @@ import { run } from '@ember/runloop';
 import getElementWithAssert from './-private/get-element-with-assert';
 import { fireEvent } from './fire-event';
 import { clickEventSequence } from './click';
-import wait from 'ember-test-helpers/wait';
+import { wait } from './-private/compatibility';
 
 /*
   @method tap

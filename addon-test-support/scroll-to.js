@@ -1,6 +1,6 @@
 import RSVP from 'rsvp';
 import getElementWithAssert from './-private/get-element-with-assert';
-import wait from 'ember-test-helpers/wait';
+import { wait } from './-private/compatibility';
 
 const rAF = window.requestAnimationFrame || function(cb) {
   setTimeout(cb, 17);

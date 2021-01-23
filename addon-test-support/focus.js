@@ -2,7 +2,7 @@ import { run } from '@ember/runloop';
 import getElementWithAssert from './-private/get-element-with-assert';
 import isFocusable from './-private/is-focusable';
 import { fireEvent } from './fire-event';
-import wait from 'ember-test-helpers/wait';
+import { wait } from './-private/compatibility';
 
 /*
   @method focus
